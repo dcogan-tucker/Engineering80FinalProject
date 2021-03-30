@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.sparta.eng80</groupId>
-    <artifactId>sparta-one-to-one-form-tracker</artifactId>
+    <artifactId>one-to-one-tracker</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>sparta-one-to-one-form-tracker</name>
+    <name>one-to-one-tracker</name>
     <description>Final project for eng 80</description>
     <properties>
         <java.version>11</java.version>
