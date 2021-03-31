@@ -137,4 +137,8 @@ public class TrainerService implements UserAppService<TrainerEntity> {
         }
         return potentialNewEmailAddress;
     }
+
+    public Iterable<TraineeEntity> getAllTraineesFromGroup(GroupEntity groupEntity) {
+        return traineeService.findByGroupId(groupEntity.getGroupId());
+    }
 }
