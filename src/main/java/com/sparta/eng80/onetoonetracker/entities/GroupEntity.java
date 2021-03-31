@@ -1,8 +1,11 @@
 package com.sparta.eng80.onetoonetracker.entities;
 
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.Set;
 
+@Entity
+@Table(name = "stream_group", schema = "1_to_1_tracker")
 public class GroupEntity {
 
     private int groupId;
@@ -14,6 +17,9 @@ public class GroupEntity {
     private Set<TraineeEntity> trainees;
     private Set<FeedbackEntity> feedbacks;
 
+    @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @Column(name = "group_id")
     public int getGroupId() {
         return groupId;
     }
@@ -22,6 +28,8 @@ public class GroupEntity {
         this.groupId = groupId;
     }
 
+    @Basic
+    @Column(name = "group_name")
     public String getGroupName() {
         return groupName;
     }
@@ -30,6 +38,8 @@ public class GroupEntity {
         this.groupName = groupName;
     }
 
+    @Basic
+    @Column(name = "start_date")
     public Date getStartDate() {
         return startDate;
     }
@@ -38,6 +48,8 @@ public class GroupEntity {
         this.startDate = startDate;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "stream_id")
     public StreamEntity getStream() {
         return stream;
     }
@@ -46,6 +58,7 @@ public class GroupEntity {
         this.stream = stream;
     }
 
+    @OneToOne(mappedBy = "trainer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public TrainerEntity getTrainer() {
         return trainer;
     }
@@ -54,6 +67,7 @@ public class GroupEntity {
         this.trainer = trainer;
     }
 
+    @OneToMany(mappedBy = "trainees", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public Set<TraineeEntity> getTrainees() {
         return trainees;
     }
@@ -62,6 +76,7 @@ public class GroupEntity {
         this.trainees = trainees;
     }
 
+    @OneToMany(mappedBy = "feedbacks", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public Set<FeedbackEntity> getFeedbacks() {
         return feedbacks;
     }
