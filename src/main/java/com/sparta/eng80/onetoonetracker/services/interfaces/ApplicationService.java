@@ -4,7 +4,7 @@ import java.util.Optional;
 
 public interface ApplicationService<T> {
 
-    Optional<T> findById();
+    Optional<T> findById(int id);
     Iterable<T> findAll();
     T save(T t);
 }
