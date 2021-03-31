@@ -13,7 +13,7 @@ public class LoginController {
         this.securityService = securityService;
     }
 
-    @GetMapping
+    @GetMapping("/login")
     public String login() {
         if(securityService.isAuthenticated()){
             return "redirect:/";
