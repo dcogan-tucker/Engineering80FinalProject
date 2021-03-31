@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,6 +22,7 @@ public class PasswordChangerController {
 
     @GetMapping("/changePassword")
     public String changePassword(@RequestParam("email") String email, Model model) {
+        //Get Currently logged in user
         UserEntity user = userService.findByEmail(email).get();
         model.addAttribute("user", user);
         //Change to name of password changer page
@@ -28,11 +30,8 @@ public class PasswordChangerController {
     }
 
     @PostMapping("/changePassword")
-    public void setPassword(@RequestParam("password") String password) {
-        //Change to get current user
-        UserEntity user = new UserEntity();
-
-        user.setPassword(password);
-        userService.save(user);
+    public void setPassword(@ModelAttribute("user") UserEntity userEntity, @RequestParam("password") String password) {
+        userEntity.setPassword(password);
+        userService.save(userEntity);
     }
 }
