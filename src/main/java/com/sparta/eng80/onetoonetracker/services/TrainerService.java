@@ -127,7 +127,7 @@ public class TrainerService implements UserAppService<TrainerEntity> {
         if (lastName.length() < 3) {
             potentialNewEmailAddress += lastName.substring(0, 1).toUpperCase();
         } else {
-            potentialNewEmailAddress += lastName.substring(0, 1).toUpperCase() + lastName.substring(2 , lastName.length() - 1).toLowerCase();
+            potentialNewEmailAddress += lastName.substring(0, 1).toUpperCase() + lastName.substring(1).toLowerCase();
         }
         potentialNewEmailAddress += "@spartaglobal.com";
         if (traineeService.findByEmail(potentialNewEmailAddress).isEmpty()) {
