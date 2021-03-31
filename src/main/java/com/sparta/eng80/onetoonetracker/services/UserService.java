@@ -17,7 +17,7 @@ public class UserService implements UserAppService<UserEntity> {
     }
 
     @Override
-    public Optional<UserEntity> findById() {
+    public Optional<UserEntity> findById(int id) {
         return Optional.empty();
     }
 
