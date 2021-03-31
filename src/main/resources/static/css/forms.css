@@ -14,6 +14,12 @@ body {
     background-color: #01181b;
 }
 
+h1 {
+    color: white;
+    font-size: 15px;
+    font-family: "Raleway", sans-serif;
+}
+
 .form-signin {
     width: 100%;
     max-width: 210px;

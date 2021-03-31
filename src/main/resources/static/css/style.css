@@ -16,6 +16,10 @@ body {
     height: 10vh;
 }
 
+#footer {
+    display: inline-block;
+}
+
 li.list-item {
     height: 20px;
 
@@ -28,6 +32,10 @@ span.status {
 
 .bg-color-main {
     background-color: #01181b;
+}
+
+div#footerBtns a {
+    margin: 30px;
 }
 
 .bg-color-red {
@@ -43,7 +51,12 @@ span.status {
 }
 
 #header img {
-    height: 8vh;
+    height: 7vh;
+    padding-bottom: 10px;
+}
+
+button#burger {
+    color: white;
 }
 
 section#main-content {
