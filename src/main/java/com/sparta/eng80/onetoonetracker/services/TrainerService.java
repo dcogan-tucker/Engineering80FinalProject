@@ -108,6 +108,7 @@ public class TrainerService implements UserAppService<TrainerEntity> {
             userEntity.setEmail(generateUniqueEmail(firstName, lastName));
             userEntity.setPassword("password");
             userEntity.setRole(role);
+            userEntity.setEnabled(true);
             userEntity = userRepository.save(userEntity);
             TraineeEntity traineeEntity = new TraineeEntity();
             traineeEntity.setUser(userEntity);
