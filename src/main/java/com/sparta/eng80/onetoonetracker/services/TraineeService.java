@@ -10,7 +10,7 @@ import java.util.Optional;
 public class TraineeService implements UserAppService<TraineeEntity> {
 
     @Override
-    public Optional<TraineeEntity> findById() {
+    public Optional<TraineeEntity> findById(int id) {
         return Optional.empty();
     }
 
