@@ -11,7 +11,7 @@ import java.util.Optional;
 public class FeedbackService implements FeedbackAppService {
 
     @Override
-    public Optional<FeedbackEntity> findById() {
+    public Optional<FeedbackEntity> findById(int id) {
         return Optional.empty();
     }
 
