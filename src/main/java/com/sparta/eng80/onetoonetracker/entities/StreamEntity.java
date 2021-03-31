@@ -1,7 +1,10 @@
 package com.sparta.eng80.onetoonetracker.entities;
 
+import javax.persistence.*;
 import java.util.Set;
 
+@Entity
+@Table(name = "stream", schema = "1_to_1_tracker")
 public class StreamEntity {
 
     private int streamId;
@@ -11,6 +14,9 @@ public class StreamEntity {
 
     private Set<GroupEntity> groups;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "stream_id")
     public int getStreamId() {
         return streamId;
     }
@@ -19,6 +25,8 @@ public class StreamEntity {
         this.streamId = streamId;
     }
 
+    @Basic
+    @Column(name = "stream_name")
     public String getName() {
         return name;
     }
@@ -27,6 +35,8 @@ public class StreamEntity {
         this.name = name;
     }
 
+    @Basic
+    @Column(name = "stream_description")
     public String getDescription() {
         return description;
     }
@@ -35,6 +45,8 @@ public class StreamEntity {
         this.description = description;
     }
 
+    @Basic
+    @Column(name = "stream_duration")
     public int getDuration() {
         return duration;
     }
@@ -43,6 +55,7 @@ public class StreamEntity {
         this.duration = duration;
     }
 
+    @OneToMany(mappedBy = "stream", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public Set<GroupEntity> getGroups() {
         return groups;
     }

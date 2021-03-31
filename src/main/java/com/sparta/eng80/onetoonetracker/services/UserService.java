@@ -38,7 +38,7 @@ public class UserService implements UserAppService<UserEntity> {
 
     @Override
     public Optional<UserEntity> findByEmail(String email) {
-        return userRepository.findUserEntityByEmail(email);
+        return userRepository.findUserEntityByEmailEquals(email);
     }
 
     @Override
