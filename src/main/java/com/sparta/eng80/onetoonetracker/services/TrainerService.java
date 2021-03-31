@@ -1,5 +1,7 @@
 package com.sparta.eng80.onetoonetracker.services;
 
+import com.sparta.eng80.onetoonetracker.entities.GroupEntity;
+import com.sparta.eng80.onetoonetracker.entities.StreamEntity;
 import com.sparta.eng80.onetoonetracker.entities.TrainerEntity;
 import com.sparta.eng80.onetoonetracker.repositories.GroupRepository;
 import com.sparta.eng80.onetoonetracker.repositories.StreamRepository;
@@ -21,6 +23,7 @@ public class TrainerService implements UserAppService<TrainerEntity> {
         this.groupRepository = groupRepository;
         this.trainerRepository = trainerRepository;
     }
+
 
     @Override
     public Optional<TrainerEntity> findById() {
@@ -67,6 +70,27 @@ public class TrainerService implements UserAppService<TrainerEntity> {
         return null;
     }
 
-    public boolean createNewGroup()
+    public GroupEntity createNewGroup(StreamEntity streamEntity, TrainerEntity trainerEntity, String groupName, java.sql.Date startDate) {
+        // check stream id is valid
+        // check trainer id is valid
+        if (!streamRepository.findById(streamEntity.getId()).isEmpty()
+            && !trainerRepository.findById(trainerEntity.getId()).isEmpty()
+        ) {
+            // add GroupEntity to database
+            GroupEntity groupEntity = new GroupEntity();
+            groupEntity.setGroupName(groupName);
+            groupEntity.setStream(streamEntity);
+            groupEntity.setStartDate(startDate);
+            groupEntity = groupRepository.save(groupEntity);
+            // add new TrainerEntity to database with the groupID just added.
+            TrainerEntity newTrainerEntity = new TrainerEntity();
+            newTrainerEntity.setUser(trainerEntity.getUser());
+            newTrainerEntity.setFirstName(trainerEntity.getFirstName());
+            newTrainerEntity.setLastName(trainerEntity.getLastName());
+            newTrainerEntity.setGroup(groupEntity);
+        } else {
+            return null;
+        }
+    }
 
 }
