@@ -85,11 +85,8 @@ public class TrainerService implements UserAppService<TrainerEntity> {
             groupEntity.setStartDate(startDate);
             groupEntity = groupRepository.save(groupEntity);
             // add new TrainerEntity to database with the groupID just added.
-            TrainerEntity newTrainerEntity = new TrainerEntity();
-            newTrainerEntity.setUser(trainerEntity.getUser());
-            newTrainerEntity.setFirstName(trainerEntity.getFirstName());
-            newTrainerEntity.setLastName(trainerEntity.getLastName());
-            newTrainerEntity.setGroup(groupEntity);
+            trainerEntity.setGroup(groupEntity);
+            trainerRepository.save(trainerEntity);
             return true;
         } else {
             return false;
@@ -180,5 +177,9 @@ public class TrainerService implements UserAppService<TrainerEntity> {
             wasRemoved = false;
         }
         return wasRemoved;
+    }
+
+    public Iterable<TraineeEntity> getAllTraineesFromGroup(GroupEntity groupEntity) {
+        return traineeService.findByGroupId(groupEntity.getGroupId());
     }
 }
