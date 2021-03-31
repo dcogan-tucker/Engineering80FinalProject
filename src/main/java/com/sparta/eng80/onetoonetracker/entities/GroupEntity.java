@@ -4,17 +4,50 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.Set;
 
+/**
+ * An Entity class represents and stores data from the stream_group table
+ */
 @Entity
 @Table(name = "stream_group", schema = "1_to_1_tracker")
 public class GroupEntity {
 
+    /**
+     * A unique identifier for a group instance
+     */
     private int groupId;
+
+    /**
+     * The name of the group
+     */
     private String groupName;
+
+    /**
+     * The date which the group starts/started their training
+     */
     private Date startDate;
 
+    /**
+     * The stream that the group belongs to
+     * @see StreamEntity
+     */
     private StreamEntity stream;
+
+    /**
+     * The trainer/s that are teaching the group
+     * @see TrainerEntity
+     */
     private TrainerEntity trainer;
+
+    /**
+     * All trainees which are assigned to the group
+     * @see TraineeEntity
+     */
     private Set<TraineeEntity> trainees;
+
+    /**
+     * All Feedback for all trainees in the group
+     * @see FeedbackEntity
+     */
     private Set<FeedbackEntity> feedbacks;
 
     @Id
