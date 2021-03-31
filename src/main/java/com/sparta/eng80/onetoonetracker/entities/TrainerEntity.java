@@ -56,7 +56,7 @@ public class TrainerEntity {
         this.user = user;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "group_id")
     public GroupEntity getGroup() {
         return group;
