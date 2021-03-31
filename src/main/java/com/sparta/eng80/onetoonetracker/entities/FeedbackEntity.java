@@ -17,7 +17,9 @@ public class FeedbackEntity {
     private String traineeContinue;
     private String trainerStop;
     private String trainerStart;
-    private String getTrainerContinue;
+    private String trainerContinue;
+    private char technicalGrade;
+    private char consultantGrade;
     private Status status;
     private boolean overdue;
 
@@ -108,12 +110,12 @@ public class FeedbackEntity {
 
     @Basic
     @Column(name = "trainer_continue")
-    public String getGetTrainerContinue() {
-        return getTrainerContinue;
+    public String getTrainerContinue() {
+        return trainerContinue;
     }
 
-    public void setGetTrainerContinue(String getTrainerContinue) {
-        this.getTrainerContinue = getTrainerContinue;
+    public void setTrainerContinue(String trainerContinue) {
+        this.trainerContinue = trainerContinue;
     }
 
     @Enumerated(EnumType.STRING)
@@ -134,6 +136,26 @@ public class FeedbackEntity {
 
     public void setOverdue(boolean overdue) {
         this.overdue = overdue;
+    }
+
+    @Basic
+    @Column(name = "technical_grade")
+    public char getTechnicalGrade(){
+        return technicalGrade;
+    }
+
+    public void setTechnicalGrade(char technicalGrade){
+        this.technicalGrade = technicalGrade;
+    }
+
+    @Basic
+    @Column(name = "consultant_grade")
+    public char getConsultantGrade(){
+        return consultantGrade;
+    }
+
+    public void setConsultantGrade(char consultantGrade){
+        this.consultantGrade = consultantGrade;
     }
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

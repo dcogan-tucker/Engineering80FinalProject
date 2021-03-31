@@ -85,11 +85,8 @@ public class TrainerService implements UserAppService<TrainerEntity> {
             groupEntity.setStartDate(startDate);
             groupEntity = groupRepository.save(groupEntity);
             // add new TrainerEntity to database with the groupID just added.
-            TrainerEntity newTrainerEntity = new TrainerEntity();
-            newTrainerEntity.setUser(trainerEntity.getUser());
-            newTrainerEntity.setFirstName(trainerEntity.getFirstName());
-            newTrainerEntity.setLastName(trainerEntity.getLastName());
-            newTrainerEntity.setGroup(groupEntity);
+            trainerEntity.setGroup(groupEntity);
+            trainerRepository.save(trainerEntity);
             return true;
         } else {
             return false;
@@ -136,5 +133,53 @@ public class TrainerService implements UserAppService<TrainerEntity> {
             generateUniqueEmail(firstName, lastName + 1);
         }
         return potentialNewEmailAddress;
+    }
+
+    /**
+     * Adds trainee to group, returning {@code true} if successful, otherwise {@code false}
+     * <p>If either {@code traineeId} of {@code groupId} do not exist within the database, then trainee cannot be added</p>
+     * <p>Any group the trainee is currently part will be overwritten, since trainee can only be part of one group at a time</p>
+     * @param traineeId id of trainee to add to group
+     * @param groupId id of group to add trainee to
+     * @return boolean value indicating whether trainee was added to group or not
+     */
+    public boolean addTraineeToGroup(int traineeId, int groupId) {
+        Optional<TraineeEntity> trainee = traineeService.findByUserId(traineeId);
+        Optional<GroupEntity> group = groupRepository.findById(groupId);
+
+        if (trainee.isPresent() && group.isPresent()) {
+            trainee.get().setGroup(group.get());
+            traineeService.save(trainee.get());
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Removes trainee from group, returning {@code true} if successful, otherwise {@code false}
+     * <p>If {@code traineeId} does not exist within the database then trainee cannot be removed</p>
+     * <p>If {@code trainee} is not in any group then trainee cannot be removed</p>
+     * @param traineeId id of trainee to add to group
+     * @return boolean value indicating whether trainee was removed from their group or not
+     */
+    public boolean removeTraineeFromGroup(int traineeId) {
+        Optional<TraineeEntity> trainee = traineeService.findByUserId(traineeId);
+        boolean wasRemoved = false;
+
+        if (trainee.isPresent()) {
+            if (trainee.get().getGroup() != null) {
+                trainee.get().setGroup(null);
+                traineeService.save(trainee.get());
+                wasRemoved = true;
+            }
+        } else {
+            wasRemoved = false;
+        }
+        return wasRemoved;
+    }
+
+    public Iterable<TraineeEntity> getAllTraineesFromGroup(GroupEntity groupEntity) {
+        return traineeService.findByGroupId(groupEntity.getGroupId());
     }
 }
