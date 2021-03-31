@@ -70,11 +70,13 @@ public class TrainerService implements UserAppService<TrainerEntity> {
         return null;
     }
 
-    public GroupEntity createNewGroup(StreamEntity streamEntity, TrainerEntity trainerEntity, String groupName, java.sql.Date startDate) {
+    public boolean createNewGroup(StreamEntity streamEntity, TrainerEntity trainerEntity, String groupName, java.sql.Date startDate) {
         // check stream id is valid
         // check trainer id is valid
+        // check groupName is not null or empty string
         if (!streamRepository.findById(streamEntity.getStreamId()).isEmpty()
             && !trainerRepository.findById(trainerEntity.getTrainerId()).isEmpty()
+                && groupName != null && groupName != ""
         ) {
             // add GroupEntity to database
             GroupEntity groupEntity = new GroupEntity();
@@ -88,9 +90,9 @@ public class TrainerService implements UserAppService<TrainerEntity> {
             newTrainerEntity.setFirstName(trainerEntity.getFirstName());
             newTrainerEntity.setLastName(trainerEntity.getLastName());
             newTrainerEntity.setGroup(groupEntity);
-            return groupEntity;
+            return true;
         } else {
-            return null;
+            return false;
         }
     }
 
