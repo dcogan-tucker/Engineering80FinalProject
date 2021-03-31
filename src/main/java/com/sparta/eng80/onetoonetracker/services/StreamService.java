@@ -25,7 +25,7 @@ public class StreamService implements StreamAppService {
     }
 
     @Override
-    public StreamEntity findByName(String name) {
+    public Optional<StreamEntity> findByName(String name) {
         return null;
     }
 }
