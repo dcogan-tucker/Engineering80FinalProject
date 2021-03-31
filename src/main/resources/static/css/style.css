@@ -12,9 +12,18 @@ body {
     /*color: white;*/
 }
 
-.main-color {
+#header, #footer {
+    height: 10vh;
     background-color: #01181b;
 }
+
+#header img {
+    height: 8vh;
+}
+
+/*.main-color {*/
+/*    background-color: #01181b;*/
+/*}*/
 
 a {
     color: #34beef;

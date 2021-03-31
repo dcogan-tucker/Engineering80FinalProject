@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <!-- Delete when database is set up -->
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <link rel="stylesheet" href="C:\Users\brad_dev\Desktop\GitHub\Engineering80FinalProject\src\main\resources\static\css\style.css">
+    </head>
+    <!-- Delete End -->
     <body>
         <div th:fragment="header">
-            <nav class="navbar main-color">
-                <div class="container">
-                    <a class="navbar-brand" href="#">
-                        <img src="../../static/images/sparta-global-logo-white.svg" alt="Sparta Global Logo">
+            <nav class="navbar" id="header">
+                <div class="container text-center">
+                    <a class="navbar-brand text-center" href="#">
+                        <img src="../../static/images/sparta-global-logo-white.svg" class="img-fluid rounded mx-auto d-block" alt="Sparta Global Logo">
                     </a>
                 </div>
             </nav>
