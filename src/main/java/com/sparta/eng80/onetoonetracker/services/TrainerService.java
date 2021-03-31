@@ -26,7 +26,7 @@ public class TrainerService implements UserAppService<TrainerEntity> {
     }
 
     @Override
-    public Optional<TrainerEntity> findById() {
+    public Optional<TrainerEntity> findById(int id) {
         return Optional.empty();
     }
 

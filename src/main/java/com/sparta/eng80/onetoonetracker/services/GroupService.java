@@ -10,7 +10,7 @@ import java.util.Optional;
 public class GroupService implements GroupAppService {
 
     @Override
-    public Optional<GroupEntity> findById() {
+    public Optional<GroupEntity> findById(int id) {
         return Optional.empty();
     }
 
