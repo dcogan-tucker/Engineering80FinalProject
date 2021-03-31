@@ -1,6 +1,9 @@
 package com.sparta.eng80.onetoonetracker.services;
 
 import com.sparta.eng80.onetoonetracker.entities.TrainerEntity;
+import com.sparta.eng80.onetoonetracker.repositories.GroupRepository;
+import com.sparta.eng80.onetoonetracker.repositories.StreamRepository;
+import com.sparta.eng80.onetoonetracker.repositories.TrainerRepository;
 import com.sparta.eng80.onetoonetracker.services.interfaces.UserAppService;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +11,16 @@ import java.util.Optional;
 
 @Service
 public class TrainerService implements UserAppService<TrainerEntity> {
+
+    private final StreamRepository streamRepository;
+    private final GroupRepository groupRepository;
+    private final TrainerRepository trainerRepository;
+
+    public TrainerService(StreamRepository streamRepository, GroupRepository groupRepository, TrainerRepository trainerRepository) {
+        this.streamRepository = streamRepository;
+        this.groupRepository = groupRepository;
+        this.trainerRepository = trainerRepository;
+    }
 
     @Override
     public Optional<TrainerEntity> findById() {
@@ -53,4 +66,7 @@ public class TrainerService implements UserAppService<TrainerEntity> {
     public Iterable<TrainerEntity> findByName(String first, String last) {
         return null;
     }
+
+    public boolean createNewGroup()
+
 }
