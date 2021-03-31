@@ -1,0 +1,23 @@
+body {
+    /* Main text styling */
+    font-family: "Raleway", sans-serif;  
+    
+    /* Main color */
+    /*background-color: #01181b;*/
+
+    /* Button or href color */
+    color: #e33661;
+
+    /* Text color when on dark background */
+    /*color: white;*/
+}
+
+.main-color {
+    background-color: #01181b;
+}
+
+a {
+    color: #34beef;
+}
+/* https://fonts.google.com/specimen/Raleway?preview.text_type=custom */
+
