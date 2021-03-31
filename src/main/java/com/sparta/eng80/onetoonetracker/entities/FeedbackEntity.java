@@ -2,8 +2,11 @@ package com.sparta.eng80.onetoonetracker.entities;
 
 import com.sparta.eng80.onetoonetracker.entities.datatypes.Status;
 
+import javax.persistence.*;
 import java.sql.Date;
 
+@Entity
+@Table(name = "feedback", schema = "1_to_1_tracker")
 public class FeedbackEntity {
 
     private int feedbackId;
@@ -22,6 +25,9 @@ public class FeedbackEntity {
     private TrainerEntity trainer;
     private GroupEntity group;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "feedback_id")
     public int getFeedbackId() {
         return feedbackId;
     }
@@ -30,6 +36,8 @@ public class FeedbackEntity {
         this.feedbackId = feedbackId;
     }
 
+    @Basic
+    @Column(name = "deadline_date")
     public Date getDeadline() {
         return deadline;
     }
@@ -38,6 +46,8 @@ public class FeedbackEntity {
         this.deadline = deadline;
     }
 
+    @Basic
+    @Column(name = "submitted_date")
     public Date getSubmitted() {
         return submitted;
     }
@@ -46,6 +56,8 @@ public class FeedbackEntity {
         this.submitted = submitted;
     }
 
+    @Basic
+    @Column(name = "trainee_stop")
     public String getTraineeStop() {
         return traineeStop;
     }
@@ -54,6 +66,8 @@ public class FeedbackEntity {
         this.traineeStop = traineeStop;
     }
 
+    @Basic
+    @Column(name = "trainee_start")
     public String getTraineeStart() {
         return traineeStart;
     }
@@ -62,6 +76,8 @@ public class FeedbackEntity {
         this.traineeStart = traineeStart;
     }
 
+    @Basic
+    @Column(name = "trainee_continue")
     public String getTraineeContinue() {
         return traineeContinue;
     }
@@ -70,6 +86,8 @@ public class FeedbackEntity {
         this.traineeContinue = traineeContinue;
     }
 
+    @Basic
+    @Column(name = "trainer_stop")
     public String getTrainerStop() {
         return trainerStop;
     }
@@ -78,6 +96,8 @@ public class FeedbackEntity {
         this.trainerStop = trainerStop;
     }
 
+    @Basic
+    @Column(name = "trainer_start")
     public String getTrainerStart() {
         return trainerStart;
     }
@@ -86,6 +106,8 @@ public class FeedbackEntity {
         this.trainerStart = trainerStart;
     }
 
+    @Basic
+    @Column(name = "trainer_continue")
     public String getGetTrainerContinue() {
         return getTrainerContinue;
     }
@@ -94,6 +116,8 @@ public class FeedbackEntity {
         this.getTrainerContinue = getTrainerContinue;
     }
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
     public Status getStatus() {
         return status;
     }
@@ -102,6 +126,8 @@ public class FeedbackEntity {
         this.status = status;
     }
 
+    @Basic
+    @Column(name = "is_overdue")
     public boolean isOverdue() {
         return overdue;
     }
@@ -110,6 +136,8 @@ public class FeedbackEntity {
         this.overdue = overdue;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "trainee_id")
     public TraineeEntity getTrainee() {
         return trainee;
     }
@@ -118,6 +146,8 @@ public class FeedbackEntity {
         this.trainee = trainee;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "trainer_id")
     public TrainerEntity getTrainer() {
         return trainer;
     }
@@ -126,6 +156,8 @@ public class FeedbackEntity {
         this.trainer = trainer;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "group_id")
     public GroupEntity getGroup() {
         return group;
     }

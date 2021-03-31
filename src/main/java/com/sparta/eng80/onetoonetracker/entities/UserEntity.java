@@ -1,16 +1,24 @@
 package com.sparta.eng80.onetoonetracker.entities;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "user", schema = "1_to_1_tracker")
 public class UserEntity {
 
     private int userId;
     private String email;
     private String password;
     private String role;
-    private boolean active;
+    private boolean enabled;
+    private boolean passwordChanged;
 
     private TrainerEntity trainer;
     private TraineeEntity trainee;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     public int getUserId() {
         return userId;
     }
@@ -19,6 +27,8 @@ public class UserEntity {
         this.userId = userId;
     }
 
+    @Basic
+    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -27,6 +37,8 @@ public class UserEntity {
         this.email = email;
     }
 
+    @Basic
+    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -35,6 +47,8 @@ public class UserEntity {
         this.password = password;
     }
 
+    @Basic
+    @Column(name = "role")
     public String getRole() {
         return role;
     }
@@ -43,14 +57,27 @@ public class UserEntity {
         this.role = role;
     }
 
-    public boolean isActive() {
-        return active;
+    @Basic
+    @Column(name = "enabled")
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    @Basic
+    @Column(name = "password_changed")
+    public boolean isPasswordChanged() {
+        return passwordChanged;
     }
 
+    public void setPasswordChanged(boolean passwordChanged) {
+        this.passwordChanged = passwordChanged;
+    }
+
+    public void setEnabled(boolean active) {
+        this.enabled = active;
+    }
+
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public TrainerEntity getTrainer() {
         return trainer;
     }
@@ -59,6 +86,7 @@ public class UserEntity {
         this.trainer = trainer;
     }
 
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public TraineeEntity getTrainee() {
         return trainee;
     }
