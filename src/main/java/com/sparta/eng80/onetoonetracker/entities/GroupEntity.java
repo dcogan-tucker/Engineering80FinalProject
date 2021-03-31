@@ -58,7 +58,7 @@ public class GroupEntity {
         this.stream = stream;
     }
 
-    @OneToOne(mappedBy = "trainer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "group", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public TrainerEntity getTrainer() {
         return trainer;
     }
@@ -67,7 +67,7 @@ public class GroupEntity {
         this.trainer = trainer;
     }
 
-    @OneToMany(mappedBy = "trainees", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "group", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public Set<TraineeEntity> getTrainees() {
         return trainees;
     }
@@ -76,7 +76,7 @@ public class GroupEntity {
         this.trainees = trainees;
     }
 
-    @OneToMany(mappedBy = "feedbacks", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "group", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public Set<FeedbackEntity> getFeedbacks() {
         return feedbacks;
     }
