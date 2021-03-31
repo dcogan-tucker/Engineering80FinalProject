@@ -17,6 +17,7 @@ public class FeedbackService implements FeedbackAppService {
         this.feedbackRepository = feedbackRepository;
     }
 
+    // TODO: feedback is present could be extracted into separate method to prevent code being repeated
     public FeedbackEntity updateTraineeSSC(Integer id, String traineeStop, String traineeStart, String traineeContinue){
         Optional<FeedbackEntity> feedbackOptional = feedbackRepository.findById(id);
         FeedbackEntity feedbackEntity = new FeedbackEntity();
