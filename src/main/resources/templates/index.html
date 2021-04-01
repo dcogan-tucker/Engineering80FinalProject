@@ -9,73 +9,73 @@
     </head>
     <body>
         <div th:insert="/fragments/header :: header"></div>
+        <div th:insert="/fragments/feedbackText :: feedbackText"></div>
+<!--        <section id="main-content">-->
+<!--            <div class="container">-->
+<!--                <h1 class="text-center" th:text="${group.name} + ' - ' + ${stream.name}"></h1><br>-->
+<!--                <label>Name:</label>-->
+<!--                <label th:text="${user.firstName} + ' ' + ${user.lastName}"></label><br>-->
+<!--            </div>-->
+<!--            <div sec:authorize="hasAnyAuthority('ROLE_USER')">-->
+<!--                <div class="container">-->
+<!--                    <label>Trainer:</label>-->
+<!--                    <label th:text="${admin.firstName} + ' ' + ${admin.lastName}"></label><br>-->
 
-        <section id="main-content">
-            <div class="container">
-                <h1 class="text-center" th:text="${group.name} + ' - ' + ${stream.name}"></h1><br>
-                <label>Name:</label>
-                <label th:text="${user.firstName} + ' ' + ${user.lastName}"></label><br>
-            </div>
-            <div sec:authorize="hasAnyAuthority('ROLE_USER')">
-                <div class="container">
-                    <label>Trainer:</label>
-                    <label th:text="${admin.firstName} + ' ' + ${admin.lastName}"></label><br>
+<!--                    <label>Current Week:</label>-->
+<!--                    <a th:href=""></a><br>-->
 
-                    <label>Current Week:</label>
-                    <a th:href=""></a><br>
+<!--                    <div class="dropdown">-->
+<!--                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Week</button>-->
+<!--                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">-->
+<!--                            <li class="list-item">-->
+<!--                                <span class="status bg-color-red" th:classappend="${isSubmitted ? 'bg-color-green' : 'bg-color-amber'}"></span>-->
+<!--                                <a class="dropdown-item" href="#" th:text=""></a>-->
+<!--                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#34beef" class="bi bi-exclamation-circle" viewBox="0 0 16 16">-->
+<!--                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>-->
+<!--                                    <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>-->
+<!--                                </svg>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
 
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Week</button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li class="list-item">
-                                <span class="status bg-color-red" th:classappend="${isSubmitted ? 'bg-color-green' : 'bg-color-amber'}"></span>
-                                <a class="dropdown-item" href="#" th:text=""></a>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#34beef" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                    <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
-                                </svg>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+<!--            <div sec:authorize="hasAnyAuthority('ROLE_ADMIN')">-->
+<!--                <div class="dropdown">-->
+<!--                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Week</button>-->
+<!--                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">-->
+<!--                        <li class="list-item">-->
+<!--                            <a class="dropdown-item" href="#" th:text=""></a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
 
-            <div sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Week</button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li class="list-item">
-                            <a class="dropdown-item" href="#" th:text=""></a>
-                        </li>
-                    </ul>
-                </div>
+<!--                <table>-->
+<!--                    <thead class="text-center">-->
+<!--                        <tr>-->
+<!--                            <td>Student name</td>-->
+<!--                            <td>Submitted</td>-->
+<!--                        </tr>-->
+<!--                    </thead>-->
+<!--                    <tbody>-->
+<!--                        <tr th:each="trainee : ${trainees}">-->
+<!--                            <td th:text="${trainee.firstName} + ' ' + ${trainee.lastName}"></td>-->
+<!--                            <td th:text="${submitted}"></td>-->
+<!--                        </tr>-->
+<!--                    </tbody>-->
+<!--                </table>-->
 
-                <table>
-                    <thead class="text-center">
-                        <tr>
-                            <td>Student name</td>
-                            <td>Submitted</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="trainee : ${trainees}">
-                            <td th:text="${trainee.firstName} + ' ' + ${trainee.lastName}"></td>
-                            <td th:text="${submitted}"></td>
-                        </tr>
-                    </tbody>
-                </table>
+<!--                <div class="container">-->
+<!--                    <button class="btn bg-color-red">Add Trainee</button>-->
+<!--                </div>-->
 
-                <div class="container">
-                    <button class="btn bg-color-red">Add Trainee</button>
-                </div>
+<!--                <div id="popup">-->
+<!--                    <div class="container text-center">-->
 
-                <div id="popup">
-                    <div class="container text-center">
-
-                    </div>
-                </div>
-            </div>
-        </section>
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </section>-->
 
         <footer>
             <div th:insert="/fragments/footer :: footer"></div>
