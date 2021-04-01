@@ -6,15 +6,49 @@ body {
     /*background-color: #01181b;*/
 
     /* Button or href color */
-    color: #e33661;
+    /*color: #e33661;*/
 
     /* Text color when on dark background */
     /*color: white;*/
 }
 
 #header, #footer {
-    /*height: 10vh;*/
+    height: 10vh;
+}
+
+li.list-item {
+    height: 20px;
+
+}
+
+span.status {
+    width: 5px;
+    height: inherit;
+}
+
+.bg-color-main {
     background-color: #01181b;
+}
+
+div#footerBtns a {
+    margin: 30px;
+}
+
+.bg-color-red {
+    background-color: #e33661;
+}
+
+.bg-color-green {
+
+}
+
+.bg-color-amber {
+
+}
+
+
+label.profile-label {
+    margin-right: 50px;
 }
 
 #header img {
@@ -76,6 +110,21 @@ label.profile-label {
     top: -5px;
     padding: 0;
     display: inline-block;
+    height: 7vh;
+    padding-bottom: 10px;
+}
+
+button#burger {
+    color: white;
+}
+
+section#main-content {
+    background-color: white;
+}
+
+img.competency {
+    height: 80%;
+    width: 80%;
 }
 
 #header img {

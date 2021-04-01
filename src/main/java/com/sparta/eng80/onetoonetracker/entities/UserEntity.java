@@ -2,18 +2,53 @@ package com.sparta.eng80.onetoonetracker.entities;
 
 import javax.persistence.*;
 
+/**
+ * An Entity class represents and stores data from the user table
+ */
 @Entity
 @Table(name = "user", schema = "1_to_1_tracker")
 public class UserEntity {
 
+    /**
+     * A unique identifier for a user instance
+     */
     private int userId;
+
+    /**
+     * The email address of the user
+     */
     private String email;
+
+    /**
+     * The password that secures the users account
+     */
     private String password;
+
+    /**
+     * Used to determine whether the user is a trainer, trainee or admin
+     */
     private String role;
+
+    /**
+     * A value to determine whether the user account is still being used
+     */
     private boolean enabled;
+
+    /**
+     * A value to determine whether the user has changed their password from the temporary password
+     */
     private boolean passwordChanged;
 
+    /**
+     * Links the user account to the a trainer only if user is a trainer
+     * @see TrainerEntity
+     */
     private TrainerEntity trainer;
+
+    /**
+     * Links the user account to the a trainee only if user is a trainee
+     * @see TraineeEntity
+     */
     private TraineeEntity trainee;
 
     @Id

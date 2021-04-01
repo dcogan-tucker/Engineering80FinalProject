@@ -1,16 +1,26 @@
 package com.sparta.eng80.onetoonetracker.services;
 
+import com.sparta.eng80.onetoonetracker.entities.FeedbackEntity;
 import com.sparta.eng80.onetoonetracker.entities.TraineeEntity;
+import com.sparta.eng80.onetoonetracker.repositories.TraineeRepository;
 import com.sparta.eng80.onetoonetracker.services.interfaces.UserAppService;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class TraineeService implements UserAppService<TraineeEntity> {
 
+    private final TraineeRepository traineeRepository;
+
+    public TraineeService(TraineeRepository traineeRepository) {
+        this.traineeRepository = traineeRepository;
+    }
+
     @Override
-    public Optional<TraineeEntity> findById() {
+    public Optional<TraineeEntity> findById(int id) {
         return Optional.empty();
     }
 
@@ -36,7 +46,7 @@ public class TraineeService implements UserAppService<TraineeEntity> {
 
     @Override
     public Iterable<TraineeEntity> findByGroupId(int id) {
-        return null;
+        return traineeRepository.getAllTraineesFromAGroup(id);
     }
 
     @Override

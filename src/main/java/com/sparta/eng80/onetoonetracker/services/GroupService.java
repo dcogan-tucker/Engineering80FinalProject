@@ -10,7 +10,7 @@ import java.util.Optional;
 public class GroupService implements GroupAppService {
 
     @Override
-    public Optional<GroupEntity> findById() {
+    public Optional<GroupEntity> findById(int id) {
         return Optional.empty();
     }
 
@@ -25,12 +25,12 @@ public class GroupService implements GroupAppService {
     }
 
     @Override
-    public GroupEntity findByName(String name) {
+    public Optional<GroupEntity> findByName(String name) {
         return null;
     }
 
     @Override
-    public GroupEntity findByStreamId(int id) {
+    public Iterable<GroupEntity> findByStreamId(int id) {
         return null;
     }
 }

@@ -1,16 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <title>Home</title>
-        <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.0.0-beta2/css/bootstrap.min.css}"/>
-        <link rel="stylesheet" href="css/style.css">
+        <link th:href="@{webjars/bootstrap/5.0.0-beta2/css/bootstrap.min.css}" th:rel="stylesheet"/>
+        <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
         <div th:insert="/fragments/header :: header"></div>
-
-        <div th:insert="/fragments/footer :: footer"></div>
-
+        <section id="main-content">
+<!--            <div class="container">-->
+<!--                <h1 class="text-center" th:text="${group.name} + ' - ' + ${stream.name}"></h1><br>-->
+<!--                <label>Name:</label>-->
+<!--                <label th:text="${user.firstName} + ' ' + ${user.lastName}"></label><br>-->
+<!--            </div>-->
+            <div sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                <div th:insert="/fragments/admin"></div>
+            </div>
+            <div sec:authorize="hasAnyAuthority('ROLE_TRAINER')">
+                <div th:insert="/fragments/trainer"></div>
+            </div>
+            <div sec:authorize="hasAnyAuthority('ROLE_USER')">
+                <div th:insert="/fragments/user"></div>
+            </div>
+        </section>
+        <footer>
+            <div th:insert="/fragments/footer :: footer"></div>
+        </footer>
         <!-- Scripts -->
         <script th:src="@{webjars/popper.js/2.5.4/umd/popper.min.js}"></script>
         <script th:src="@{webjars/bootstrap/5.0.0-beta2/js/bootstrap.min.js}"></script>

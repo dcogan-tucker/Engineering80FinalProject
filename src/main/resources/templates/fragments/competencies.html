@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Behavioural Competencies</title>
+        <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.0.0-beta2/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+    <div th:insert="/fragments/header :: header"></div>
+        <div class="container text-center bg-color-main">
+            <a class="" data-bs-toggle="modal" href="#analytical" role="button">
+                <img th:href="@{/images/Analytical.png}" class="competency" alt="">
+            </a>
+            <a class="" data-bs-toggle="modal" href="#determined" role="button">
+                <img th:href="@{/images/Determined.png}" class="competency" alt="">
+            </a>
+            <a class="" data-bs-toggle="modal" href="#imaginative" role="button">
+                <img th:href="@{/images/Imaginative.png}" class="competency" alt="">
+            </a>
+            <a class="" data-bs-toggle="modal" href="#independent" role="button">
+                <img th:href="@{/images/Independent.png}" class="competency" alt="">
+            </a>
+            <a class="" data-bs-toggle="modal" href="#professional" role="button">
+                <img th:href="@{/images/Professional.png}" class="competency" alt="">
+            </a>
+            <a class="" data-bs-toggle="modal" href="#studios" role="button">
+                <img th:href="@{/images/Studios.png}" class="competency" alt="">
+            </a>
+        </div>
+
+        <!-- Analytical -->
+        <div class="modal fade" id="analytical" aria-hidden="true" aria-labelledby="..." tabindex="-1">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <img th:href="@{/images/Analytical.png}" alt="">
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" data-bs-target="#determined" data-bs-toggle="modal" data-bs-dismiss="modal">Next: #determined</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Determined -->
+        <div class="modal fade" id="determined" aria-hidden="true" aria-labelledby="..." tabindex="-1">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <img th:href="@{/images/Determined.png}" alt="">
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" data-bs-target="#imaginative" data-bs-toggle="modal" data-bs-dismiss="modal">Next: #imaginative</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Imaginative -->
+        <div class="modal fade" id="imaginative" aria-hidden="true" aria-labelledby="..." tabindex="-1">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <img th:href="@{/images/Imaginative.png}" alt="">
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" data-bs-target="#independent" data-bs-toggle="modal" data-bs-dismiss="modal">Next: #independent</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Independent -->
+        <div class="modal fade" id="independent" aria-hidden="true" aria-labelledby="..." tabindex="-1">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <img th:href="@{/images/Independent.png}" alt="">
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" data-bs-target="#prodessional" data-bs-toggle="modal" data-bs-dismiss="modal">Next: #professional</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Professional -->
+        <div class="modal fade" id="professional" aria-hidden="true" aria-labelledby="..." tabindex="-1">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <img th:href="@{/images/Professional.png}" alt="">
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" data-bs-target="#studios" data-bs-toggle="modal" data-bs-dismiss="modal">Next: #studios</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Studios -->
+        <div class="modal fade" id="studios" aria-hidden="true" aria-labelledby="..." tabindex="-1">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <img th:href="@{/images/Studios.png}" alt="">
+                    <div class="modal-footer">
+                        <a class="btn btn-primary" href="#analytical" data-bs-toggle="modal" role="button">Open #analytical</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <footer>
+        <div th:insert="/fragments/footer :: footer"></div>
+    </footer>
+    </body>
+</html>

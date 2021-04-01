@@ -10,7 +10,7 @@ import java.util.Optional;
 public class StreamService implements StreamAppService {
 
     @Override
-    public Optional<StreamEntity> findById() {
+    public Optional<StreamEntity> findById(int id) {
         return Optional.empty();
     }
 
@@ -25,7 +25,7 @@ public class StreamService implements StreamAppService {
     }
 
     @Override
-    public StreamEntity findByName(String name) {
+    public Optional<StreamEntity> findByName(String name) {
         return null;
     }
 }
