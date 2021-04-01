@@ -38,13 +38,14 @@ public class PasswordChangerController {
                             @RequestParam("newPassword") String newPassword,
                             @RequestParam("confirmPassword") String confirmPassword) {
         UserEntity userEntity = securityService.getCurrentUser();
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        System.out.println(passwordEncoder.matches(userEntity.getPassword(), currentPassword));
-        System.out.println(newPassword.equals(confirmPassword));
+        PasswordEncryptor passwordEncryptor = new PasswordEncryptor();
+        PasswordEncoder passwordEncoder = passwordEncryptor.getBCryptPasswordEncoder();
+
         System.out.println("P: " + currentPassword);
         System.out.println("NP: " + newPassword);
         System.out.println("CP: " + confirmPassword);
-        if (!newPassword.equals(confirmPassword)) {
+
+        if (!passwordEncoder.matches(currentPassword, userEntity.getPassword()) || !newPassword.equals(confirmPassword)) {
             System.out.println("Error");
             return "redirect:/change-password";
         } else {
