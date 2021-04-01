@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.0.0-beta2/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div th:fragment="feedbackText" id="feedbackText">
+    <div class="container-fluid text-center">
+        <th:form method="POST" th:action="@{/submitFeedback}">
+            <div class="btn-group" role="group" aria-label="User Selection">
+                <input type="radio" class="btn-check" name="btnradioUser"
+                       onclick="toggleUser('trainee','trainer')" id="traineeBtn"
+                       autocomplete="off" checked>
+                <label class="btn btn-outline-primary" for="traineeBtn">Trainee</label>
+
+                <input type="radio" class="btn-check" name="btnradioUser"
+                       onclick="toggleUser('trainer','trainee')" id="trainerBtn"
+                       autocomplete="off">
+                <label class="btn btn-outline-primary" for="trainerBtn">Trainer</label>
+            </div>
+            <div id="trainee">
+                <div class="btn-group" role="group" aria-label="SSC Selection Trainee">
+                    <input type="radio" class="btn-check" name="btnradioTrainee"
+                           onclick="toggleTextBox('stopTrainee','startTrainee','continueTrainee')" id="stopTrainee"
+                           autocomplete="off" checked>
+                    <label class="btn btn-outline-primary" for="stopTrainee">Stop</label>
+
+                    <input type="radio" class="btn-check" name="btnradioTrainee"
+                           onclick="toggleTextBox('startTrainee','stopTrainee','continueTrainee')" id="startTrainee"
+                           autocomplete="off">
+                    <label class="btn btn-outline-primary" for="startTrainee">Start</label>
+
+                    <input type="radio" class="btn-check" name="btnradioTrainee"
+                           onclick="toggleTextBox('continueTrainee','startTrainee','stopTrainee')" id="continueTrainee"
+                           autocomplete="off">
+                    <label class="btn btn-outline-primary" for="continueTrainee">Continue</label>
+                </div>
+
+                <textarea id="stopTraineeTxt" th:value="traineeStop"></textarea>
+                <textarea id="startTraineeTxt" th:value="traineeStart" hidden></textarea>
+                <textarea id="continueTraineeTxt" th:value="traineeContinue" hidden></textarea>
+            </div>
+            <div id="trainer" hidden>
+                <div class="btn-group" role="group" aria-label="SSC Trainer Selection">
+                    <input type="radio" class="btn-check" name="btnradioTrainer"
+                           onclick="toggleTextBox('stopTrainer','startTrainer','continueTrainer')" id="stopTrainer"
+                           autocomplete="off" checked>
+                    <label class="btn btn-outline-primary" for="stopTrainer">Stop</label>
+
+                    <input type="radio" class="btn-check" name="btnradioTrainer"
+                           onclick="toggleTextBox('startTrainer','stopTrainer','continueTrainer')" id="startTrainer"
+                           autocomplete="off">
+                    <label class="btn btn-outline-primary" for="startTrainer">Start</label>
+
+                    <input type="radio" class="btn-check" name="btnradioTrainer"
+                           onclick="toggleTextBox('continueTrainer','startTrainer','stopTrainer')" id="continueTrainer"
+                           autocomplete="off">
+                    <label class="btn btn-outline-primary" for="continueTrainer">Continue</label>
+                </div>
+
+                <textarea id="stopTrainerTxt" readonly></textarea>
+                <textarea id="startTrainerTxt" hidden readonly></textarea>
+                <textarea id="continueTrainerTxt" hidden readonly></textarea>
+            </div>
+            <select id="techGrade" name="techGrade" class="form-control" required>
+                <option value="" disabled selected>Technical Grade</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+            </select>
+            <select id="consultGrade" name="consultGrade" class="form-control" required>
+                <option value="" disabled selected>Consultant Grade</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+            </select>
+            <input type="submit" class="btn btn-primary">
+        </th:form>
+    </div>
+    <script>
+        function toggleUser(enabled, disabled) {
+            var divEnabled = document.getElementById(enabled);
+            var divDisabled = document.getElementById(disabled);
+            divEnabled.hidden = false;
+            divDisabled.hidden = true;
+        }
+
+        function toggleTextBox(enabled, disabled, disabled2) {
+            var textboxEnabled = document.getElementById(enabled);
+            var textboxDisabled = document.getElementById(disabled);
+            var textboxDisabled2 = document.getElementById(disabled2);
+            textboxEnabled.hidden = false;
+            textboxDisabled.hidden = true;
+            textboxDisabled2.hidden = true;
+        }
+    </script>
+</div>
+</body>
+</html>
