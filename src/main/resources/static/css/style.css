@@ -50,6 +50,11 @@ div#footerBtns a {
 
 }
 
+
+label.profile-label {
+    margin-right: 50px;
+}
+
 #header img {
     height: 7vh;
     padding-bottom: 10px;
