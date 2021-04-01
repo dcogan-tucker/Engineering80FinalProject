@@ -16,29 +16,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class LoginController {
 
     private final SecurityService securityService;
-    private final TrainerController trainerController;
-    private final TrainerService trainerService;
 
     @Autowired
-    public LoginController(SecurityService securityService, TrainerController trainerController, TrainerService trainerService) {
+    public LoginController(SecurityService securityService) {
         this.securityService = securityService;
-        this.trainerController = trainerController;
-        this.trainerService = trainerService;
     }
 
     @GetMapping("/login")
-    public String login(ModelMap model) {
+    public String login() {
         if(securityService.isAuthenticated()){
-            switch (securityService.getCurrentUser().getRole()) {
-                case "ROLE_TRAINER":
-                    Iterable<TraineeEntity> trainees =trainerController.getTrainees(securityService.getCurrentUser().getTrainer());
-                    model.addAttribute("traineesInTrainerGroup", trainees);
-                    break;
-                case "ROLE_ADMIN":
-                case "ROLE_TRAINEE":
-                    break;
-            }
-            return "index";
+            return "redirect:/";
         }
         return "login";
     }
