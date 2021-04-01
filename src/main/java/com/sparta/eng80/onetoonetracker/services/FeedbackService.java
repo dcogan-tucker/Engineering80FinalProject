@@ -53,10 +53,15 @@ public class FeedbackService implements FeedbackAppService {
         return feedbackRepository.save(feedbackEntity);
     }
 
+    public FeedbackEntity update(FeedbackEntity feedbackEntity){
+        return feedbackRepository.save(feedbackEntity);
+    }
+
+
 
     @Override
     public Optional<FeedbackEntity> findById(int id) {
-        return Optional.empty();
+        return feedbackRepository.findById(id);
     }
 
     @Override
