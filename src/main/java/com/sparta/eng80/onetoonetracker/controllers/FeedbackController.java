@@ -33,7 +33,7 @@ public class FeedbackController {
     }
 
     @PostMapping("/feedback")
-    public String submitFeedback(@ModelAttribute(value = "feedback") FeedbackEntity feedback){
+    public String submitFeedback(@ModelAttribute("feedback") FeedbackEntity feedback){
         UserEntity user = securityService.getCurrentUser();
         if(user.getRole().equals("ROLE_TRAINEE")){
             feedbackService.update(feedback);

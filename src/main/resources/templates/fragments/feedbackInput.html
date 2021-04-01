@@ -5,9 +5,9 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div th:fragment="feedbackInput(feedback)" id="feedbackText">
+<div th:fragment="feedbackInput(feedback)" id="feedbackText" >
     <div class="container-fluid text-center">
-        <form method="POST" th:action="@{/feedback}">
+        <form method="POST" th:object="${feedback}" th:action="@{/feedback}" >
             <div class="btn-group" role="group" aria-label="User Selection">
                 <input type="radio" class="btn-check" name="btnradioUser"
                        onclick="toggleUser('trainee','trainer')" id="traineeBtn"
@@ -37,9 +37,9 @@
                     <label class="btn btn-outline-primary" for="continueTraineeBtn">Continue</label>
                 </div>
 
-                <textarea id="stopTrainee" th:text="${feedback.traineeStop}" th:value="${feedback.traineeStop}"></textarea>
-                <textarea id="startTrainee" th:text="${feedback.traineeStart}" th:value="${feedback.traineeStart}" hidden></textarea>
-                <textarea id="continueTrainee"  th:text="${feedback.traineeContinue}" th:value="${feedback.traineeContinue}" hidden></textarea>
+                <textarea id="stopTrainee" th:field="*{traineeStop}"></textarea>
+                <textarea id="startTrainee" th:field="${feedback.traineeStart}" hidden></textarea>
+                <textarea id="continueTrainee"  th:field="${feedback.traineeContinue}" hidden></textarea>
             </div>
             <div id="trainer" hidden>
                 <div class="btn-group" role="group" aria-label="SSC Trainer Selection">
@@ -65,19 +65,18 @@
             </div>
             <select id="techGrade" th:value="${feedback.technicalGrade}" class="form-control" required>
                 <option value="" disabled selected>Technical Grade</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
+                <option th:value="${feedback.consultantGrade}" th:text="A"></option>
+                <option th:value="${feedback.consultantGrade}" th:text="B"></option>
+                <option th:value="${feedback.consultantGrade}" th:text="C"></option>
+                <option th:value="${feedback.consultantGrade}" th:text="D"></option>
             </select>
-            <select id="consultGrade" th:value="${feedback.consultantGrade}" class="form-control" required>
+            <select id="consultGrade" th:field="${feedback.consultantGrade}" class="form-control" required>
                 <option value="" disabled selected>Consultant Grade</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
+                <option th:value="${feedback.consultantGrade}" th:text="A"></option>
+                <option th:value="${feedback.consultantGrade}" th:text="B"></option>
+                <option th:value="${feedback.consultantGrade}" th:text="C"></option>
+                <option th:value="${feedback.consultantGrade}" th:text="D"></option>
             </select>
-            <textarea hidden th:value="${feedback.feedbackId = #request.getParameter('id')}"></textarea>
             <input type="submit" class="btn btn-primary" value="Submit">
         </form>
     </div>
