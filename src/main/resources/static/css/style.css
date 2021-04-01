@@ -6,7 +6,7 @@ body {
     /*background-color: #01181b;*/
 
     /* Button or href color */
-    color: #e33661;
+    /*color: #e33661;*/
 
     /* Text color when on dark background */
     /*color: white;*/
@@ -14,11 +14,53 @@ body {
 
 #header, #footer {
     height: 10vh;
+}
+
+#footer {
+    display: inline-block;
+}
+
+li.list-item {
+    height: 20px;
+
+}
+
+span.status {
+    width: 5px;
+    height: inherit;
+}
+
+.bg-color-main {
     background-color: #01181b;
 }
 
+div#footerBtns a {
+    margin: 30px;
+}
+
+.bg-color-red {
+    background-color: #e33661;
+}
+
+.bg-color-green {
+
+}
+
+.bg-color-amber {
+
+}
+
 #header img {
-    height: 8vh;
+    height: 7vh;
+    padding-bottom: 10px;
+}
+
+button#burger {
+    color: white;
+}
+
+section#main-content {
+    background-color: white;
 }
 
 /*.main-color {*/

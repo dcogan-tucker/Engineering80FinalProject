@@ -8,14 +8,15 @@
     </head>
     <!-- Delete End -->
     <body>
-        <div th:fragment="header">
-            <nav class="navbar" id="header">
-                <div class="container text-center">
-                    <a class="navbar-brand text-center" href="#">
-                        <img src="../../static/images/sparta-global-logo-white.svg" class="img-fluid rounded mx-auto d-block" alt="Sparta Global Logo">
-                    </a>
-                </div>
-            </nav>
-        </div>
+        <nav th:fragment="header" class="navbar bg-color-main" id="header">
+            <div class="container-fluid text-center">
+                <a class="navbar-brand" href="#">
+                    <img th:src="@{images/sparta-global-logo-white.svg}" alt="Sparta Global Logo">
+                </a>
+                <button class="navbar-toggler" id="burger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
     </body>
 </html>

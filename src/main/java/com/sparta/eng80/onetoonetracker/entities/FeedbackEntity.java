@@ -69,16 +69,29 @@ public class FeedbackEntity {
     private boolean overdue;
 
     /**
+     * The grade that the trainee believes achieved in technical skills for the week
+     */
+    private char technicalGrade;
+
+    /**
+     * The grade that the trainee believes achieved in consultant skills for the week
+     */
+    private char consultantGrade;
+
+    /**
+     * The trainee which the feedback relates to
      * @see TraineeEntity
      */
     private TraineeEntity trainee;
 
     /**
+     * The trainer who can view the feedback
      * @see TrainerEntity
      */
     private TrainerEntity trainer;
 
     /**
+     * The group which the trainee who relates to the feedback was apart of when  the feedback is created
      * @see GroupEntity
      */
     private GroupEntity group;
@@ -170,7 +183,7 @@ public class FeedbackEntity {
         return trainerContinue;
     }
 
-    public void setTrainerContinue(String TrainerContinue) {
+    public void setTrainerContinue(String trainerContinue) {
         this.trainerContinue = trainerContinue;
     }
 
@@ -192,6 +205,26 @@ public class FeedbackEntity {
 
     public void setOverdue(boolean overdue) {
         this.overdue = overdue;
+    }
+
+    @Basic
+    @Column(name = "technical_grade")
+    public char getTechnicalGrade(){
+        return technicalGrade;
+    }
+
+    public void setTechnicalGrade(char technicalGrade){
+        this.technicalGrade = technicalGrade;
+    }
+
+    @Basic
+    @Column(name = "consultant_grade")
+    public char getConsultantGrade(){
+        return consultantGrade;
+    }
+
+    public void setConsultantGrade(char consultantGrade){
+        this.consultantGrade = consultantGrade;
     }
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
