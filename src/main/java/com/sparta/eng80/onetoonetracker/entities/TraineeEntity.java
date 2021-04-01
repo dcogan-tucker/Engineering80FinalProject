@@ -2,18 +2,47 @@ package com.sparta.eng80.onetoonetracker.entities;
 
 import javax.persistence.*;
 import java.util.Set;
+import java.util.TreeSet;
 
+/**
+ * An Entity class represents and stores data from the trainee table
+ */
 @Entity
 @Table(name = "trainee", schema = "1_to_1_tracker")
 public class TraineeEntity {
 
+    /**
+     * A unique identifier for a trainee instance
+     */
     private int traineeId;
+
+    /**
+     * The first name of the trainee
+     */
     private String firstName;
+
+    /**
+     * The surname of the trainee
+     */
     private String lastName;
 
+    /**
+     * The trainees user details
+     * @see UserEntity
+     */
     private UserEntity user;
+
+    /**
+     * The group that the trainee is apart of
+     * @see GroupEntity
+     */
     private GroupEntity group;
-    private Set<FeedbackEntity> feedbacks;
+
+    /**
+     * All the feedback forms that are related to the trainee
+     * @see FeedbackEntity
+     */
+    private TreeSet<FeedbackEntity> feedbacks;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -72,6 +101,6 @@ public class TraineeEntity {
     }
 
     public void setFeedbacks(Set<FeedbackEntity> feedbacks) {
-        this.feedbacks = feedbacks;
+        this.feedbacks = (TreeSet<FeedbackEntity>) feedbacks;
     }
 }

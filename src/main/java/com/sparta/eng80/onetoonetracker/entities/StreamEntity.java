@@ -3,15 +3,37 @@ package com.sparta.eng80.onetoonetracker.entities;
 import javax.persistence.*;
 import java.util.Set;
 
+/**
+ * An Entity class represents and stores data from the stream table
+ */
 @Entity
 @Table(name = "stream", schema = "1_to_1_tracker")
 public class StreamEntity {
 
+    /**
+     * A unique identifier for a stream instance
+     */
     private int streamId;
+
+    /**
+     * The name of the stream
+     */
     private String name;
+
+    /**
+     * A small paragraph about the stream
+     */
     private String description;
+
+    /**
+     * The number of weeks the stream lasts for
+     */
     private int duration;
 
+    /**
+     * All groups that are apart of the stream
+     * @see GroupEntity
+     */
     private Set<GroupEntity> groups;
 
     @Id

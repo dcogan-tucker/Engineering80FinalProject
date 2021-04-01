@@ -178,8 +178,4 @@ public class TrainerService implements UserAppService<TrainerEntity> {
         }
         return wasRemoved;
     }
-
-    public Iterable<TraineeEntity> getAllTraineesFromGroup(GroupEntity groupEntity) {
-        return traineeService.findByGroupId(groupEntity.getGroupId());
-    }
 }
