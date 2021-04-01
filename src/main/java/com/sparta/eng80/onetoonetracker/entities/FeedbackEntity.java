@@ -18,8 +18,8 @@ public class FeedbackEntity {
     private String trainerStop;
     private String trainerStart;
     private String trainerContinue;
-    private char technicalGrade;
-    private char consultantGrade;
+    private String technicalGrade;
+    private String consultantGrade;
     private Status status;
     private boolean overdue;
 
@@ -140,21 +140,21 @@ public class FeedbackEntity {
 
     @Basic
     @Column(name = "technical_grade")
-    public char getTechnicalGrade(){
+    public String getTechnicalGrade(){
         return technicalGrade;
     }
 
-    public void setTechnicalGrade(char technicalGrade){
+    public void setTechnicalGrade(String technicalGrade){
         this.technicalGrade = technicalGrade;
     }
 
     @Basic
     @Column(name = "consultant_grade")
-    public char getConsultantGrade(){
+    public String getConsultantGrade(){
         return consultantGrade;
     }
 
-    public void setConsultantGrade(char consultantGrade){
+    public void setConsultantGrade(String consultantGrade){
         this.consultantGrade = consultantGrade;
     }
 

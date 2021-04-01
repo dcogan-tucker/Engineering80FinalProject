@@ -25,7 +25,7 @@ public class FeedbackController {
     }
 
     @GetMapping("/feedback")
-    public String getFeedback(Model model , @RequestParam("id") int id){
+    public String getFeedback(Model model , @RequestParam(value = "id") Integer id){
         Optional<FeedbackEntity> feedbackEntity = feedbackService.findById(id);
         FeedbackEntity feedback = feedbackEntity.get();
         model.addAttribute("feedback", feedback);
@@ -35,6 +35,7 @@ public class FeedbackController {
     @PostMapping("/feedback")
     public String submitFeedback(@ModelAttribute("feedback") FeedbackEntity feedback){
         UserEntity user = securityService.getCurrentUser();
+        System.out.println(feedback.getFeedbackId());
         if(user.getRole().equals("ROLE_TRAINEE")){
             feedbackService.update(feedback);
         }
