@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<!--<div class="dropdown">-->
+<!--    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Week</button>-->
+<!--    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">-->
+<!--        <li class="list-item">-->
+<!--            <a class="dropdown-item" href="#" th:text=""></a>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</div>-->
+
+<table>
+    <thead class="text-center">
+    <tr>
+        <td>Student name</td>
+        <td>Submitted</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="trainee : ${traineesInTrainerGroup}">
+        <td th:text="${trainee.firstName} + ' ' + ${trainee.lastName}"></td>
+        <td th:text="${submitted}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="container">
+    <button class="btn bg-color-red">Add Trainee</button>
+</div>
+<div class="container">
+    <button class="btn bg-color-red">Add Group</button>
+</div>
+<div id="popup">
+    <div class="container text-center">
+    </div>
+</div>
+</body>
+</html>
