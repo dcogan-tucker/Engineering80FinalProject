@@ -3,16 +3,44 @@ package com.sparta.eng80.onetoonetracker.entities;
 import javax.persistence.*;
 import java.util.Set;
 
+/**
+ * An Entity class represents and stores data from the trainer table
+ */
 @Entity
 @Table(name = "trainer", schema = "1_to_1_tracker")
 public class TrainerEntity {
 
+    /**
+     * A unique identifier for a trainer instance
+     */
     private int trainerId;
+
+    /**
+     * The first name of the trainer
+     */
     private String firstName;
+
+    /**
+     * The surname of the trainer
+     */
     private String lastName;
 
+    /**
+     * The trainers user details
+     * @see UserEntity
+     */
     private UserEntity user;
+
+    /**
+     * The group that the trainer is teaching
+     * @see GroupEntity
+     */
     private GroupEntity group;
+
+    /**
+     * All the feedback forms that the trainer can access
+     * @see FeedbackEntity
+     */
     private Set<FeedbackEntity> feedbacks;
 
     @Id
