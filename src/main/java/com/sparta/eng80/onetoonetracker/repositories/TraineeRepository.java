@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface TraineeRepository extends CrudRepository<TraineeEntity, Integer> {
 
-    @Query(nativeQuery = true, value = "SELECT * FROM trainee WHERE group_id = ?1")
+    @Query(nativeQuery = true, value = "SELECT * FROM trainee WHERE group_id = ?")
     Iterable<TraineeEntity> getAllTraineesFromAGroup(int id);
 
 }
