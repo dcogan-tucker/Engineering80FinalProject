@@ -42,7 +42,7 @@ public class TraineeEntity {
      * All the feedback forms that are related to the trainee
      * @see FeedbackEntity
      */
-    private TreeSet<FeedbackEntity> feedbacks;
+    private Set<FeedbackEntity> feedbacks;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -101,6 +101,6 @@ public class TraineeEntity {
     }
 
     public void setFeedbacks(Set<FeedbackEntity> feedbacks) {
-        this.feedbacks = (TreeSet<FeedbackEntity>) feedbacks;
+        this.feedbacks = feedbacks;
     }
 }
