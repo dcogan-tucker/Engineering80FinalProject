@@ -7,11 +7,13 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Repository
 public interface TrainerRepository extends CrudRepository<TrainerEntity, Integer> {
 
     @Query(nativeQuery = true, value = "select * from trainer where trainer_id = ?")
-    TrainerEntity findTrainerById(int trainerId);
+    Optional<TrainerEntity> findTrainerById(int trainerId);
 
     @Modifying
     @Transactional
