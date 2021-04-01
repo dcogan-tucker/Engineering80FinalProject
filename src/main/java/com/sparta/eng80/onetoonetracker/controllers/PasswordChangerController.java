@@ -50,10 +50,11 @@ public class PasswordChangerController {
             return "redirect:/change-password";
         } else {
             System.out.println("Changed");
+            userEntity.setPassword(passwordEncoder.encode(newPassword));
+            userEntity.setPasswordChanged(true);
+            userService.save(userEntity);
             return "index";
-//            userEntity.setPassword(newPassword);
-//            userEntity.setPasswordChanged(true);
-//            userService.save(userEntity);
+
         }
     }
 }
