@@ -12,7 +12,8 @@
             <div class="modal-content">
                 <div class="modal-header bg-dark text-white d-flex">
                     <h4 class="fw-bold">Add new trainee</h4>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                 </div>
                 <div class="modal-body bg-dark text-white">
                     <table class="w-100">
@@ -21,24 +22,26 @@
                         </tr>
                         <tr>
                             <div class="col-md-3">
-                                                            <select style="text-align-last: center" class="form-control" th:field="*{groupId}" required>
-                                                                <option value=""> -- </option>
-                                                                <option th:each="group : ${allGroups}"
-                                                                        th:value="${group.groupId}"
-                                                                        th:text="${group.groupName}"></option>
-                                                            </select>
+                                <select style="text-align-last: center" class="form-control" th:field="*{groupId}"
+                                        required>
+                                    <option value=""> --</option>
+                                    <option th:each="group : ${allGroups}"
+                                            th:value="${group.groupId}"
+                                            th:text="${group.groupName}"></option>
+                                </select>
                             </div>
                         </tr>
                         <tr>
                             <td>First Name</td>
                             <td>
-<!--                                <input type="text" th:field="*{firstName}" class="form-control" autofocus="autofocus" required>-->
+                                <input type="text" th:field="*{firstName}" class="form-control" autofocus="autofocus"
+                                       required>
                             </td>
                         </tr>
                         <tr>
                             <td>Last Name</td>
                             <td>
-<!--                                <input type="text" th:field="*{lastName}" class="form-control" required>-->
+                                <input type="text" th:field="*{lastName}" class="form-control" required>
                             </td>
                         </tr>
                     </table>

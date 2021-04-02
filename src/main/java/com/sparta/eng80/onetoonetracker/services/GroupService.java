@@ -1,14 +1,13 @@
 package com.sparta.eng80.onetoonetracker.services;
 
 import com.sparta.eng80.onetoonetracker.entities.GroupEntity;
-import com.sparta.eng80.onetoonetracker.entities.StreamEntity;
-import com.sparta.eng80.onetoonetracker.entities.TrainerEntity;
 import com.sparta.eng80.onetoonetracker.repositories.GroupRepository;
 import com.sparta.eng80.onetoonetracker.services.interfaces.GroupAppService;
 import com.sparta.eng80.onetoonetracker.utilities.NewGroupForm;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Optional;
 
 @Service
 public class GroupService implements GroupAppService {
