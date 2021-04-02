@@ -37,14 +37,25 @@
                 <td th:text="*{trainer.trainerId}"/>
                 <td th:text="*{trainer.firstName}"/>
                 <td th:text="*{trainer.lastName}"/>
-                <td> </td>
+                <td>
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="editTrainerDropdown" data-bs-toggle="dropdown" aria-expanded="false">Edit Trainer</button></td>
             </tr>
-            <tr>
-                <div class="collapse" id="editTrainerToggle">
-                    <div class="container">
-                        
-                    </div>
-                </div>
+            <tr class="dropdown-toggle" aria-labelledby="editTrainerDropdown">
+                <form class="dropdown-item" th:action="@{/edit-trainer}" method="post">
+                    <td>
+                        <input type="hidden" name="trainerId" th:value="*{trainer.trainerId}">
+                    </td>
+                    <td>
+                        <input class="mt-2" type="text" name="firstName" th:value="*{trainer.firstName}">
+                    </td>
+                    <td>
+                        <input class="mt-2" type="text" name="lastName" th:value="*{trainer.lastName}">
+                    </td>
+                    <td>
+                        <input class="btn" id="primaryBtn" type="submit" value="Confirm" >
+                    </td>
+
+                </form>
             </tr>
 
             </tbody>

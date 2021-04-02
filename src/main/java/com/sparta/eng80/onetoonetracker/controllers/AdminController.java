@@ -73,6 +73,12 @@ public class AdminController {
         return "redirect:/trainers";
     }
 
+    @PostMapping("/edit-trainer")
+    public String editTrainer(@RequestParam int trainerId, @RequestParam String firstName, @RequestParam String lastName){
+        adminService.editTrainer(trainerId, firstName, lastName);
+        return "redirect:/trainers";
+    }
+
     @PostMapping("/remove-trainer")
     public String removeTrainer(@RequestParam int trainerId, boolean confirmation){
         if(confirmation){

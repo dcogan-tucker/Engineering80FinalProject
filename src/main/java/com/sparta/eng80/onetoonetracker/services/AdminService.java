@@ -68,4 +68,8 @@ public class AdminService implements AdminAppService {
     public Iterable<TrainerEntity> findAllTrainers(){
         return trainerRepository.findAll();
     }
+
+    public void editTrainer(int trainerId, String firstName, String lastName){
+        trainerRepository.editTrainerById(firstName, lastName, trainerId);
+    }
 }
