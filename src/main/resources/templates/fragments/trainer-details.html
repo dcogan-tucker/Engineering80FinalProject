@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainer Details</title>
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.0.0-beta2/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="C:\Users\brad_dev\Desktop\GitHub\Engineering80FinalProject\src\main\resources\static\css\style.css">
+</head>
+<body>
+<nav th:fragment="header" class="navbar bg-color-main" id="header">
+    <div class="container-fluid text-center">
+        <a class="navbar-brand" href="#">
+            <img th:src="@{images/sparta-global-logo-white.svg}" alt="Sparta Global Logo">
+        </a>
+        <button class="navbar-toggler" id="burger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+    <div class="container" th:each="trainer : ${trainer}">
+        <table class="table table-hover" id="trainersTable">
+            <thead class="text-black-50 font-weight-bold">
+            <tr>
+                <th>Trainer ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr  class="text-black-50" data-bs-toggle="modal"
+            th:attr="data-bs-target=${'#trainerModal' + trainer.trainerId}">
+                <td th:text="*{trainer.trainerId}"/>
+                <td th:text="*{trainer.firstName}"/>
+                <td th:text="*{trainer.lastName}"/>
+                <td>
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="editTrainerDropdown" data-bs-toggle="dropdown" aria-expanded="false">Edit Trainer</button></td>
+            </tr>
+            <tr class="dropdown-toggle" aria-labelledby="editTrainerDropdown">
+                <form class="dropdown-item" th:action="@{/edit-trainer}" method="post">
+                    <td>
+                        <input type="hidden" name="trainerId" th:value="*{trainer.trainerId}">
+                    </td>
+                    <td>
+                        <input class="mt-2" type="text" name="firstName" th:value="*{trainer.firstName}">
+                    </td>
+                    <td>
+                        <input class="mt-2" type="text" name="lastName" th:value="*{trainer.lastName}">
+                    </td>
+                    <td>
+                        <input class="btn" id="primaryBtn" type="submit" value="Confirm" >
+                    </td>
+
+                </form>
+            </tr>
+
+            </tbody>
+        </table>
+        <form action="#" th:action="@{/remove-trainer}" method="post" >
+            <input class="mt-2" type="hidden" name="trainerId" th:value="*{trainer.trainerId}"/>
+            <label for="confirmation">I understand upon deletion the information can not be restored.</label>
+            <input type="checkbox" id="confirmation" name="confirmation" value="true">
+            <div class="modal-footer">
+                <input class="btn" id="primaryBtn" type="submit" value="Remove Trainer">
+            </div>
+        </form>
+    </div>
+    <div>
+
+    </div>
+
+</body>
+</html>

@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
-
+/**
+ * This Controller is responsible for handling all the Admin controls.
+ * Such as add and delete a Trainer, view all trainers, and general management.
+ */
 @Controller
 public class AdminController {
 
@@ -31,30 +34,30 @@ public class AdminController {
 
     //TODO Correct the return strings
 
-    @GetMapping("/admin")
+    @GetMapping("/trainers")
     public String getAllTrainers(ModelMap modelMap){
         Iterable<TrainerEntity> trainers = adminService.findAllTrainers();
         modelMap.addAttribute("trainers", trainers);
-        return "trainers";
+        return "/fragments/trainers";
     }
 
-    @GetMapping("admin/{trainerId}")
-    public String findTrainer(Model model, int trainerId){
+    @GetMapping("/trainers/")
+    public String findTrainer(Model model, @RequestParam Integer trainerId){
         Optional<TrainerEntity> trainer = adminService.findTrainerById(trainerId);
         if(trainer.isEmpty()){
             //Return trainer not found
-            return "admin";
+            return "/fragments/trainer-details";
         }else {
             model.addAttribute("trainer", trainer.get());
-            return "admin";
+            return "/fragments/trainer-details";
         }
     }
 
-    @PostMapping("/addTrainer")
-    public String addTrainer(@RequestParam String userId, @RequestParam String groupId, @RequestParam String firstName, @RequestParam String lastName){
+    @PostMapping("/add-trainer")
+    public String addTrainer(@RequestParam Integer userId, @RequestParam Integer groupId, @RequestParam String firstName, @RequestParam String lastName){
         TrainerEntity trainer = new TrainerEntity();
-        Optional<UserEntity> user = userService.findByUserId(Integer.parseInt(userId));
-        Optional<GroupEntity> group = groupService.findById(Integer.parseInt(groupId));
+        Optional<UserEntity> user = userService.findByUserId(userId);
+        Optional<GroupEntity> group = groupService.findById(groupId);
         if (group.isPresent()){
             trainer.setGroup(group.get());
         }
@@ -67,14 +70,20 @@ public class AdminController {
         trainer.setLastName(lastName);
         adminService.saveTrainer(trainer);
         int trainerId = trainer.getTrainerId();
-        return "redirect:/fragments/admin";
+        return "redirect:/trainers";
     }
 
-    @PostMapping("/removeTrainer")
+    @PostMapping("/edit-trainer")
+    public String editTrainer(@RequestParam int trainerId, @RequestParam String firstName, @RequestParam String lastName){
+        adminService.editTrainer(trainerId, firstName, lastName);
+        return "redirect:/trainers";
+    }
+
+    @PostMapping("/remove-trainer")
     public String removeTrainer(@RequestParam int trainerId, boolean confirmation){
         if(confirmation){
             adminService.deleteTrainerById(trainerId);
         }
-        return "redirect:/fragments/admin";
+        return "redirect:/trainers";
     }
 }
