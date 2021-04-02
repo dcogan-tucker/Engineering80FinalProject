@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainers</title>
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.0.0-beta2/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div th:insert="/fragments/header :: header"></div>
+    <div class="container">
+        <table class="table table-hover" id="trainersTable">
+            <thead class="text-black-50 font-weight-bold">
+            <tr>
+                <th>Trainer ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="trainer : ${trainers}" class="text-black-50">
+                <td th:text="*{trainer.trainerId}"/>
+                <td th:text="*{trainer.firstName}"/>
+                <td th:text="*{trainer.lastName}"/>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <form action="#" th:action="@{/addTrainer}" th:object="${trainer}" method="post">
+            <div class="modal-body">
+                <label>
+                    <input class="mt-2" type="text" name="firstName" placeholder="First Name"/>
+                </label>
+                <label>
+                    <input class="mt-2" type="text" name="lastName" placeholder="Last Name"/>
+                </label>
+                <label>
+                    <input class="mt-2" type="number" name="userId" placeholder="User Id"/>
+                </label>
+                <label>
+                    <input class="mt-2" type="number" name="groupId" placeholder="Group Id"/>
+                </label>
+            </div>
+            <div class="modal-footer">
+                <input class="btn" id="primaryBtn" type="submit" value="Add">
+            </div>
+        </form>
+    </div>
+    <div>
+        <form action="#" th:action="@{/removeTrainer}" method="post">
+            <div class="modal-body">
+                <label>
+                    <input class="mt-2" type="text" name="trainerId" placeholder="Trainer Id"/>
+                </label>
+                <label for="confirmation">Are you sure?</label><br>
+                <input type="radio" id="confirmation" name="confirmation" value="true">
+            </div>
+            <div class="modal-footer">
+                <input class="btn" id="primaryBtn" type="submit" value="Remove">
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
