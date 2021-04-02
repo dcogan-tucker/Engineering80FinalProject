@@ -16,7 +16,7 @@
 <!--                <label th:text="${user.firstName} + ' ' + ${user.lastName}"></label><br>-->
 <!--            </div>-->
             <div sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
-                <div th:insert="/fragments/admin"></div>
+                <div th:insert="/fragments/trainers"></div>
             </div>
             <div sec:authorize="hasAnyAuthority('ROLE_TRAINER')">
                 <div th:insert="/fragments/trainer"></div>

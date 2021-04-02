@@ -31,22 +31,22 @@ public class AdminController {
 
     //TODO Correct the return strings
 
-    @GetMapping("/trainers")
+    @GetMapping("/admin")
     public String getAllTrainers(ModelMap modelMap){
         Iterable<TrainerEntity> trainers = adminService.findAllTrainers();
         modelMap.addAttribute("trainers", trainers);
-        return "/fragments/trainers";
+        return "trainers";
     }
 
-    @GetMapping("trainers/{trainerId}")
+    @GetMapping("admin/{trainerId}")
     public String findTrainer(Model model, int trainerId){
         Optional<TrainerEntity> trainer = adminService.findTrainerById(trainerId);
         if(trainer.isEmpty()){
             //Return trainer not found
-            return "trainers";
+            return "admin";
         }else {
             model.addAttribute("trainer", trainer.get());
-            return "trainers";
+            return "admin";
         }
     }
 
@@ -67,7 +67,7 @@ public class AdminController {
         trainer.setLastName(lastName);
         adminService.saveTrainer(trainer);
         int trainerId = trainer.getTrainerId();
-        return "redirect:/fragments/trainers";
+        return "redirect:/fragments/admin";
     }
 
     @PostMapping("/removeTrainer")
@@ -75,6 +75,6 @@ public class AdminController {
         if(confirmation){
             adminService.deleteTrainerById(trainerId);
         }
-        return "redirect:/fragments/trainers";
+        return "redirect:/fragments/admin";
     }
 }
