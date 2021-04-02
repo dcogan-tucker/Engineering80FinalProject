@@ -1,24 +1,31 @@
 package com.sparta.eng80.onetoonetracker.services;
 
 import com.sparta.eng80.onetoonetracker.entities.GroupEntity;
+import com.sparta.eng80.onetoonetracker.entities.StreamEntity;
+import com.sparta.eng80.onetoonetracker.entities.TrainerEntity;
 import com.sparta.eng80.onetoonetracker.repositories.GroupRepository;
 import com.sparta.eng80.onetoonetracker.services.interfaces.GroupAppService;
+import com.sparta.eng80.onetoonetracker.utilities.NewGroupForm;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class GroupService implements GroupAppService {
 
     private final GroupRepository groupRepository;
+    private final StreamService streamService;
+    private final TrainerService trainerService;
 
-    public GroupService(GroupRepository groupRepository) {
+    public GroupService(GroupRepository groupRepository, StreamService streamService, TrainerService trainerService) {
         this.groupRepository = groupRepository;
+        this.streamService = streamService;
+        this.trainerService = trainerService;
     }
 
     @Override
     public Optional<GroupEntity> findById(int id) {
-        return Optional.empty();
+        return groupRepository.findById(id);
     }
 
     @Override
@@ -28,7 +35,7 @@ public class GroupService implements GroupAppService {
 
     @Override
     public GroupEntity save(GroupEntity groupEntity) {
-        return null;
+        return groupRepository.save(groupEntity);
     }
 
     @Override
@@ -39,5 +46,15 @@ public class GroupService implements GroupAppService {
     @Override
     public Iterable<GroupEntity> findByStreamId(int id) {
         return null;
+    }
+
+    public void addNewGroup(NewGroupForm newGroupForm) {
+        GroupEntity groupEntity = new GroupEntity();
+        groupEntity.setGroupName(newGroupForm.getGroupName());
+        groupEntity.setStartDate(newGroupForm.getStartDate());
+        groupEntity.setStream(streamService.findById(newGroupForm.getStreamId()).get());
+        groupEntity.setTrainer(trainerService.findById(newGroupForm.getTrainerId()).get());
+        groupEntity.setTrainees(new HashSet<>());
+        groupEntity.setFeedbacks(new HashSet<>());
     }
 }

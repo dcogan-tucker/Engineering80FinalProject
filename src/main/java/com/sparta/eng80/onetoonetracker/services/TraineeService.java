@@ -21,17 +21,17 @@ public class TraineeService implements UserAppService<TraineeEntity> {
 
     @Override
     public Optional<TraineeEntity> findById(int id) {
-        return Optional.empty();
+        return traineeRepository.findById(id);
     }
 
     @Override
     public Iterable<TraineeEntity> findAll() {
-        return null;
+        return traineeRepository.findAll();
     }
 
     @Override
     public TraineeEntity save(TraineeEntity traineeEntity) {
-        return null;
+        return traineeRepository.save(traineeEntity);
     }
 
     @Override
@@ -45,9 +45,7 @@ public class TraineeService implements UserAppService<TraineeEntity> {
     }
 
     @Override
-    public Iterable<TraineeEntity> findByGroupId(int id) {
-        return traineeRepository.getAllTraineesFromAGroup(id);
-    }
+    public Iterable<TraineeEntity> findByGroupId(int id) { return traineeRepository.getAllTraineesFromAGroup(id); }
 
     @Override
     public Iterable<TraineeEntity> findByFirstName(String name) {

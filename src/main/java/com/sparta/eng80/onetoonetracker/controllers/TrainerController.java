@@ -3,17 +3,15 @@ package com.sparta.eng80.onetoonetracker.controllers;
 import com.sparta.eng80.onetoonetracker.entities.TraineeEntity;
 import com.sparta.eng80.onetoonetracker.entities.TrainerEntity;
 import com.sparta.eng80.onetoonetracker.services.GroupService;
+import com.sparta.eng80.onetoonetracker.services.StreamService;
 import com.sparta.eng80.onetoonetracker.services.TraineeService;
 import com.sparta.eng80.onetoonetracker.services.TrainerService;
+import com.sparta.eng80.onetoonetracker.utilities.NewGroupForm;
 import com.sparta.eng80.onetoonetracker.utilities.NewUserForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.sql.Date;
 
 @Controller
 public class TrainerController {
@@ -21,26 +19,45 @@ public class TrainerController {
     private final TrainerService trainerService;
     private final GroupService groupService;
     private final TraineeService traineeService;
+    private final StreamService streamService;
 
-    public TrainerController(TrainerService trainerService, GroupService groupService, TraineeService traineeService) {
+    public TrainerController(TrainerService trainerService, GroupService groupService, TraineeService traineeService, StreamService streamService) {
         this.trainerService = trainerService;
         this.groupService = groupService;
         this.traineeService = traineeService;
+        this.streamService = streamService;
+    }
+
+    @GetMapping("/trainer/addTrainee")
+    public String main(Model model) {
+        model.addAttribute("newUserForm", new NewUserForm());
+        model.addAttribute("allGroups", groupService.findAll());
+        return "redirect:/";
     }
 
     @PostMapping("/trainer/addTrainee")
-    public ModelMap addNewUser(@ModelAttribute NewUserForm newUserForm, ModelMap modelMap) {
-        modelMap.addAttribute("newUserForm", new NewUserForm());
-        modelMap.addAttribute("allGroups", groupService.findAll());
-
+    public Model addNewUser(NewUserForm newUserForm, Model model) {
         trainerService.addNewTrainee(
                 groupService.findById(newUserForm.getGroupId()).get(),
                 newUserForm.getFirstName(),
                 newUserForm.getLastName(),
                 "ROLE_TRAINEE"
         );
+        return model;
+    }
 
-        return modelMap;
+    @GetMapping("/trainer/newGroup")
+    public String newGroup(Model model) {
+        model.addAttribute("newGroupForm", new NewGroupForm());
+        model.addAttribute("allStreams", streamService.findAll());
+        model.addAttribute("allTrainers", trainerService.findAll());
+        return "redirect:/";
+    }
+
+    @PostMapping("/trainer/newGroup")
+    public Model addNewUser(NewGroupForm newGroupForm, Model model) {
+        groupService.addNewGroup(newGroupForm);
+        return model;
     }
 
 
