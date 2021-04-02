@@ -52,6 +52,64 @@ label.profile-label {
 }
 
 #header img {
+    width: 100%;
+    height: 41px;
+}
+
+li.list-item {
+    height: 20px;
+}
+
+span.status {
+    width: 5px;
+    height: inherit;
+}
+
+span#menuBtn-container {
+    height: 42px;
+    background-color: #e33661;
+    float: right;
+    padding: 5px;
+}
+
+span#menuBtn-container button {
+    background-color: transparent;
+    outline: none !important;
+    border-style: none;
+    color: white;
+    padding-top: 4px;
+}
+
+.bg-color-main {
+    background-color: #01181b !important;
+}
+
+div#footerBtns a {
+    margin: 0 30px 10px 30px;
+}
+
+.bg-color-red {
+    background-color: #e33661;
+}
+
+.bg-color-green {
+
+}
+
+.bg-color-amber {
+
+}
+
+
+label.profile-label {
+    margin-right: 50px;
+}
+
+#headerInner {
+    margin-top: -9px;
+    top: -5px;
+    padding: 0;
+    display: inline-block;
     height: 7vh;
     padding-bottom: 10px;
 }
@@ -69,8 +127,46 @@ img.competency {
     width: 80%;
 }
 
-a {
-    color: #34beef;
+#header img {
+    height: 2rem;
+    padding-left: 10px;
+    margin-top: 4px;
 }
+
+div#navbarNav {
+    margin-top: 6px;
+}
+
+li.nav-item a, li.nav-item input {
+    color: white!important;
+    font-family: "Raleway", sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+    padding-left: 10px !important;
+}
+
+input#logoutBtn {
+    color: white !important;
+    font-family: "Raleway", sans-serif;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+button#burger {
+    color: white;
+    height: 20px;
+    width: 15px;
+    margin-right: 15px;
+    float: right;
+}
+
+section#main-content {
+    background-color: white;
+}
+
+/*a {*/
+/*    color: #34beef;*/
+/*}*/
 /* https://fonts.google.com/specimen/Raleway?preview.text_type=custom */
 
