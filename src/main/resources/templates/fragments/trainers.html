@@ -20,15 +20,20 @@
             </thead>
             <tbody>
             <tr th:each="trainer : ${trainers}" class="text-black-50">
-                <td th:text="*{trainer.trainerId}"/>
+                <td>
+                    <form th:action="@{/trainers/}" method="get">
+                        <input class="btn" name="trainerId" id="primaryBtn" type="submit" th:value="*{trainer.trainerId}"/>
+                    </form>
+                </td>
                 <td th:text="*{trainer.firstName}"/>
                 <td th:text="*{trainer.lastName}"/>
+
             </tr>
             </tbody>
         </table>
     </div>
     <div>
-        <form action="#" th:action="@{/addTrainer}" th:object="${trainer}" method="post">
+        <form action="#" th:action="@{/add-trainer}" th:object="${trainer}" method="post">
             <div class="modal-body">
                 <label>
                     <input class="mt-2" type="text" name="firstName" placeholder="First Name"/>
@@ -49,16 +54,12 @@
         </form>
     </div>
     <div>
-        <form action="#" th:action="@{/removeTrainer}" method="post">
-            <div class="modal-body">
-                <label>
-                    <input class="mt-2" type="text" name="trainerId" placeholder="Trainer Id"/>
-                </label>
-                <label for="confirmation">Are you sure?</label><br>
-                <input type="radio" id="confirmation" name="confirmation" value="true">
-            </div>
+        <form action="#" th:action="@{/remove-trainer}" method="post" >
+            <input class="mt-2" type="number" name="trainerId" placeholder="Trainer Id"/></br>
+            <label for="confirmation">I understand upon deletion the information can not be restored.</label>
+            <input type="checkbox" id="confirmation" name="confirmation" value="true">
             <div class="modal-footer">
-                <input class="btn" id="primaryBtn" type="submit" value="Remove">
+                <input class="btn" id="primaryBtn" type="submit" value="Remove Trainer">
             </div>
         </form>
     </div>
