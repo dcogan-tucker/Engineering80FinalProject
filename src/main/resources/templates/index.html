@@ -21,7 +21,7 @@
             <div sec:authorize="hasAnyAuthority('ROLE_TRAINER')">
                 <div th:insert="/fragments/trainer"></div>
             </div>
-            <div sec:authorize="hasAnyAuthority('ROLE_USER')">
+            <div sec:authorize="hasAnyAuthority('ROLE_TRAINEE')">
                 <div th:insert="/fragments/user"></div>
             </div>
         </section>
