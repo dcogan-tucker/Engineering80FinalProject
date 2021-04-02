@@ -16,10 +16,6 @@ body {
     height: 10vh;
 }
 
-#footer {
-    display: inline-block;
-}
-
 li.list-item {
     height: 20px;
 
@@ -50,6 +46,11 @@ div#footerBtns a {
 
 }
 
+
+label.profile-label {
+    margin-right: 50px;
+}
+
 #header img {
     height: 7vh;
     padding-bottom: 10px;
@@ -63,9 +64,10 @@ section#main-content {
     background-color: white;
 }
 
-/*.main-color {*/
-/*    background-color: #01181b;*/
-/*}*/
+img.competency {
+    height: 80%;
+    width: 80%;
+}
 
 a {
     color: #34beef;
