@@ -1,17 +1,13 @@
 package com.sparta.eng80.onetoonetracker.controllers;
 
+import com.sparta.eng80.onetoonetracker.utilities.NewGroupForm;
 import com.sparta.eng80.onetoonetracker.entities.TraineeEntity;
 import com.sparta.eng80.onetoonetracker.entities.TrainerEntity;
 import com.sparta.eng80.onetoonetracker.services.GroupService;
-import com.sparta.eng80.onetoonetracker.services.StreamService;
 import com.sparta.eng80.onetoonetracker.services.TraineeService;
 import com.sparta.eng80.onetoonetracker.services.TrainerService;
-import com.sparta.eng80.onetoonetracker.utilities.NewGroupForm;
-import com.sparta.eng80.onetoonetracker.utilities.NewUserForm;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,11 +26,6 @@ public class TrainerController {
         this.traineeService = traineeService;
     }
 
-    @GetMapping("/addTrainee")
-    public void preAddNewTrainee(Model model) {
-//        model.addAttribute("newUserForm", new NewUserForm());
-    }
-
     @PostMapping("/addTrainee")
     public String addNewTrainee(@RequestParam Integer groupId, @RequestParam String firstName, @RequestParam String lastName, Model model) {
         trainerService.addNewTrainee(
@@ -44,11 +35,6 @@ public class TrainerController {
                 "ROLE_TRAINEE"
         );
         return "redirect:/";
-    }
-
-    @GetMapping("/addGroup")
-    public void preAddNewGroup(Model model) {
-//        model.addAttribute("newGroupForm", new NewGroupForm());
     }
 
     @PostMapping("/addGroup")
