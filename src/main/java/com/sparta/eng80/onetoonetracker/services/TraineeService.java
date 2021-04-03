@@ -1,22 +1,23 @@
 package com.sparta.eng80.onetoonetracker.services;
 
-import com.sparta.eng80.onetoonetracker.entities.FeedbackEntity;
 import com.sparta.eng80.onetoonetracker.entities.TraineeEntity;
+import com.sparta.eng80.onetoonetracker.entities.UserEntity;
 import com.sparta.eng80.onetoonetracker.repositories.TraineeRepository;
+import com.sparta.eng80.onetoonetracker.repositories.UserRepository;
 import com.sparta.eng80.onetoonetracker.services.interfaces.UserAppService;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class TraineeService implements UserAppService<TraineeEntity> {
 
     private final TraineeRepository traineeRepository;
+    private final UserRepository userRepository;
 
-    public TraineeService(TraineeRepository traineeRepository) {
+    public TraineeService(TraineeRepository traineeRepository, UserRepository userRepository) {
         this.traineeRepository = traineeRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -42,6 +43,10 @@ public class TraineeService implements UserAppService<TraineeEntity> {
     @Override
     public Optional<TraineeEntity> findByEmail(String name) {
         return Optional.empty();
+    }
+
+    public Optional<UserEntity> findUserByEmail(String name) {
+        return userRepository.findUserEntityByEmailEquals(name);
     }
 
     @Override

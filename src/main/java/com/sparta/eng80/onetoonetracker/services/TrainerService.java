@@ -97,13 +97,12 @@ public class TrainerService implements UserAppService<TrainerEntity> {
         } else {
             potentialNewEmailAddress += lastName.substring(0, 1).toUpperCase() + lastName.substring(1).toLowerCase();
         }
-        potentialNewEmailAddress += "@spartaglobal.com";
-        if (traineeService.findByEmail(potentialNewEmailAddress).isEmpty()) {
+        potentialNewEmailAddress += "@sparta.com";
+        if (traineeService.findUserByEmail(potentialNewEmailAddress).isEmpty()) {
             return potentialNewEmailAddress;
-        } else {
-            generateUniqueEmail(firstName, lastName + 1);
         }
-        return potentialNewEmailAddress;
+//        generateUniqueEmail(firstName, lastName + 'e');
+        return generateUniqueEmail(firstName, lastName + 'e');
     }
 
     /**
