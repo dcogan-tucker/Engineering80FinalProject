@@ -8,10 +8,14 @@ import com.sparta.eng80.onetoonetracker.services.TraineeService;
 import com.sparta.eng80.onetoonetracker.services.TrainerService;
 import com.sparta.eng80.onetoonetracker.utilities.NewGroupForm;
 import com.sparta.eng80.onetoonetracker.utilities.NewUserForm;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.sql.Date;
 
 @Controller
 public class TrainerController {
@@ -19,45 +23,50 @@ public class TrainerController {
     private final TrainerService trainerService;
     private final GroupService groupService;
     private final TraineeService traineeService;
-    private final StreamService streamService;
 
-    public TrainerController(TrainerService trainerService, GroupService groupService, TraineeService traineeService, StreamService streamService) {
+    public TrainerController(TrainerService trainerService, GroupService groupService, TraineeService traineeService) {
         this.trainerService = trainerService;
         this.groupService = groupService;
         this.traineeService = traineeService;
-        this.streamService = streamService;
     }
 
-    @GetMapping("/trainer/addTrainee")
-    public String main(Model model) {
-        model.addAttribute("newUserForm", new NewUserForm());
-        model.addAttribute("allGroups", groupService.findAll());
-        return "redirect:/";
+    @GetMapping("/addTrainee")
+    public void preAddNewTrainee(Model model) {
+//        model.addAttribute("newUserForm", new NewUserForm());
     }
 
-    @PostMapping("/trainer/addTrainee")
-    public Model addNewUser(NewUserForm newUserForm, Model model) {
+    @PostMapping("/addTrainee")
+    public String addNewTrainee(@RequestParam Integer groupId, @RequestParam String firstName, @RequestParam String lastName, Model model) {
         trainerService.addNewTrainee(
-                groupService.findById(newUserForm.getGroupId()).get(),
-                newUserForm.getFirstName(),
-                newUserForm.getLastName(),
+                groupService.findById(groupId).get(),
+                firstName,
+                lastName,
                 "ROLE_TRAINEE"
         );
-        return model;
-    }
-
-    @GetMapping("/trainer/newGroup")
-    public String newGroup(Model model) {
-        model.addAttribute("newGroupForm", new NewGroupForm());
-        model.addAttribute("allStreams", streamService.findAll());
-        model.addAttribute("allTrainers", trainerService.findAll());
         return "redirect:/";
     }
 
-    @PostMapping("/trainer/newGroup")
-    public Model addNewUser(NewGroupForm newGroupForm, Model model) {
+    @GetMapping("/addGroup")
+    public void preAddNewGroup(Model model) {
+//        model.addAttribute("newGroupForm", new NewGroupForm());
+    }
+
+    @PostMapping("/addGroup")
+    public String addNewGroup(
+            @RequestParam String groupName,
+            @RequestParam Date startDate,
+            @RequestParam Integer streamId,
+            @RequestParam Integer trainerId,
+            Model model) {
+
+        NewGroupForm newGroupForm = new NewGroupForm();
+        newGroupForm.setGroupName(groupName);
+        newGroupForm.setStartDate(startDate);
+        newGroupForm.setStreamId(streamId);
+        newGroupForm.setTrainerId(trainerId);
+
         groupService.addNewGroup(newGroupForm);
-        return model;
+        return "redirect:/";
     }
 
 

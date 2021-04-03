@@ -1,18 +1,9 @@
 package com.sparta.eng80.onetoonetracker.utilities;
 
-import com.sparta.eng80.onetoonetracker.entities.FeedbackEntity;
-import com.sparta.eng80.onetoonetracker.entities.TraineeEntity;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
-import java.util.Set;
 
-@Getter
-@Setter
-@NoArgsConstructor
 public class NewGroupForm {
 
     private Integer groupId;
@@ -23,7 +14,44 @@ public class NewGroupForm {
 
     private Integer streamId;
     private Integer trainerId;
-    private Set<TraineeEntity> trainees;
-    private Set<FeedbackEntity> feedbacks;
 
+    public Integer getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Integer getStreamId() {
+        return streamId;
+    }
+
+    public void setStreamId(Integer streamId) {
+        this.streamId = streamId;
+    }
+
+    public Integer getTrainerId() {
+        return trainerId;
+    }
+
+    public void setTrainerId(Integer trainerId) {
+        this.trainerId = trainerId;
+    }
 }

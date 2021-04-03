@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-<table class="table table-hover table-responsive" >
+<table class="table table-hover table-responsive" id="traineeTable">
     <thead class="text-center">
     <tr>
         <td>Trainees in your group: </td>
@@ -20,7 +20,7 @@
     <button type="button" class="btn bg-color-red" data-bs-toggle="modal" th:attr="data-bs-target=${'#addNewTrainee'}">Add Trainee</button>
 </div>
 <div class="container">
-    <button type="button" class="btn bg-color-red" data-bs-toggle="modal" th:attr="data-bs-target=${'#editModal'}">Add Group</button>
+    <button type="button" class="btn bg-color-red" data-bs-toggle="modal" th:attr="data-bs-target=${'#addNewGroup'}">Add Group</button>
 </div>
 <div th:insert="/fragments/trainer/newUserForm"></div>
 <div th:insert="/fragments/trainer/newGroupForm"></div>

@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<form method="POST" th:action="@{trainer/addTrainee}" th:object="${newUserForm}">
+<form method="POST" action="#" th:action="@{/addTrainee}">
     <div th:attr="id=${'addNewTrainee'}" class="modal fade rounded" tabindex="-1"
          aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -21,8 +21,12 @@
                             <td><h5 class="fw-bold">Trainee Name</h5></td>
                         </tr>
                         <tr>
+                            <td>
+                                Group to assign trainee to:
+                            </td>
+                            <td>
                             <div class="col-md-3">
-                                <select style="text-align-last: center" class="form-control" th:field="*{groupId}"
+                                <select style="text-align-last: center" class="form-control" type="Number" name="groupId"
                                         required>
                                     <option value=""> --</option>
                                     <option th:each="group : ${allGroups}"
@@ -30,18 +34,18 @@
                                             th:text="${group.groupName}"></option>
                                 </select>
                             </div>
+                            </td>
                         </tr>
                         <tr>
                             <td>First Name</td>
                             <td>
-                                <input type="text" th:field="*{firstName}" class="form-control" autofocus="autofocus"
-                                       required>
+                                <input type="text" name="firstName" class="form-control" autofocus="autofocus" required>
                             </td>
                         </tr>
                         <tr>
                             <td>Last Name</td>
                             <td>
-                                <input type="text" th:field="*{lastName}" class="form-control" required>
+                                <input type="text" name="lastName" class="form-control" required>
                             </td>
                         </tr>
                     </table>
