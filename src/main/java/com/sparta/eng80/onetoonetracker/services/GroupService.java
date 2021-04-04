@@ -1,11 +1,13 @@
 package com.sparta.eng80.onetoonetracker.services;
 
+import com.sparta.eng80.onetoonetracker.entities.FeedbackEntity;
 import com.sparta.eng80.onetoonetracker.entities.GroupEntity;
 import com.sparta.eng80.onetoonetracker.repositories.GroupRepository;
 import com.sparta.eng80.onetoonetracker.services.interfaces.GroupAppService;
 import com.sparta.eng80.onetoonetracker.utilities.NewGroupForm;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
 
@@ -32,6 +34,10 @@ public class GroupService implements GroupAppService {
         return groupRepository.findAll();
     }
 
+    public Iterable<FeedbackEntity> findAllFromGroup(GroupEntity groupEntity) {
+        return groupEntity.getFeedbacks();
+    }
+
     @Override
     public GroupEntity save(GroupEntity groupEntity) {
         return groupRepository.save(groupEntity);
@@ -55,5 +61,6 @@ public class GroupService implements GroupAppService {
         groupEntity.setTrainer(trainerService.findById(newGroupForm.getTrainerId()).get());
         groupEntity.setTrainees(new HashSet<>());
         groupEntity.setFeedbacks(new HashSet<>());
+        save(groupEntity);
     }
 }
