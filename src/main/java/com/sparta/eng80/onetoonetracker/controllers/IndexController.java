@@ -1,11 +1,17 @@
 package com.sparta.eng80.onetoonetracker.controllers;
 
+import com.sparta.eng80.onetoonetracker.entities.FeedbackEntity;
 import com.sparta.eng80.onetoonetracker.entities.TraineeEntity;
+import com.sparta.eng80.onetoonetracker.entities.datatypes.Status;
 import com.sparta.eng80.onetoonetracker.services.*;
+import com.sparta.eng80.onetoonetracker.utilities.TrainerTraineeEntity;
+import org.hibernate.collection.internal.PersistentSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.ArrayList;
 
 @Controller
 public class IndexController {
@@ -33,8 +39,29 @@ public class IndexController {
                     model.addAttribute("allGroups", groupService.findAll());
                     model.addAttribute("allStreams", streamService.findAll());
                     model.addAttribute("allTrainers", trainerService.findAll());
-                    Iterable<TraineeEntity> trainees =trainerController.getTrainees(securityService.getCurrentUser().getTrainer());
-                    model.addAttribute("traineesInTrainerGroup", trainees);
+                    Iterable<TraineeEntity> trainees = trainerController.getTrainees(securityService.getCurrentUser().getTrainer());
+                    Iterable<FeedbackEntity> feedbackSheets = groupService.findAllFromGroup(securityService.getCurrentUser().getTrainer().getGroup());
+                    ArrayList<TrainerTraineeEntity> feedbackSheetsInCorrectOrder = new ArrayList<>();
+                    for (TraineeEntity traineeEntity : trainees) {
+                        TrainerTraineeEntity trainerTraineeEntity = new TrainerTraineeEntity();
+                        trainerTraineeEntity.setTraineeEntity(traineeEntity);
+                        boolean found = false;
+                        if (feedbackSheets.iterator().hasNext()) {
+                            for (Object feedbackEntity : feedbackSheets) {
+                                if (((FeedbackEntity) feedbackEntity).getTrainee().getTraineeId() == traineeEntity.getTraineeId()) {
+                                    trainerTraineeEntity.setFeedbackEntity(((FeedbackEntity) feedbackEntity));
+                                    found = true;
+                                }
+                            }
+                        }
+                        if (!found) {
+                            FeedbackEntity feedbackEntity = new FeedbackEntity();
+                            feedbackEntity.setStatus(Status.IN_PROGRESS);
+                            trainerTraineeEntity.setFeedbackEntity(feedbackEntity);
+                        }
+                        feedbackSheetsInCorrectOrder.add(trainerTraineeEntity);
+                    }
+                    model.addAttribute("feedbackStatus", feedbackSheetsInCorrectOrder);
                     break;
                 case "ROLE_ADMIN":
                 case "ROLE_TRAINEE":
