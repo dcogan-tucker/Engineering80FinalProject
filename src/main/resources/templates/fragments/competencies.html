@@ -8,34 +8,37 @@
     </head>
     <body>
     <div th:insert="/fragments/header :: header"></div>
-        <div class="container text-center bg-color-main">
+        <div class="text-center bg-color-main" id="competency-container">
             <a class="" data-bs-toggle="modal" href="#analytical" role="button">
-                <img th:src="@{/images/Analytical.png}" height="100" width="100" class="competency" alt="">
+                <img th:src="@{/images/Analytical.png}" height="100" width="100" class="competency-sm mt-5" alt="">
             </a>
             <a class="" data-bs-toggle="modal" href="#determined" role="button">
-                <img th:src="@{/images/Determined.png}" height="100" width="100" class="competency" alt="">
+                <img th:src="@{/images/Determined.png}" height="100" width="100" class="competency-sm mt-5" alt="">
             </a>
             <a class="" data-bs-toggle="modal" href="#imaginative" role="button">
-                <img th:src="@{/images/Imaginative.png}" height="100" width="100" class="competency" alt="">
+                <img th:src="@{/images/Imaginative.png}" height="100" width="100" class="competency-sm mt-5" alt="">
             </a>
             <a class="" data-bs-toggle="modal" href="#independent" role="button">
-                <img th:src="@{/images/Independent.png}" height="100" width="100" class="competency" alt="">
+                <img th:src="@{/images/Independent.png}" height="100" width="100" class="competency-sm mt-5" alt="">
             </a>
             <a class="" data-bs-toggle="modal" href="#professional" role="button">
-                <img th:src="@{/images/Professional.png}" height="100" width="100" class="competency" alt="">
+                <img th:src="@{/images/Professional.png}" height="100" width="100" class="competency-sm mt-5" alt="">
             </a>
             <a class="" data-bs-toggle="modal" href="#studios" role="button">
-                <img th:src="@{/images/Studious.png}" height="100" width="100" class="competency" alt="">
+                <img th:src="@{/images/Studious.png}" height="100" width="100" class="competency-sm mt-5" alt="">
             </a>
         </div>
 
         <!-- Analytical -->
         <div class="modal fade" id="analytical" aria-hidden="true" aria-labelledby="..." tabindex="-1">
             <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content">
+                <div class="modal-content bg-color-main justify-content-center">
+                    <div class="modal-header text-white">
+                        <button type="button" class="btn-close btn-close-white btn-lg" data-bs-dismiss="modal" aria-label="close"></button>
+                    </div>
                     <img th:src="@{/images/Analytical.png}" alt="">
                     <div class="modal-footer">
-                        <button class="btn btn-primary" data-bs-target="#determined" data-bs-toggle="modal" data-bs-dismiss="modal">Next: #determined</button>
+                        <button class="btn btn-primary btn-lg" data-bs-target="#determined" data-bs-toggle="modal" data-bs-dismiss="modal">Next: Determined</button>
                     </div>
                 </div>
             </div>
@@ -44,10 +47,13 @@
         <!-- Determined -->
         <div class="modal fade" id="determined" aria-hidden="true" aria-labelledby="..." tabindex="-1">
             <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content">
+                <div class="modal-content bg-color-main justify-content-center">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close btn-close-white btn-lg" data-bs-dismiss="modal" aria-label="close"></button>
+                    </div>
                     <img th:src="@{/images/Determined.png}" alt="">
                     <div class="modal-footer">
-                        <button class="btn btn-primary" data-bs-target="#imaginative" data-bs-toggle="modal" data-bs-dismiss="modal">Next: #imaginative</button>
+                        <button class="btn btn-primary btn-lg" data-bs-target="#imaginative" data-bs-toggle="modal" data-bs-dismiss="modal">Next: Imaginative</button>
                     </div>
                 </div>
             </div>
@@ -56,10 +62,13 @@
         <!-- Imaginative -->
         <div class="modal fade" id="imaginative" aria-hidden="true" aria-labelledby="..." tabindex="-1">
             <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content">
+                <div class="modal-content bg-color-main justify-content-center">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close btn-close-white btn-lg" data-bs-dismiss="modal" aria-label="close"></button>
+                    </div>
                     <img th:src="@{/images/Imaginative.png}" alt="">
                     <div class="modal-footer">
-                        <button class="btn btn-primary" data-bs-target="#independent" data-bs-toggle="modal" data-bs-dismiss="modal">Next: #independent</button>
+                        <button class="btn btn-primary btn-lg" data-bs-target="#independent" data-bs-toggle="modal" data-bs-dismiss="modal">Next: Independent</button>
                     </div>
                 </div>
             </div>
@@ -68,10 +77,13 @@
         <!-- Independent -->
         <div class="modal fade" id="independent" aria-hidden="true" aria-labelledby="..." tabindex="-1">
             <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content">
+                <div class="modal-content bg-color-main justify-content-center">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close btn-close-white btn-lg" data-bs-dismiss="modal" aria-label="close"></button>
+                    </div>
                     <img th:src="@{/images/Independent.png}" alt="">
                     <div class="modal-footer">
-                        <button class="btn btn-primary" data-bs-target="#prodessional" data-bs-toggle="modal" data-bs-dismiss="modal">Next: #professional</button>
+                        <button class="btn btn-primary btn-lg" data-bs-target="#professional" data-bs-toggle="modal" data-bs-dismiss="modal">Next: Professional</button>
                     </div>
                 </div>
             </div>
@@ -80,28 +92,36 @@
         <!-- Professional -->
         <div class="modal fade" id="professional" aria-hidden="true" aria-labelledby="..." tabindex="-1">
             <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content">
+                <div class="modal-content bg-color-main justify-content-center">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close btn-close-white btn-lg" data-bs-dismiss="modal" aria-label="close"></button>
+                    </div>
                     <img th:src="@{/images/Professional.png}" alt="">
                     <div class="modal-footer">
-                        <button class="btn btn-primary" data-bs-target="#studios" data-bs-toggle="modal" data-bs-dismiss="modal">Next: #studios</button>
+                        <button class="btn btn-primary btn-lg" data-bs-target="#studious" data-bs-toggle="modal" data-bs-dismiss="modal">Next: Studios</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Studios -->
-        <div class="modal fade" id="studios" aria-hidden="true" aria-labelledby="..." tabindex="-1">
+        <div class="modal fade" id="studious" aria-hidden="true" aria-labelledby="..." tabindex="-1">
             <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content">
-                    <img th:src="@{/images/Studios.png}" alt="">
+                <div class="modal-content bg-color-main justify-content-center">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close btn-close-white btn-lg" data-bs-dismiss="modal" aria-label="close"></button>
+                    </div>
+                    <img th:src="@{/images/Studious.png}" alt="">
                     <div class="modal-footer">
-                        <a class="btn btn-primary" href="#analytical" data-bs-toggle="modal" role="button">Open #analytical</a>
+                        <a class="btn btn-primary btn-lg" href="#analytical" data-bs-toggle="modal" role="button" data-bs-dismiss="modal">Next: Analytical</a>
                     </div>
                 </div>
             </div>
         </div>
-<!--    <footer>-->
-<!--        <div th:insert="/fragments/footer :: footer"></div>-->
-<!--    </footer>-->
+    <footer>
+        <div th:insert="/fragments/footer :: footer"></div>
+    </footer>
+    <script th:src="@{webjars/popper.js/2.5.4/umd/popper.min.js}"></script>
+    <script th:src="@{webjars/bootstrap/5.0.0-beta2/js/bootstrap.min.js}"></script>
     </body>
 </html>
