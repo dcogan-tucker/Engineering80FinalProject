@@ -1,7 +1,6 @@
 package com.sparta.eng80.onetoonetracker.repositories;
 
 import com.sparta.eng80.onetoonetracker.entities.FeedbackEntity;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
