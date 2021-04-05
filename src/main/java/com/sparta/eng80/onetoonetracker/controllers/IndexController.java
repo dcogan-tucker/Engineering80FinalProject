@@ -38,11 +38,12 @@ public class IndexController {
                 case "ROLE_TRAINER":
                     TrainerEntity trainer = securityService.getCurrentUser().getTrainer();
 
+                    model.addAttribute("trainer", trainer);
                     model.addAttribute("allGroups", groupService.findAll());
                     model.addAttribute("allStreams", streamService.findAll());
                     model.addAttribute("allTrainers", trainerService.findAll());
-                    Iterable<TraineeEntity> trainees = traineeService.findByGroupId(trainer.getTrainerId());
-                    Iterable<FeedbackEntity> feedbackSheets = groupService.findAllFeedbackFromGroup(trainer.getGroup());
+                    Iterable<TraineeEntity> trainees = traineeService.findByGroupId(trainer.getGroup().getGroupId());
+                    Iterable<FeedbackEntity> feedbackSheets = groupService.findAllFeedbackFromGroup(trainer.getGroup().getGroupId());
                     ArrayList<TrainerTraineeEntity> feedbackSheetsInCorrectOrder = new ArrayList<>();
                     for (TraineeEntity traineeEntity : trainees) {
                         TrainerTraineeEntity trainerTraineeEntity = new TrainerTraineeEntity();
