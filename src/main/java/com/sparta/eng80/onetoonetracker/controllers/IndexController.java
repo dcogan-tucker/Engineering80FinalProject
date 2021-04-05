@@ -76,7 +76,7 @@ public class IndexController {
                     model.addAttribute("trainer", trainer);
                     model.addAttribute("group", group);
                     model.addAttribute("stream", stream);
-                    model.addAttribute("duration", duration);
+                    model.addAttribute("duration", stream.getDuration());
                     break;
             }
             return "index";
