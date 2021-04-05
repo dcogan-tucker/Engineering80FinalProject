@@ -59,4 +59,9 @@ h1 {
 #loginBtn {
     background-color: #e33661;
     color: white;
+    margin-bottom: 10px;
+}
+
+h1 {
+    padding-top: 10px;
 }
