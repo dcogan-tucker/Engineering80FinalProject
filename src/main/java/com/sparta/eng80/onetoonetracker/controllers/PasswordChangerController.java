@@ -1,9 +1,12 @@
 package com.sparta.eng80.onetoonetracker.controllers;
 
 import com.sparta.eng80.onetoonetracker.entities.UserEntity;
+import com.sparta.eng80.onetoonetracker.security.PasswordEncryptor;
 import com.sparta.eng80.onetoonetracker.services.SecurityService;
 import com.sparta.eng80.onetoonetracker.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,18 +26,35 @@ public class PasswordChangerController {
         this.securityService = securityService;
     }
 
-    @GetMapping("/changePassword")
+    @GetMapping("/change-password")
     public String changePassword(Model model) {
         UserEntity user = securityService.getCurrentUser();
-        model.addAttribute("user", user);
-        //Change to name of password changer page
-        return "changePassword";
+        return "change_password";
     }
 
-    @PostMapping("/changePassword")
-    public void setPassword(@ModelAttribute("user") UserEntity userEntity, @RequestParam("password") String password) {
-        userEntity.setPassword(password);
-        userEntity.setPasswordChanged(true);
-        userService.save(userEntity);
+    @PostMapping("/change-password")
+    public String setPassword(
+                            @RequestParam("currentPassword") String currentPassword,
+                            @RequestParam("newPassword") String newPassword,
+                            @RequestParam("confirmPassword") String confirmPassword) {
+        UserEntity userEntity = securityService.getCurrentUser();
+        PasswordEncryptor passwordEncryptor = new PasswordEncryptor();
+        PasswordEncoder passwordEncoder = passwordEncryptor.getBCryptPasswordEncoder();
+
+        System.out.println("P: " + currentPassword);
+        System.out.println("NP: " + newPassword);
+        System.out.println("CP: " + confirmPassword);
+
+        if (!passwordEncoder.matches(currentPassword, userEntity.getPassword()) || !newPassword.equals(confirmPassword)) {
+            System.out.println("Error");
+            return "redirect:/change-password";
+        } else {
+            System.out.println("Changed");
+            userEntity.setPassword(passwordEncoder.encode(newPassword));
+            userEntity.setPasswordChanged(true);
+            userService.save(userEntity);
+            return "index";
+
+        }
     }
 }
