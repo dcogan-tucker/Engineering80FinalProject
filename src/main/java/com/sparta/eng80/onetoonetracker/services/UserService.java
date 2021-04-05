@@ -6,6 +6,7 @@ import com.sparta.eng80.onetoonetracker.services.interfaces.UserAppService;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService implements UserAppService<UserEntity> {
@@ -60,4 +61,6 @@ public class UserService implements UserAppService<UserEntity> {
     public Iterable<UserEntity> findByName(String first, String last) {
         return null;
     }
+
+    public Set<String> getAllEmails(){ return userRepository.getAllEmails();}
 }
