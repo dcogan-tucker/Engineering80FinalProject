@@ -16,13 +16,13 @@
 <!--                <label th:text="${user.firstName} + ' ' + ${user.lastName}"></label><br>-->
 <!--            </div>-->
             <div sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
-                <div th:insert="/fragments/trainers"></div>
+                <div th:insert="/fragments/home/admin_home"></div>
             </div>
             <div sec:authorize="hasAnyAuthority('ROLE_TRAINER')">
-                <div th:insert="/fragments/trainer"></div>
+                <div th:insert="/fragments/home/trainer_home"></div>
             </div>
             <div sec:authorize="hasAnyAuthority('ROLE_TRAINEE')">
-                <div th:insert="/fragments/user"></div>
+                <div th:insert="/fragments/home/trainee_home"></div>
             </div>
         </section>
         <footer>

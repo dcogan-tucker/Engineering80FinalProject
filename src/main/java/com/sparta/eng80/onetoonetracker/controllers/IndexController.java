@@ -64,7 +64,10 @@ public class IndexController {
                     model.addAttribute("feedbackStatus", feedbackSheetsInCorrectOrder);
                     break;
                 case "ROLE_ADMIN":
+                    model.addAttribute("trainers", trainerService.findAll());
+                    break;
                 case "ROLE_TRAINEE":
+                    model.addAttribute("trainee", securityService.getCurrentUser().getTrainee());
                     break;
             }
             return "index";
