@@ -56,7 +56,15 @@ public class FeedbackEntity {
      * A paragraph of what the trainer thinks the trainee should to continue doing
      */
     private String trainerContinue;
+
+    /**
+     * The grade that the trainee believes achieved in technical skills for the week
+     */
     private String technicalGrade;
+
+    /**
+     * The grade that the trainee believes achieved in consultant skills for the week
+     */
     private String consultantGrade;
 
     /**
@@ -69,16 +77,6 @@ public class FeedbackEntity {
      * The status for whether the feedback form has been submitted before or after the deadline
      */
     private boolean overdue;
-
-    /**
-     * The grade that the trainee believes achieved in technical skills for the week
-     */
-    private char technicalGrade;
-
-    /**
-     * The grade that the trainee believes achieved in consultant skills for the week
-     */
-    private char consultantGrade;
 
     /**
      * The trainee which the feedback relates to
