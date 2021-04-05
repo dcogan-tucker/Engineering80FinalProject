@@ -121,8 +121,8 @@ section#main-content {
 }
 
 img.competency {
-    height: 80%;
-    width: 80%;
+    height: 100%;
+    width: 100%;
 }
 
 #header img {
@@ -162,6 +162,15 @@ button#burger {
 
 section#main-content {
     background-color: white;
+}
+
+img.competency-sm {
+    height: 700px;
+    width: 90vw;
+}
+
+div.modal-content {
+    /*margin-top: 50%;*/
 }
 
 /*a {*/
