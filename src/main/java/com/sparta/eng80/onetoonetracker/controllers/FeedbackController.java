@@ -45,7 +45,7 @@ public class FeedbackController {
         feedbackEntity.setTechnicalGrade(feedback.getTechnicalGrade());
 
         if(user.getRole().equals("ROLE_TRAINEE")){
-            feedbackService.update(feedback);
+            feedbackService.update(feedbackEntity);
         }
 
         return "feedback";
