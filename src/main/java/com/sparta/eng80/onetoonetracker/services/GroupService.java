@@ -3,11 +3,12 @@ package com.sparta.eng80.onetoonetracker.services;
 import com.sparta.eng80.onetoonetracker.entities.FeedbackEntity;
 import com.sparta.eng80.onetoonetracker.entities.GroupEntity;
 import com.sparta.eng80.onetoonetracker.repositories.GroupRepository;
+import com.sparta.eng80.onetoonetracker.repositories.StreamRepository;
+import com.sparta.eng80.onetoonetracker.repositories.TrainerRepository;
 import com.sparta.eng80.onetoonetracker.services.interfaces.GroupAppService;
 import com.sparta.eng80.onetoonetracker.utilities.NewGroupForm;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
 
@@ -15,13 +16,13 @@ import java.util.Optional;
 public class GroupService implements GroupAppService {
 
     private final GroupRepository groupRepository;
-    private final StreamService streamService;
-    private final TrainerService trainerService;
+    private final StreamRepository streamRepository;
+    private final TrainerRepository trainerRepository;
 
-    public GroupService(GroupRepository groupRepository, StreamService streamService, TrainerService trainerService) {
+    public GroupService(GroupRepository groupRepository, StreamRepository streamRepository, TrainerRepository trainerRepository) {
         this.groupRepository = groupRepository;
-        this.streamService = streamService;
-        this.trainerService = trainerService;
+        this.streamRepository = streamRepository;
+        this.trainerRepository = trainerRepository;
     }
 
     @Override
@@ -34,8 +35,8 @@ public class GroupService implements GroupAppService {
         return groupRepository.findAll();
     }
 
-    public Iterable<FeedbackEntity> findAllFeedbackFromGroup(GroupEntity groupEntity) {
-        return groupEntity.getFeedbacks();
+    public Iterable<FeedbackEntity> findAllFeedbackFromGroup(int id) {
+        return groupRepository.findById(id).get().getFeedbacks();
     }
 
     @Override
@@ -57,8 +58,8 @@ public class GroupService implements GroupAppService {
         GroupEntity groupEntity = new GroupEntity();
         groupEntity.setGroupName(newGroupForm.getGroupName());
         groupEntity.setStartDate(newGroupForm.getStartDate());
-        groupEntity.setStream(streamService.findById(newGroupForm.getStreamId()).get());
-        groupEntity.setTrainer(trainerService.findById(newGroupForm.getTrainerId()).get());
+        groupEntity.setStream(streamRepository.findById(newGroupForm.getStreamId()).get());
+        groupEntity.setTrainer(trainerRepository.findById(newGroupForm.getTrainerId()).get());
         groupEntity.setTrainees(new HashSet<>());
         groupEntity.setFeedbacks(new HashSet<>());
         save(groupEntity);
