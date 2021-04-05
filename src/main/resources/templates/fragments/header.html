@@ -8,13 +8,37 @@
     <!-- Delete End -->
     <body>
         <nav th:fragment="header" class="navbar bg-color-main" id="header">
-            <div class="container-fluid text-center">
+            <div class="container-fluid" id="headerInner">
                 <a class="navbar-brand" href="#">
                     <img th:src="@{images/sparta-global-logo-white.svg}" alt="Sparta Global Logo">
                 </a>
-                <button class="navbar-toggler" id="burger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <span id="menuBtn-container" class="bg-color-red">
+                    <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                        </svg>
+                    </button>
+                </span>
+
+                <div class="collapse navbar-collapse bg-color-main" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item mt-2">
+                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/profile">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">1-1 Tracker</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Behavioural Competencies</a>
+                        </li>
+                        <form th:action="@{/logout}" method="post">
+                            <input class="btn btn-sm bg-color-red" id="logoutBtn" type="submit" value="Logout"/>
+                        </form>
+                    </ul>
+                </div>
             </div>
         </nav>
     </body>

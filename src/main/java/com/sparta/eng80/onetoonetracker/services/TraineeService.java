@@ -1,9 +1,10 @@
 package com.sparta.eng80.onetoonetracker.services;
 
 import com.sparta.eng80.onetoonetracker.entities.TraineeEntity;
+import com.sparta.eng80.onetoonetracker.entities.UserEntity;
 import com.sparta.eng80.onetoonetracker.repositories.TraineeRepository;
+import com.sparta.eng80.onetoonetracker.repositories.UserRepository;
 import com.sparta.eng80.onetoonetracker.services.interfaces.UserAppService;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,24 +13,26 @@ import java.util.Optional;
 public class TraineeService implements UserAppService<TraineeEntity> {
 
     private final TraineeRepository traineeRepository;
+    private final UserRepository userRepository;
 
-    public TraineeService(TraineeRepository traineeRepository) {
+    public TraineeService(TraineeRepository traineeRepository, UserRepository userRepository) {
         this.traineeRepository = traineeRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
     public Optional<TraineeEntity> findById(int id) {
-        return Optional.empty();
+        return traineeRepository.findById(id);
     }
 
     @Override
     public Iterable<TraineeEntity> findAll() {
-        return null;
+        return traineeRepository.findAll();
     }
 
     @Override
     public TraineeEntity save(TraineeEntity traineeEntity) {
-        return null;
+        return traineeRepository.save(traineeEntity);
     }
 
     @Override
@@ -42,10 +45,12 @@ public class TraineeService implements UserAppService<TraineeEntity> {
         return Optional.empty();
     }
 
-    @Override
-    public Iterable<TraineeEntity> findByGroupId(int id) {
-        return traineeRepository.getAllTraineesFromAGroup(id);
+    public Optional<UserEntity> findUserByEmail(String name) {
+        return userRepository.findUserEntityByEmailEquals(name);
     }
+
+    @Override
+    public Iterable<TraineeEntity> findByGroupId(int id) { return traineeRepository.getAllTraineesFromAGroup(id); }
 
     @Override
     public Iterable<TraineeEntity> findByFirstName(String name) {
