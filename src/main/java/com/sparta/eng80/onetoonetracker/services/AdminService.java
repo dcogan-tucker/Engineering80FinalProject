@@ -6,6 +6,8 @@ import com.sparta.eng80.onetoonetracker.services.interfaces.AdminAppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
  * Here is the Admin Service. This service will be responsible for the Admins functionality.
  * Primarily we'll be using this service to manage the Trainer Entities; adding, finding and removing as required.
@@ -54,7 +56,7 @@ public class AdminService implements AdminAppService {
      * @return the trainer entity found.
      */
     @Override
-    public TrainerEntity findTrainerById(int trainerId) {
+    public Optional<TrainerEntity> findTrainerById(int trainerId) {
         return trainerRepository.findTrainerById(trainerId);
     }
 
@@ -65,5 +67,9 @@ public class AdminService implements AdminAppService {
     @Override
     public Iterable<TrainerEntity> findAllTrainers(){
         return trainerRepository.findAll();
+    }
+
+    public void editTrainer(int trainerId, String firstName, String lastName){
+        trainerRepository.editTrainerById(firstName, lastName, trainerId);
     }
 }

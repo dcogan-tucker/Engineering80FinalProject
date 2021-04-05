@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<table class="table table-hover table-responsive" id="traineeTable">
+    <thead class="text-center">
+    <tr>
+        <td>Trainees in your group: </td>
+        <td>Status of feedback sheet: </td>
+        <td>Overdue:</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="trainee : ${feedbackStatus}">
+        <td th:text="${trainee.traineeEntity.firstName} + ' ' + ${trainee.traineeEntity.lastName}"></td>
+        <td th:text="${trainee.feedbackEntity.status}"></td>
+        <td th:text="${trainee.feedbackEntity.overdue}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="container">
+    <button type="button" class="btn bg-color-red" data-bs-toggle="modal" th:attr="data-bs-target=${'#addNewTrainee'}">Add Trainee</button>
+</div>
+<div class="container">
+    <button type="button" class="btn bg-color-red" data-bs-toggle="modal" th:attr="data-bs-target=${'#addNewGroup'}">Add Group</button>
+</div>
+<div th:insert="/fragments/trainer/newUserForm"></div>
+<div th:insert="/fragments/trainer/newGroupForm"></div>
+</body>
+</html>
