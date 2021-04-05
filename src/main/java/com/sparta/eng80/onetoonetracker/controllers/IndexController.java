@@ -67,7 +67,9 @@ public class IndexController {
                     model.addAttribute("trainers", trainerService.findAll());
                     break;
                 case "ROLE_TRAINEE":
-                    model.addAttribute("trainee", securityService.getCurrentUser().getTrainee());
+                    TraineeEntity trainee = securityService.getCurrentUser().getTrainee();
+                    model.addAttribute("trainee", trainee);
+                    model.addAttribute("trainer", trainee.getGroup().getTrainer());
                     break;
             }
             return "index";
