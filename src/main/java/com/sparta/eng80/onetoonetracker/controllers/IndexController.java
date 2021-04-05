@@ -1,7 +1,6 @@
 package com.sparta.eng80.onetoonetracker.controllers;
 
-import com.sparta.eng80.onetoonetracker.entities.FeedbackEntity;
-import com.sparta.eng80.onetoonetracker.entities.TraineeEntity;
+import com.sparta.eng80.onetoonetracker.entities.*;
 import com.sparta.eng80.onetoonetracker.entities.datatypes.Status;
 import com.sparta.eng80.onetoonetracker.services.*;
 import com.sparta.eng80.onetoonetracker.utilities.TrainerTraineeEntity;
@@ -12,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class IndexController {
@@ -68,8 +68,15 @@ public class IndexController {
                     break;
                 case "ROLE_TRAINEE":
                     TraineeEntity trainee = securityService.getCurrentUser().getTrainee();
+                    GroupEntity group = trainee.getGroup();
+                    TrainerEntity trainer = group.getTrainer();
+                    StreamEntity stream = group.getStream();
+                    int[] duration = new int[stream.getDuration()];
                     model.addAttribute("trainee", trainee);
-                    model.addAttribute("trainer", trainee.getGroup().getTrainer());
+                    model.addAttribute("trainer", trainer);
+                    model.addAttribute("group", group);
+                    model.addAttribute("stream", stream);
+                    model.addAttribute("duration", duration);
                     break;
             }
             return "index";
