@@ -34,7 +34,7 @@ public class GroupService implements GroupAppService {
         return groupRepository.findAll();
     }
 
-    public Iterable<FeedbackEntity> findAllFromGroup(GroupEntity groupEntity) {
+    public Iterable<FeedbackEntity> findAllFeedbackFromGroup(GroupEntity groupEntity) {
         return groupEntity.getFeedbacks();
     }
 
