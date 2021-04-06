@@ -77,8 +77,11 @@ public class IndexController {
                     StreamEntity stream = group.getStream();
                     int duration = stream.getDuration();
                     LocalDate startDate = group.getStartDate().toLocalDate();
-                    LocalDate currentDate = LocalDate.now();
+                    LocalDate currentDate = LocalDate.now().plusWeeks(12);
                     long currentWeek = ChronoUnit.WEEKS.between(startDate, currentDate) + 1;
+                    if (currentWeek > duration) {
+                        currentWeek = duration;
+                    }
                     model.addAttribute("trainee", trainee);
                     model.addAttribute("trainer", traineesTrainer);
                     model.addAttribute("group", group);
