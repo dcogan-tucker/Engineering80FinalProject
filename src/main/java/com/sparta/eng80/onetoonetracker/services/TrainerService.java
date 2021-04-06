@@ -2,11 +2,14 @@ package com.sparta.eng80.onetoonetracker.services;
 
 import com.sparta.eng80.onetoonetracker.entities.*;
 import com.sparta.eng80.onetoonetracker.repositories.*;
+import com.sparta.eng80.onetoonetracker.security.PasswordEncryptor;
 import com.sparta.eng80.onetoonetracker.services.interfaces.UserAppService;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.Locale;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class TrainerService implements UserAppService<TrainerEntity> {
@@ -26,19 +29,13 @@ public class TrainerService implements UserAppService<TrainerEntity> {
     }
 
     @Override
-    public Optional<TrainerEntity> findById(int id) {
-        return Optional.empty();
-    }
+    public Optional<TrainerEntity> findById(int id) { return trainerRepository.findById(id); }
 
     @Override
-    public Iterable<TrainerEntity> findAll() {
-        return null;
-    }
+    public Iterable<TrainerEntity> findAll() { return trainerRepository.findAll(); }
 
     @Override
-    public TrainerEntity save(TrainerEntity trainerEntity) {
-        return null;
-    }
+    public TrainerEntity save(TrainerEntity trainerEntity) { return trainerRepository.save(trainerEntity); }
 
     @Override
     public Optional<TrainerEntity> findByUserId(int id) {
@@ -70,29 +67,6 @@ public class TrainerService implements UserAppService<TrainerEntity> {
         return null;
     }
 
-    public boolean createNewGroup(StreamEntity streamEntity, TrainerEntity trainerEntity, String groupName, java.sql.Date startDate) {
-        // check stream id is valid
-        // check trainer id is valid
-        // check groupName is not null or empty string
-        if (streamRepository.existsById(streamEntity.getStreamId())
-            && trainerRepository.existsById(trainerEntity.getTrainerId())
-                && groupName != null && !groupName.equals("")
-        ) {
-            // add GroupEntity to database
-            GroupEntity groupEntity = new GroupEntity();
-            groupEntity.setGroupName(groupName);
-            groupEntity.setStream(streamEntity);
-            groupEntity.setStartDate(startDate);
-            groupEntity = groupRepository.save(groupEntity);
-            // add new TrainerEntity to database with the groupID just added.
-            trainerEntity.setGroup(groupEntity);
-            trainerRepository.save(trainerEntity);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public TraineeEntity addNewTrainee(GroupEntity groupEntity, String firstName, String lastName, String role) {
         //add checks
         if (
@@ -103,7 +77,8 @@ public class TrainerService implements UserAppService<TrainerEntity> {
         ) {
             UserEntity userEntity = new UserEntity();
             userEntity.setEmail(generateUniqueEmail(firstName, lastName));
-            userEntity.setPassword("password");
+            PasswordEncryptor passwordEncryptor = new PasswordEncryptor();
+            userEntity.setPassword(passwordEncryptor.encode("password"));
             userEntity.setRole(role);
             userEntity.setEnabled(true);
             userEntity = userRepository.save(userEntity);
@@ -120,20 +95,21 @@ public class TrainerService implements UserAppService<TrainerEntity> {
     }
 
     private String generateUniqueEmail(String firstName, String lastName) {
-        String potentialNewEmailAddress = firstName.substring(0, 1).toUpperCase();
-        if (lastName.length() < 3) {
-            potentialNewEmailAddress += lastName.substring(0, 1).toUpperCase();
+        String email = firstName.toLowerCase().toCharArray()[0] + lastName.trim().toLowerCase() +"@sparta.com";
+        if(traineeService.findUserByEmail(email).isEmpty()){
+            return email;
         } else {
-            potentialNewEmailAddress += lastName.substring(0, 1).toUpperCase() + lastName.substring(1).toLowerCase();
+        int i = 1;
+        while(true){
+            email = firstName.toLowerCase().toCharArray()[0] + lastName.trim().toLowerCase() + i +"@sparta.com";
+            if (traineeService.findUserByEmail(email).isEmpty()) {
+                return email;
+            } else {
+                i++;
+            }
         }
-        potentialNewEmailAddress += "@spartaglobal.com";
-        if (traineeService.findByEmail(potentialNewEmailAddress).isEmpty()) {
-            return potentialNewEmailAddress;
-        } else {
-            generateUniqueEmail(firstName, lastName + 1);
-        }
-        return potentialNewEmailAddress;
     }
+}
 
     /**
      * Adds trainee to group, returning {@code true} if successful, otherwise {@code false}
@@ -164,7 +140,7 @@ public class TrainerService implements UserAppService<TrainerEntity> {
      * @return boolean value indicating whether trainee was removed from their group or not
      */
     public boolean removeTraineeFromGroup(int traineeId) {
-        Optional<TraineeEntity> trainee = traineeService.findByUserId(traineeId);
+        Optional<TraineeEntity> trainee = traineeService.findById(traineeId);
         boolean wasRemoved = false;
 
         if (trainee.isPresent()) {
@@ -177,5 +153,19 @@ public class TrainerService implements UserAppService<TrainerEntity> {
             wasRemoved = false;
         }
         return wasRemoved;
+    }
+
+    public boolean disableTraineeLogin(int traineeId) {
+        Optional<TraineeEntity> trainee = traineeService.findById(traineeId);
+        boolean wasDisabled = false;
+        if (trainee.isPresent()) {
+            UserEntity user = trainee.get().getUser();
+            user.setEnabled(false);
+            userRepository.save(user);
+            wasDisabled = true;
+        } else {
+            wasDisabled = false;
+        }
+        return wasDisabled;
     }
 }

@@ -27,8 +27,12 @@ public class FeedbackController {
 
     @GetMapping("/feedback")
     public String getFeedback(Model model , @RequestParam(value = "id") Integer id){
+        UserEntity user = securityService.getCurrentUser();
         Optional<FeedbackEntity> feedbackEntity = feedbackService.findById(id);
         FeedbackEntity feedback = feedbackEntity.get();
+        if(user.getUserId() != feedback.getTrainee().getUser().getUserId()){
+            return "redirect:/error";
+        }
         feedbackID = feedback.getFeedbackId();
         model.addAttribute("feedback", feedback);
         return "feedback";
