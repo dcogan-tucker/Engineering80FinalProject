@@ -1,13 +1,13 @@
 package com.sparta.eng80.onetoonetracker.controllers;
 
 import com.sparta.eng80.onetoonetracker.utilities.NewGroupForm;
-import com.sparta.eng80.onetoonetracker.entities.TraineeEntity;
-import com.sparta.eng80.onetoonetracker.entities.TrainerEntity;
 import com.sparta.eng80.onetoonetracker.services.GroupService;
 import com.sparta.eng80.onetoonetracker.services.TraineeService;
 import com.sparta.eng80.onetoonetracker.services.TrainerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -54,4 +54,17 @@ public class TrainerController {
         groupService.addNewGroup(newGroupForm);
         return "redirect:/";
     }
+
+    @GetMapping("/removeTrainee")
+    public void removeTrainee(Model model, @RequestParam Integer traineeId) {
+        model.addAttribute("traineeIdToDelete", traineeId);
+    }
+
+    @PostMapping("/deleteTrainee")
+    public String removeTraineePart2(@RequestParam Integer traineeId) {
+        trainerService.removeTraineeFromGroup(traineeId);
+        trainerService.disableTraineeLogin(traineeId);
+        return "redirect:/";
+    }
+
 }

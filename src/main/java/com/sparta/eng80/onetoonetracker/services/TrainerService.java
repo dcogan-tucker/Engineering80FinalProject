@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Locale;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class TrainerService implements UserAppService<TrainerEntity> {
@@ -94,19 +95,21 @@ public class TrainerService implements UserAppService<TrainerEntity> {
     }
 
     private String generateUniqueEmail(String firstName, String lastName) {
-        String potentialNewEmailAddress = firstName.substring(0, 1).toUpperCase();
-        if (lastName.length() < 3) {
-            potentialNewEmailAddress += lastName.substring(0, 1).toUpperCase();
+        String email = firstName.toLowerCase().toCharArray()[0] + lastName.trim().toLowerCase() +"@sparta.com";
+        if(traineeService.findUserByEmail(email).isEmpty()){
+            return email;
         } else {
-            potentialNewEmailAddress += lastName.substring(0, 1).toUpperCase() + lastName.substring(1).toLowerCase();
+        int i = 1;
+        while(true){
+            email = firstName.toLowerCase().toCharArray()[0] + lastName.trim().toLowerCase() + i +"@sparta.com";
+            if (traineeService.findUserByEmail(email).isEmpty()) {
+                return email;
+            } else {
+                i++;
+            }
         }
-        potentialNewEmailAddress += "@sparta.com";
-        if (traineeService.findUserByEmail(potentialNewEmailAddress).isEmpty()) {
-            return potentialNewEmailAddress;
-        }
-//        generateUniqueEmail(firstName, lastName + 'e');
-        return generateUniqueEmail(firstName, lastName + 'e');
     }
+}
 
     /**
      * Adds trainee to group, returning {@code true} if successful, otherwise {@code false}
@@ -137,7 +140,7 @@ public class TrainerService implements UserAppService<TrainerEntity> {
      * @return boolean value indicating whether trainee was removed from their group or not
      */
     public boolean removeTraineeFromGroup(int traineeId) {
-        Optional<TraineeEntity> trainee = traineeService.findByUserId(traineeId);
+        Optional<TraineeEntity> trainee = traineeService.findById(traineeId);
         boolean wasRemoved = false;
 
         if (trainee.isPresent()) {
@@ -150,5 +153,19 @@ public class TrainerService implements UserAppService<TrainerEntity> {
             wasRemoved = false;
         }
         return wasRemoved;
+    }
+
+    public boolean disableTraineeLogin(int traineeId) {
+        Optional<TraineeEntity> trainee = traineeService.findById(traineeId);
+        boolean wasDisabled = false;
+        if (trainee.isPresent()) {
+            UserEntity user = trainee.get().getUser();
+            user.setEnabled(false);
+            userRepository.save(user);
+            wasDisabled = true;
+        } else {
+            wasDisabled = false;
+        }
+        return wasDisabled;
     }
 }
