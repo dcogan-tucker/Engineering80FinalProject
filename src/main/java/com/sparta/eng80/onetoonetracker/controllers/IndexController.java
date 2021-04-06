@@ -75,15 +75,15 @@ public class IndexController {
                     TrainerEntity traineesTrainer = group.getTrainer();
                     StreamEntity stream = group.getStream();
                     Set<FeedbackEntity> traineesFeedbackSheets = trainee.getFeedbacks();
-//                    System.out.println(traineesFeedbackSheets.isEmpty());
                     int duration = stream.getDuration();
                     LocalDate startDate = group.getStartDate().toLocalDate();
                     LocalDate currentDate = LocalDate.now();
                     long currentWeek = ChronoUnit.WEEKS.between(startDate, currentDate) + 1;
+
                     if (currentWeek > duration) {
                         currentWeek = duration;
                     }
-                    ArrayList<FeedbackEntity> feedbackEntities = new ArrayList<>();
+
                     Map<Long, FeedbackEntity> feedbackMappedToWeek = new HashMap<>();
                     for (FeedbackEntity feedback:traineesFeedbackSheets) {
                         long feedbackWeek = ChronoUnit.WEEKS.between(startDate, feedback.getDeadline().toLocalDate()) + 1;
@@ -91,7 +91,7 @@ public class IndexController {
                             feedbackMappedToWeek.put(feedbackWeek, feedback);
                         }
                     }
-                    System.out.println(feedbackMappedToWeek);
+
                     model.addAttribute("trainee", trainee);
                     model.addAttribute("trainer", traineesTrainer);
                     model.addAttribute("group", group);
