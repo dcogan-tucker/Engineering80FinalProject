@@ -24,7 +24,7 @@
             <td th:text="${feedback.overdue}"></td>
             <td>
                 <form action="#" th:action="@{/removeTrainee}" method="get">
-                    <input type="hidden" id="traineeId" name="traineeId" th:value="*{trainee.traineeEntity.traineeId}">
+                    <input type="hidden" id="traineeId" name="traineeId" th:value="${feedback.trainee.traineeId}">
                     <button class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal" th:attr="data-bs-target=${'#removeOldTrainee'}"
                             type="submit">Remove Trainee
                     </button>
