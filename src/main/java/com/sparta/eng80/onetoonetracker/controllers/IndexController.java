@@ -2,10 +2,10 @@ package com.sparta.eng80.onetoonetracker.controllers;
 
 import com.sparta.eng80.onetoonetracker.entities.FeedbackEntity;
 import com.sparta.eng80.onetoonetracker.entities.TraineeEntity;
+import com.sparta.eng80.onetoonetracker.entities.TrainerEntity;
 import com.sparta.eng80.onetoonetracker.entities.datatypes.Status;
 import com.sparta.eng80.onetoonetracker.services.*;
 import com.sparta.eng80.onetoonetracker.utilities.TrainerTraineeEntity;
-import org.hibernate.collection.internal.PersistentSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,18 +17,18 @@ import java.util.ArrayList;
 public class IndexController {
 
     private final SecurityService securityService;
-    private final TrainerController trainerController;
     private final GroupService groupService;
     private final StreamService streamService;
     private final TrainerService trainerService;
+    private final TraineeService traineeService;
 
     @Autowired
-    public IndexController(SecurityService securityService, TrainerController trainerController, GroupService groupService, StreamService streamService, TrainerService trainerService) {
+    public IndexController(SecurityService securityService, GroupService groupService, StreamService streamService, TrainerService trainerService, TraineeService traineeService) {
         this.securityService = securityService;
-        this.trainerController = trainerController;
         this.groupService = groupService;
         this.streamService = streamService;
         this.trainerService = trainerService;
+        this.traineeService = traineeService;
     }
 
     @GetMapping("/")
@@ -36,11 +36,14 @@ public class IndexController {
         if(securityService.isAuthenticated()){
             switch (securityService.getCurrentUser().getRole()) {
                 case "ROLE_TRAINER":
+                    TrainerEntity trainer = securityService.getCurrentUser().getTrainer();
+
+                    model.addAttribute("trainer", trainer);
                     model.addAttribute("allGroups", groupService.findAll());
                     model.addAttribute("allStreams", streamService.findAll());
                     model.addAttribute("allTrainers", trainerService.findAll());
-                    Iterable<TraineeEntity> trainees = trainerController.getTrainees(securityService.getCurrentUser().getTrainer());
-                    Iterable<FeedbackEntity> feedbackSheets = groupService.findAllFromGroup(securityService.getCurrentUser().getTrainer().getGroup());
+                    Iterable<TraineeEntity> trainees = traineeService.findByGroupId(trainer.getGroup().getGroupId());
+                    Iterable<FeedbackEntity> feedbackSheets = groupService.findAllFeedbackFromGroup(trainer.getGroup().getGroupId());
                     ArrayList<TrainerTraineeEntity> feedbackSheetsInCorrectOrder = new ArrayList<>();
                     for (TraineeEntity traineeEntity : trainees) {
                         TrainerTraineeEntity trainerTraineeEntity = new TrainerTraineeEntity();

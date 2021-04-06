@@ -54,10 +54,4 @@ public class TrainerController {
         groupService.addNewGroup(newGroupForm);
         return "redirect:/";
     }
-
-
-    public Iterable<TraineeEntity> getTrainees(TrainerEntity trainer) {
-        Iterable<TraineeEntity> trainees = traineeService.findByGroupId(trainer.getGroup().getGroupId());
-        return trainees;
-    }
 }
