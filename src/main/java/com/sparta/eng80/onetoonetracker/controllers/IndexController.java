@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 
 @Controller
 public class IndexController {
@@ -75,18 +74,30 @@ public class IndexController {
                     GroupEntity group = trainee.getGroup();
                     TrainerEntity traineesTrainer = group.getTrainer();
                     StreamEntity stream = group.getStream();
+                    Set<FeedbackEntity> traineesFeedbackSheets = trainee.getFeedbacks();
+//                    System.out.println(traineesFeedbackSheets.isEmpty());
                     int duration = stream.getDuration();
                     LocalDate startDate = group.getStartDate().toLocalDate();
-                    LocalDate currentDate = LocalDate.now().plusWeeks(12);
+                    LocalDate currentDate = LocalDate.now();
                     long currentWeek = ChronoUnit.WEEKS.between(startDate, currentDate) + 1;
                     if (currentWeek > duration) {
                         currentWeek = duration;
                     }
+                    ArrayList<FeedbackEntity> feedbackEntities = new ArrayList<>();
+                    Map<Long, FeedbackEntity> feedbackMappedToWeek = new HashMap<>();
+                    for (FeedbackEntity feedback:traineesFeedbackSheets) {
+                        long feedbackWeek = ChronoUnit.WEEKS.between(startDate, feedback.getDeadline().toLocalDate()) + 1;
+                        if (feedbackWeek <= currentWeek) {
+                            feedbackMappedToWeek.put(feedbackWeek, feedback);
+                        }
+                    }
+                    System.out.println(feedbackMappedToWeek);
                     model.addAttribute("trainee", trainee);
                     model.addAttribute("trainer", traineesTrainer);
                     model.addAttribute("group", group);
                     model.addAttribute("stream", stream);
                     model.addAttribute("currentWeek", currentWeek);
+                    model.addAttribute("feedbackWeeks", feedbackMappedToWeek);
                     break;
             }
             return "index";

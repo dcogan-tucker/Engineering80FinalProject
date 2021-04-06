@@ -14,13 +14,17 @@
 
     <label>Current Week: </label>
     <a th:text="${currentWeek}"></a><br>
-    <select name="weeks">
-        <option th:each="weekNumber : ${#numbers.sequence(1, currentWeek)}"
-                th:value="${weekNumber}"
-                th:text="|Week ${weekNumber}|">
-        </option>
-<!--        <span class="status bg-color-red" th:classappend="${isSubmitted ? 'bg-color-green' : 'bg-color-amber'}"></span>-->
-    </select><br>
+
+    <form method="get" th:action="@{/feedback}">
+        <select name="id">
+            <option th:each="feedback, iterStat : ${feedbackWeeks}"
+                    th:value="${feedback.value.feedbackId}"
+                    th:text="|Week ${feedback.key}|">
+            </option>
+            <!--        <span class="status bg-color-red" th:classappend="${isSubmitted ? 'bg-color-green' : 'bg-color-amber'}"></span>-->
+        </select><br>
+        <button type="submit">View</button>
+    </form>
 
     <!--    <div class="dropdown">-->
     <!--        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"-->
