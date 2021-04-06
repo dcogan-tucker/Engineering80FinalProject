@@ -80,6 +80,7 @@ div#footerBtns a {
 
 .bg-color-red {
     background-color: #e33661;
+    color: white;
 }
 
 .bg-color-green {
@@ -133,6 +134,8 @@ div#navbarNav {
     margin-top: 6px;
     width: 100vw;
     margin-left: -12px;
+    position: absolute;
+    z-index: 2;
 }
 
 li.nav-item a, li.nav-item input {

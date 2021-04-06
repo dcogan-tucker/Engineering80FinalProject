@@ -4,7 +4,7 @@
     <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.0.0-beta2/css/bootstrap.min.css}"/>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body th:if="${feedback.overdue}" onload="disableEdits()">
 <div th:fragment="feedbackInput(feedback)" id="feedbackText">
     <div class="container-fluid text-center">
         <form method="POST" th:object="${feedback}" th:attr="id=${feedback}" th:action="@{/feedback}">
@@ -81,7 +81,7 @@
                     <option th:value="D" th:text="D"></option>
                 </select>
             </div>
-            <input type="submit" class="btn btn-danger mt-2" value="Submit">
+            <input id="submitBtn" type="submit" class="btn btn-danger mt-2" value="Submit">
         </form>
     </div>
     <script>
@@ -99,6 +99,15 @@
             textboxEnabled.hidden = false;
             textboxDisabled.hidden = true;
             textboxDisabled2.hidden = true;
+        }
+
+        function disableEdits(){
+            document.getElementById("stopTrainee").readOnly = true;
+            document.getElementById("startTrainee").readOnly = true;
+            document.getElementById("continueTrainee").readOnly = true;
+            document.getElementById("techGrade").disabled = true;
+            document.getElementById("consultGrade").disabled = true;
+            document.getElementById("submitBtn").hidden = true
         }
     </script>
 </div>
