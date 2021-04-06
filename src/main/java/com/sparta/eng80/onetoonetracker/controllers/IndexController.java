@@ -71,12 +71,11 @@ public class IndexController {
                     GroupEntity group = trainee.getGroup();
                     TrainerEntity trainer = group.getTrainer();
                     StreamEntity stream = group.getStream();
-                    int[] duration = new int[stream.getDuration()];
                     model.addAttribute("trainee", trainee);
                     model.addAttribute("trainer", trainer);
                     model.addAttribute("group", group);
                     model.addAttribute("stream", stream);
-                    model.addAttribute("duration", stream.getDuration());
+                    model.addAttribute("duration", stream.getDuration()+10);
                     break;
             }
             return "index";
