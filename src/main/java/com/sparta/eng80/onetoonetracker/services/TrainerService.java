@@ -151,4 +151,18 @@ public class TrainerService implements UserAppService<TrainerEntity> {
         }
         return wasRemoved;
     }
+
+    public boolean disableTraineeLogin(int traineeId) {
+        Optional<TraineeEntity> trainee = traineeService.findByUserId(traineeId);
+        boolean wasDisabled = false;
+        if (trainee.isPresent()) {
+            UserEntity user = trainee.get().getUser();
+            user.setEnabled(false);
+            userRepository.save(user);
+            wasDisabled = true;
+        } else {
+            wasDisabled = false;
+        }
+        return wasDisabled;
+    }
 }
