@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class LoginControllerTest {
+public class MainController {
 
     @Autowired
-    private LoginController loginController;
+    private MainController mainController;
 
     @Test
     public void loadsContext() {
-        Assertions.assertNotNull(loginController);
+        Assertions.assertNotNull(mainController);
     }
 }
