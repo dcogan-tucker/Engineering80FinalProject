@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class ErrorControllerTest {
+public class FeedbackControllerTest {
 
     @Autowired
-    private ErrorController errorController;
+    private FeedbackController feedbackController;
 
     @Test
     public void loadsContext() {
-        Assertions.assertNotNull(errorController);
+        Assertions.assertNotNull(feedbackController);
     }
 }
