@@ -18,7 +18,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="feedback : ${feedbacks.get(i)}">
+        <tr class="clickable" th:each="feedback : ${feedbacks.get(i)}" th:onclick="'javascript:rowClicked(' + ${feedback.feedbackId} + ')'">
             <td th:text="${feedback.trainee.firstName} + ' ' + ${feedback.trainee.lastName}"></td>
             <td th:text="${feedback.status.status}"></td>
             <td th:text="${feedback.overdue}"></td>
@@ -44,6 +44,9 @@
             tables[i].hidden = true;
         }
         document.getElementById('traineeTable' + selected.value).hidden = false;
+    }
+    function rowClicked(value) {
+        location.href = "/feedback?id=" + value;
     }
 </script>
 </body>
