@@ -4,16 +4,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Controller;
 
 @SpringBootTest
-public class LoginControllerTest {
+public class TrainerControllerTest {
 
     @Autowired
-    private LoginController loginController;
+    private TrainerController trainerController;
 
     @Test
     public void loadsContext() {
-        Assertions.assertNotNull(loginController);
+        Assertions.assertNotNull(trainerController);
     }
 }
