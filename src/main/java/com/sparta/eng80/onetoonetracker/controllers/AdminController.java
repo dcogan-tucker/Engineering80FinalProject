@@ -10,10 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.websocket.server.PathParam;
 import java.util.Optional;
 import java.util.Set;
 
@@ -31,12 +31,14 @@ public class AdminController {
         this.groupService = groupService;
     }
 
-    //TODO Correct the return strings
-
     @GetMapping("/trainers")
     public String getAllTrainers(ModelMap modelMap){
         Iterable<TrainerEntity> trainers = adminService.findAllTrainers();
         modelMap.addAttribute("trainers", trainers);
+        Iterable<GroupEntity> groups = groupService.findAll();
+        modelMap.addAttribute("groups", groups);
+        TrainerEntity trainer = new TrainerEntity();
+        modelMap.addAttribute("newTrainer", trainer);
         return "/fragments/home/admin_home";
     }
 
@@ -83,15 +85,15 @@ public class AdminController {
         return "redirect:/trainers";
     }
 
-    @GetMapping("/trainers/")
-    public String findTrainer(Model model, @RequestParam Integer trainerId){
+    @GetMapping("/trainers/{trainerId}")
+    public String findTrainer(Model model, @PathVariable(name = "trainerId") Integer trainerId){
         Optional<TrainerEntity> trainer = adminService.findTrainerById(trainerId);
         if(trainer.isEmpty()){
             //Return trainer not found
-            return "/fragments/trainer-details";
+            return "trainer-details";
         }else {
             model.addAttribute("trainer", trainer.get());
-            return "/fragments/trainer-details";
+            return "trainer-details";
         }
     }
 
