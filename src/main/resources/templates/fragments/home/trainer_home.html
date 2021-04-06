@@ -6,7 +6,8 @@
     <h1 class="pt-5 pb-3" th:text="${trainer.group.groupName} + ' - ' + ${trainer.group.stream.name}"></h1>
     <label class="pb-3" th:text="'Name: ' + ${trainer.firstName} + ' ' + ${trainer.lastName}">Trainer Name</label>
     <select class="form-select mt-3 mb-3" aria-label="Default select example">
-        <option selected th:each="i : ${#numbers.sequence(1, trainer.group.stream.duration)}" th:value="${i}" th:text="'Week ' + ${i}"></option>
+        <option selected th:each="i : ${#numbers.sequence(1, trainer.group.stream.duration)}" th:value="${i}"
+                th:text="'Week ' + ${i}"></option>
     </select>
 
     <table class="table table-hover table-responsive py-3" id="traineeTable">
@@ -22,9 +23,14 @@
             <td th:text="${trainee.traineeEntity.firstName} + ' ' + ${trainee.traineeEntity.lastName}"></td>
             <td th:text="${trainee.feedbackEntity.status.status}"></td>
             <td th:text="${trainee.feedbackEntity.overdue}"></td>
-<!--            <td>-->
-<!--                <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal" th:attr="data-bs-target=${'#addNewTrainee'}">Add Trainee</button>-->
-<!--            </td>-->
+            <td>
+                <form action="#" th:action="@{/removeTrainee}" method="get">
+                    <input type="hidden" id="traineeId" name="traineeId" th:value="*{trainee.traineeEntity.traineeId}">
+                    <button class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal" th:attr="data-bs-target=${'#removeOldTrainee'}"
+                            type="submit">Remove Trainee
+                    </button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>
@@ -32,8 +38,12 @@
 
 
 <div class="container text-center">
-    <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal" th:attr="data-bs-target=${'#addNewTrainee'}">Add Trainee</button>
-    <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal" th:attr="data-bs-target=${'#addNewGroup'}">Add Group</button>
+    <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal"
+            th:attr="data-bs-target=${'#addNewTrainee'}">Add Trainee
+    </button>
+    <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal"
+            th:attr="data-bs-target=${'#addNewGroup'}">Add Group
+    </button>
 </div>
 <div th:insert="/fragments/trainer/newUserForm"></div>
 <div th:insert="/fragments/trainer/newGroupForm"></div>
