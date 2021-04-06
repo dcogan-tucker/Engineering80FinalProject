@@ -9,6 +9,7 @@ import com.sparta.eng80.onetoonetracker.services.interfaces.GroupAppService;
 import com.sparta.eng80.onetoonetracker.utilities.NewGroupForm;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
 
@@ -46,7 +47,7 @@ public class GroupService implements GroupAppService {
 
     @Override
     public Optional<GroupEntity> findByName(String name) {
-        return null;
+        return groupRepository.findByName(name);
     }
 
     @Override
@@ -63,5 +64,16 @@ public class GroupService implements GroupAppService {
         groupEntity.setTrainees(new HashSet<>());
         groupEntity.setFeedbacks(new HashSet<>());
         save(groupEntity);
+    }
+
+    public Iterable<GroupEntity> findAllUnassigned() {
+        Iterable<GroupEntity> all = findAll();
+        ArrayList<GroupEntity> unique = new ArrayList<>();
+        for (GroupEntity groupEntity : all) {
+            if (groupEntity.getTrainer() == null) {
+                unique.add(groupEntity);
+            }
+        }
+        return unique;
     }
 }

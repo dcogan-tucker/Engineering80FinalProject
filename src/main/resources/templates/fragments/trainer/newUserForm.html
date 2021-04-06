@@ -22,14 +22,14 @@
                         </tr>
                         <tr>
                             <td>
-                                Group to assign trainee to:
+                                Unassigned Group to assign trainee to:
                             </td>
                             <td>
                             <div class="col-md-3">
                                 <select style="text-align-last: center" class="form-control" type="Number" name="groupId"
                                         required>
                                     <option value=""> --</option>
-                                    <option th:each="group : ${allGroups}"
+                                    <option th:each="group : ${allUnassignedGroups}"
                                             th:value="${group.groupId}"
                                             th:text="${group.groupName}"></option>
                                 </select>

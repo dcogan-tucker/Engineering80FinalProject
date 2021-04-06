@@ -39,7 +39,7 @@ public class IndexController {
                     TrainerEntity trainer = securityService.getCurrentUser().getTrainer();
 
                     model.addAttribute("trainer", trainer);
-                    model.addAttribute("allGroups", groupService.findAll());
+                    model.addAttribute("allUnassignedGroups", groupService.findAllUnassigned());
                     model.addAttribute("allStreams", streamService.findAll());
                     model.addAttribute("allTrainers", trainerService.findAll());
                     Iterable<TraineeEntity> trainees = traineeService.findByGroupId(trainer.getGroup().getGroupId());
