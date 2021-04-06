@@ -5,8 +5,8 @@
 <div class="container">
     <h1 class="pt-5 pb-3" th:text="${trainer.group.groupName} + ' - ' + ${trainer.group.stream.name}"></h1>
     <label class="pb-3" th:text="'Name: ' + ${trainer.firstName} + ' ' + ${trainer.lastName}">Trainer Name</label>
-    <select class="form-select mt-3 mb-3" aria-label="Default select example">
-        <option selected th:each="i : ${#numbers.sequence(1, trainer.group.stream.duration)}" th:value="${i}" th:text="'Week ' + ${i}"></option>
+    <select class="form-select mt-3 mb-3" aria-label="Default select example" onchange="updateWeek(this)">
+        <option th:each="i, iterStat : ${feedbacks}" th:value="${iterStat.count}" th:text="'Week ' + ${iterStat.count} + ' of ' + ${trainer.group.stream.duration}"></option>
     </select>
 
     <table class="table table-hover table-responsive py-3" id="traineeTable">
@@ -18,10 +18,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="trainee : ${feedbackStatus}">
-            <td th:text="${trainee.traineeEntity.firstName} + ' ' + ${trainee.traineeEntity.lastName}"></td>
-            <td th:text="${trainee.feedbackEntity.status.status}"></td>
-            <td th:text="${trainee.feedbackEntity.overdue}"></td>
+        <tr th:each="feedback : ${feedbacks.get(weekNo)}">
+            <!--<td th:text="${trainee.traineeEntity.firstName} + ' ' + ${trainee.traineeEntity.lastName}"></td>-->
+            <td>Name</td>
+            <td th:text="${feedback.status.status}"></td>
+            <td th:text="${feedback.overdue}"></td>
         </tr>
         </tbody>
     </table>
@@ -34,5 +35,10 @@
 </div>
 <div th:insert="/fragments/trainer/newUserForm"></div>
 <div th:insert="/fragments/trainer/newGroupForm"></div>
+<script th:inline="javascript">
+    function updateWeek(selected) {
+        console.log(selected.value);
+    }
+</script>
 </body>
 </html>
