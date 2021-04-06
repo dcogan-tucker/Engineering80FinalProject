@@ -58,6 +58,16 @@ public class FeedbackEntity {
     private String trainerContinue;
 
     /**
+     * The grade that the trainee believes achieved in technical skills for the week
+     */
+    private String technicalGrade;
+
+    /**
+     * The grade that the trainee believes achieved in consultant skills for the week
+     */
+    private String consultantGrade;
+
+    /**
      * The current status on the completion of the feedback form
      * @see Status
      */
@@ -67,16 +77,6 @@ public class FeedbackEntity {
      * The status for whether the feedback form has been submitted before or after the deadline
      */
     private boolean overdue;
-
-    /**
-     * The grade that the trainee believes achieved in technical skills for the week
-     */
-    private char technicalGrade;
-
-    /**
-     * The grade that the trainee believes achieved in consultant skills for the week
-     */
-    private char consultantGrade;
 
     /**
      * The trainee which the feedback relates to
@@ -209,21 +209,21 @@ public class FeedbackEntity {
 
     @Basic
     @Column(name = "technical_grade")
-    public char getTechnicalGrade(){
+    public String getTechnicalGrade(){
         return technicalGrade;
     }
 
-    public void setTechnicalGrade(char technicalGrade){
+    public void setTechnicalGrade(String technicalGrade){
         this.technicalGrade = technicalGrade;
     }
 
     @Basic
     @Column(name = "consultant_grade")
-    public char getConsultantGrade(){
+    public String getConsultantGrade(){
         return consultantGrade;
     }
 
-    public void setConsultantGrade(char consultantGrade){
+    public void setConsultantGrade(String consultantGrade){
         this.consultantGrade = consultantGrade;
     }
 

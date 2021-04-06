@@ -7,10 +7,14 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public interface UserRepository extends CrudRepository<UserEntity, Integer> {
 
     @Query(nativeQuery = true, value = "SELECT * FROM user WHERE email = ?")
     Optional<UserEntity> findUserEntityByEmailEquals(String email);
+
+    @Query(nativeQuery = true, value = "select email from user")
+    Set<String> getAllEmails();
 }

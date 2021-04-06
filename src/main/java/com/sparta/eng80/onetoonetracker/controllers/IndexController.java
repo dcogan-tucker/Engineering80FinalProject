@@ -15,18 +15,18 @@ import java.util.ArrayList;
 public class IndexController {
 
     private final SecurityService securityService;
-    private final TrainerController trainerController;
     private final GroupService groupService;
     private final StreamService streamService;
     private final TrainerService trainerService;
+    private final TraineeService traineeService;
 
     @Autowired
-    public IndexController(SecurityService securityService, TrainerController trainerController, GroupService groupService, StreamService streamService, TrainerService trainerService) {
+    public IndexController(SecurityService securityService, GroupService groupService, StreamService streamService, TrainerService trainerService, TraineeService traineeService) {
         this.securityService = securityService;
-        this.trainerController = trainerController;
         this.groupService = groupService;
         this.streamService = streamService;
         this.trainerService = trainerService;
+        this.traineeService = traineeService;
     }
 
     @GetMapping("/")
@@ -34,11 +34,14 @@ public class IndexController {
         if(securityService.isAuthenticated()){
             switch (securityService.getCurrentUser().getRole()) {
                 case "ROLE_TRAINER":
+                    TrainerEntity trainer = securityService.getCurrentUser().getTrainer();
+
+                    model.addAttribute("trainer", trainer);
                     model.addAttribute("allGroups", groupService.findAll());
                     model.addAttribute("allStreams", streamService.findAll());
                     model.addAttribute("allTrainers", trainerService.findAll());
-                    Iterable<TraineeEntity> trainees = trainerController.getTrainees(securityService.getCurrentUser().getTrainer());
-                    Iterable<FeedbackEntity> feedbackSheets = groupService.findAllFromGroup(securityService.getCurrentUser().getTrainer().getGroup());
+                    Iterable<TraineeEntity> trainees = traineeService.findByGroupId(trainer.getGroup().getGroupId());
+                    Iterable<FeedbackEntity> feedbackSheets = groupService.findAllFeedbackFromGroup(trainer.getGroup().getGroupId());
                     ArrayList<TrainerTraineeEntity> feedbackSheetsInCorrectOrder = new ArrayList<>();
                     for (TraineeEntity traineeEntity : trainees) {
                         TrainerTraineeEntity trainerTraineeEntity = new TrainerTraineeEntity();
@@ -67,13 +70,13 @@ public class IndexController {
                 case "ROLE_TRAINEE":
                     TraineeEntity trainee = securityService.getCurrentUser().getTrainee();
                     GroupEntity group = trainee.getGroup();
-                    TrainerEntity trainer = group.getTrainer();
+                    TrainerEntity traineesTrainer = group.getTrainer();
                     StreamEntity stream = group.getStream();
                     model.addAttribute("trainee", trainee);
-                    model.addAttribute("trainer", trainer);
+                    model.addAttribute("trainer", traineesTrainer);
                     model.addAttribute("group", group);
                     model.addAttribute("stream", stream);
-                    model.addAttribute("duration", stream.getDuration()+10);
+                    model.addAttribute("duration", stream.getDuration());
                     break;
             }
             return "index";

@@ -2,7 +2,9 @@ package com.sparta.eng80.onetoonetracker.services;
 
 import com.sparta.eng80.onetoonetracker.entities.*;
 import com.sparta.eng80.onetoonetracker.repositories.*;
+import com.sparta.eng80.onetoonetracker.security.PasswordEncryptor;
 import com.sparta.eng80.onetoonetracker.services.interfaces.UserAppService;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.Locale;
@@ -74,7 +76,8 @@ public class TrainerService implements UserAppService<TrainerEntity> {
         ) {
             UserEntity userEntity = new UserEntity();
             userEntity.setEmail(generateUniqueEmail(firstName, lastName));
-            userEntity.setPassword("password");
+            PasswordEncryptor passwordEncryptor = new PasswordEncryptor();
+            userEntity.setPassword(passwordEncryptor.encode("password"));
             userEntity.setRole(role);
             userEntity.setEnabled(true);
             userEntity = userRepository.save(userEntity);
