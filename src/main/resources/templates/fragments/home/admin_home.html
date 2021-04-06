@@ -19,38 +19,42 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="trainer : ${trainers}" class="text-black-50">
-                    <td>
-                        <form th:action="@{/trainers/}" method="get">
-                            <input class="btn" name="trainerId" id="primaryBtn" type="submit" th:value="*{trainer.trainerId}"/>
-                        </form>
-                    </td>
-                    <td th:text="*{trainer.firstName}"/>
-                    <td th:text="*{trainer.lastName}"/>
+            <tr th:each="trainer : ${trainers}" class="text-black-50">
+                <td>
+                    <form th:action="@{'/trainers/' + *{trainer.trainerId}}" method="get">
+                        <input class="btn" name="trainerId" id="primaryBtn" type="submit" th:value="*{trainer.trainerId}"/>
+                    </form>
+                </td>
+                <td th:text="*{trainer.firstName}"/>
+                <td th:text="*{trainer.lastName}"/>
 
-                </tr>
+            </tr>
             </tbody>
         </table>
     </div>
     <div>
-        <form action="#" th:action="@{/add-trainer}" th:object="${trainer}" method="post">
-            <div class="container mt-5 text-center">
-                <h1 class="text-center">Add Trainer</h1>
+        <form action="#" th:action="@{/add-trainer}" th:object="${newTrainer}" method="post">
+            <div class="modal-body">
                 <label>
-                    <input class="mt-2" type="text" name="firstName" placeholder="First Name"/><br>
-                    <input class="mt-2" type="text" name="lastName" placeholder="Last Name"/><br>
-                    <select>
-                        <option th:each="" th:value="" th:text="" name="groupId"></option>
-                    </select>
-<!--                    <input class="mt-2" type="number" name="userId" placeholder="User Id"/><br>-->
-<!--                    <input class="mt-2" type="number" name="groupId" placeholder="Group Id"/><br>-->
+                    <input class="mt-2" type="text" name="firstName" placeholder="First Name"/>
                 </label>
                 <label>
                     <input class="mt-2" type="text" name="lastName" placeholder="Last Name"/>
                 </label>
-                <label>
-                    <input class="mt-2" type="number" name="groupId" placeholder="Group Id"/>
-                </label>
+                <td>
+                    Group to assign trainee to:
+                </td>
+                <div>
+                    <div class="col-md-3">
+                        <select style="text-align-last: center" class="form-control" type="Number" name="groupId"
+                                required>
+                            <option value=""> --</option>
+                            <option th:each="group : ${allGroups}"
+                                    th:value="${group.groupId}"
+                                    th:text="${group.groupName}"></option>
+                        </select>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <input class="btn" id="primaryBtn" type="submit" value="Add">

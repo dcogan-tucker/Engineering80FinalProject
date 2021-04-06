@@ -67,6 +67,7 @@ public class IndexController {
                     model.addAttribute("feedbackStatus", feedbackSheetsInCorrectOrder);
                     break;
                 case "ROLE_ADMIN":
+                    model.addAttribute("allGroups", groupService.findAll());
                     model.addAttribute("trainers", trainerService.findAll());
                     break;
                 case "ROLE_TRAINEE":

@@ -35,19 +35,6 @@ div#footerBtns a {
     margin: 30px;
 }
 
-.bg-color-red {
-    background-color: #e33661;
-}
-
-.bg-color-green {
-
-}
-
-.bg-color-amber {
-
-}
-
-
 label.profile-label {
     margin-right: 50px;
 }
@@ -83,12 +70,12 @@ span#menuBtn-container button {
     padding-top: 4px;
 }
 
-.bg-color-main {
-    background-color: #01181b !important;
-}
-
 div#footerBtns a {
     margin: 0 30px 10px 30px;
+}
+
+.bg-color-main {
+    background-color: #01181b !important;
 }
 
 .bg-color-red {
@@ -101,6 +88,18 @@ div#footerBtns a {
 
 .bg-color-amber {
 
+}
+
+.text-color-main {
+    color: #01181b;
+}
+
+.text-color-red {
+    color: #e33661;
+}
+
+.border-color-main {
+    border-color: #01181b !important;
 }
 
 
