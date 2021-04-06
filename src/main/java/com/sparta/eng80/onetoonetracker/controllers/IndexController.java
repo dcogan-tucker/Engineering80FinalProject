@@ -1,8 +1,6 @@
 package com.sparta.eng80.onetoonetracker.controllers;
 
-import com.sparta.eng80.onetoonetracker.entities.FeedbackEntity;
-import com.sparta.eng80.onetoonetracker.entities.TraineeEntity;
-import com.sparta.eng80.onetoonetracker.entities.TrainerEntity;
+import com.sparta.eng80.onetoonetracker.entities.*;
 import com.sparta.eng80.onetoonetracker.entities.datatypes.Status;
 import com.sparta.eng80.onetoonetracker.services.*;
 import com.sparta.eng80.onetoonetracker.utilities.TrainerTraineeEntity;
@@ -11,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 
 @Controller
 public class IndexController {
@@ -70,7 +70,34 @@ public class IndexController {
                     model.addAttribute("trainers", trainerService.findAll());
                     break;
                 case "ROLE_TRAINEE":
-                    model.addAttribute("trainee", securityService.getCurrentUser().getTrainee());
+                    TraineeEntity trainee = securityService.getCurrentUser().getTrainee();
+                    GroupEntity group = trainee.getGroup();
+                    TrainerEntity traineesTrainer = group.getTrainer();
+                    StreamEntity stream = group.getStream();
+                    Set<FeedbackEntity> traineesFeedbackSheets = trainee.getFeedbacks();
+                    int duration = stream.getDuration();
+                    LocalDate startDate = group.getStartDate().toLocalDate();
+                    LocalDate currentDate = LocalDate.now();
+                    long currentWeek = ChronoUnit.WEEKS.between(startDate, currentDate) + 1;
+
+                    if (currentWeek > duration) {
+                        currentWeek = duration;
+                    }
+
+                    Map<Long, FeedbackEntity> feedbackMappedToWeek = new HashMap<>();
+                    for (FeedbackEntity feedback:traineesFeedbackSheets) {
+                        long feedbackWeek = ChronoUnit.WEEKS.between(startDate, feedback.getDeadline().toLocalDate()) + 1;
+                        if (feedbackWeek <= currentWeek) {
+                            feedbackMappedToWeek.put(feedbackWeek, feedback);
+                        }
+                    }
+
+                    model.addAttribute("trainee", trainee);
+                    model.addAttribute("trainer", traineesTrainer);
+                    model.addAttribute("group", group);
+                    model.addAttribute("stream", stream);
+                    model.addAttribute("currentWeek", currentWeek);
+                    model.addAttribute("feedbackWeeks", feedbackMappedToWeek);
                     break;
             }
             return "index";
