@@ -8,6 +8,8 @@ import com.sparta.eng80.onetoonetracker.services.TraineeService;
 import com.sparta.eng80.onetoonetracker.services.TrainerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -52,6 +54,13 @@ public class TrainerController {
         newGroupForm.setTrainerId(trainerId);
 
         groupService.addNewGroup(newGroupForm);
+        return "redirect:/";
+    }
+
+    @GetMapping("/removeTrainee/{traineeId}")
+    public String removeTrainee(@PathVariable Integer traineeId) {
+        trainerService.removeTraineeFromGroup(traineeId);
+        trainerService.disableTraineeLogin(traineeId);
         return "redirect:/";
     }
 }
