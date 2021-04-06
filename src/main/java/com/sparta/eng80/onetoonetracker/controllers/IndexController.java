@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 
 @Controller
 public class IndexController {
@@ -37,20 +39,36 @@ public class IndexController {
             switch (securityService.getCurrentUser().getRole()) {
                 case "ROLE_TRAINER":
                     TrainerEntity trainer = securityService.getCurrentUser().getTrainer();
-
-                    model.addAttribute("trainer", trainer);
-                    model.addAttribute("allGroups", groupService.findAll());
-                    model.addAttribute("allStreams", streamService.findAll());
-                    model.addAttribute("allTrainers", trainerService.findAll());
                     Iterable<TraineeEntity> trainees = traineeService.findByGroupId(trainer.getGroup().getGroupId());
-                    Iterable<FeedbackEntity> feedbackSheets = groupService.findAllFeedbackFromGroup(trainer.getGroup().getGroupId());
+                    Iterable<FeedbackEntity> allFeedback = groupService.findAllFeedbackFromGroup(trainer.getGroup().getGroupId());
                     ArrayList<TrainerTraineeEntity> feedbackSheetsInCorrectOrder = new ArrayList<>();
+
+                    List<FeedbackEntity> feedbackOrdered = new ArrayList<>();
+                    for (FeedbackEntity feedback : allFeedback) {
+                        feedbackOrdered.add(feedback);
+                    }
+                    feedbackOrdered.sort(Comparator.comparing(FeedbackEntity::getDeadline).reversed());
+
+                    Map<Integer, List<FeedbackEntity>> feedbackByWeek = new HashMap<>();
+
+                    for (FeedbackEntity feedback : feedbackOrdered) {
+                        LocalDate startDate = trainer.getGroup().getStartDate().toLocalDate();
+                        LocalDate feedbackDate = feedback.getDeadline().toLocalDate();
+                        int weekNo = (int) ChronoUnit.WEEKS.between(startDate, feedbackDate) + 1;
+
+                        List<FeedbackEntity> hasValue = feedbackByWeek.putIfAbsent(weekNo, new ArrayList<>(Arrays.asList(feedback)));
+                        if (hasValue != null) {
+                            feedbackByWeek.get(weekNo).add(feedback);
+                        }
+                    }
+
+                    /*
                     for (TraineeEntity traineeEntity : trainees) {
                         TrainerTraineeEntity trainerTraineeEntity = new TrainerTraineeEntity();
                         trainerTraineeEntity.setTraineeEntity(traineeEntity);
                         boolean found = false;
-                        if (feedbackSheets.iterator().hasNext()) {
-                            for (Object feedbackEntity : feedbackSheets) {
+                        if (allFeedback.iterator().hasNext()) {
+                            for (Object feedbackEntity : allFeedback) {
                                 if (((FeedbackEntity) feedbackEntity).getTrainee().getTraineeId() == traineeEntity.getTraineeId()) {
                                     trainerTraineeEntity.setFeedbackEntity(((FeedbackEntity) feedbackEntity));
                                     found = true;
@@ -64,7 +82,11 @@ public class IndexController {
                         }
                         feedbackSheetsInCorrectOrder.add(trainerTraineeEntity);
                     }
-                    model.addAttribute("feedbackStatus", feedbackSheetsInCorrectOrder);
+                    */
+
+                    model.addAttribute("trainer", trainer);
+                    model.addAttribute("trainees", trainees);
+                    model.addAttribute("feedbacks", feedbackByWeek);
                     break;
                 case "ROLE_ADMIN":
                     model.addAttribute("trainers", trainerService.findAll());
