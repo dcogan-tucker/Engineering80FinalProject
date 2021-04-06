@@ -12,15 +12,16 @@
     <label>Trainer:</label>
     <label th:text="${trainer.firstName} + ' ' + ${trainer.lastName}"></label><br>
 
-    <label>Current Week:</label>
-    <a href="#"></a><br>
+    <label>Current Week: </label>
+    <a th:text="${currentWeek}"></a><br>
     <select name="weeks">
-        <option th:each="weekNumber : ${#numbers.sequence(1, duration)}"
+        <option th:each="weekNumber : ${#numbers.sequence(1, currentWeek)}"
                 th:value="${weekNumber}"
                 th:text="|Week ${weekNumber}|">
         </option>
-        <!--<span class="status bg-color-red" th:classappend="${isSubmitted ? 'bg-color-green' : 'bg-color-amber'}"></span>-->
-    </select>
+<!--        <span class="status bg-color-red" th:classappend="${isSubmitted ? 'bg-color-green' : 'bg-color-amber'}"></span>-->
+    </select><br>
+
     <!--    <div class="dropdown">-->
     <!--        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"-->
     <!--                data-bs-toggle="dropdown" aria-expanded="false">Week-->

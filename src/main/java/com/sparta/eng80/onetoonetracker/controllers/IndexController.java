@@ -9,7 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Date;
 
 @Controller
 public class IndexController {
@@ -72,11 +75,15 @@ public class IndexController {
                     GroupEntity group = trainee.getGroup();
                     TrainerEntity traineesTrainer = group.getTrainer();
                     StreamEntity stream = group.getStream();
+                    int duration = stream.getDuration();
+                    LocalDate startDate = group.getStartDate().toLocalDate();
+                    LocalDate currentDate = LocalDate.now();
+                    long currentWeek = ChronoUnit.WEEKS.between(startDate, currentDate) + 1;
                     model.addAttribute("trainee", trainee);
                     model.addAttribute("trainer", traineesTrainer);
                     model.addAttribute("group", group);
                     model.addAttribute("stream", stream);
-                    model.addAttribute("duration", stream.getDuration());
+                    model.addAttribute("currentWeek", currentWeek);
                     break;
             }
             return "index";
