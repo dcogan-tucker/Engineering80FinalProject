@@ -43,16 +43,14 @@ public class AdminController {
     }
 
     @PostMapping("/add-trainer")
-    public String addTrainer(@RequestParam String groupId, @RequestParam String firstName, @RequestParam String lastName){
+    public String addTrainer(@RequestParam Integer groupId, @RequestParam String firstName, @RequestParam String lastName){
         TrainerEntity trainer = new TrainerEntity();
         trainer.setFirstName(firstName);
         trainer.setLastName(lastName);
-//        if (!groupId.equals("")){
-//            Optional<GroupEntity> group = groupService.findById(Integer.parseInt(groupId));
-//            if(group.isPresent()){
-//                trainer.setGroup(group.get());
-//            }
-//        }
+        Optional<GroupEntity> group = groupService.findById(groupId);
+        if(group.isPresent()){
+            trainer.setGroup(group.get());
+        }
         UserEntity user = new UserEntity();
         user.setRole("ROLE_TRAINER");
         user.setPassword("password");
