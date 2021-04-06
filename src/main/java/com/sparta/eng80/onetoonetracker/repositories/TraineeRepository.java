@@ -13,4 +13,7 @@ public interface TraineeRepository extends CrudRepository<TraineeEntity, Integer
     @Query(nativeQuery = true, value = "SELECT * FROM trainee WHERE group_id = ?")
     Iterable<TraineeEntity> getAllTraineesFromAGroup(int id);
 
+    @Query(nativeQuery = true, value = "SELECT * FROM trainee WHERE trainee_id = ?")
+    Optional<TraineeEntity> findById(int id);
+
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete trainee</title>
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.0.0-beta2/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<form method="post" action="#" th:action="@{/deleteTrainee}">
+    <div class="modal-header bg-dark text-white d-flex">
+        <h4 class="fw-bold">Are you sure?</h4>
+    </div>
+    <div class="modal-body bg-dark text-white">
+        <h5 class="fw-bold">This will remove the trainee from your group,
+            aswell as deactivate the trainee from logging-in to the system.</h5>
+    </div>
+    <div class="modal-footer bg-dark text-white">
+        <input type="hidden" id="traineeId" name="traineeId" th:value="*{traineeIdToDelete}">
+        <button class="btn bg-color-red" data-bs-toggle="modal" type="submit">DELETE</button>
+    </div>
+</form>
+
+<footer>
+    <div th:insert="/fragments/footer :: footer"></div>
+</footer>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/moment/moment.min.js}"></script>
+<script th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
+
+</body>
+
+</html>
