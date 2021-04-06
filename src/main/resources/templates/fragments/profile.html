@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <title>Profile</title>
@@ -18,7 +18,7 @@
 
         <div class="container">
             <label class="profile-label">Name</label>
-            <label th:text="${trainee.firstName}"></label><br>
+            <label th:text="${name}"></label><br>
 
             <label class="profile-label">Email</label>
             <!-- Trainee email from the user entity (may need to do a join) -->
@@ -30,21 +30,17 @@
             <button class="btn btn-primary">Change password</button>
         </div>
 
-        <div class="container">
+        <div sec:authorize="hasAnyAuthority('ROLE_TRAINEE')">
             <h1>Stats</h1>
             <table>
                 <tbody>
                     <tr>
                         <td>Technical</td>
-                        <td th:text=""></td>
+                        <td th:text="${feedback.getTechnicalGrade()}"></td>
                     </tr>
                     <tr>
                         <td>Consultant</td>
-                        <td th:text=""></td>
-                    </tr>
-                    <tr>
-                        <td>Average Submission Time</td>
-                        <td th:text=""></td>
+                        <td th:text="${feedback.getConsultantGrade()}"></td>
                     </tr>
                 </tbody>
             </table>

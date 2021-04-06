@@ -42,7 +42,7 @@ public class FeedbackService implements FeedbackAppService {
         return feedbackRepository.save(feedbackEntity);
     }
 
-    public FeedbackEntity updateGrades(Integer id, char technicalGrade, char consultantGrade){
+    public FeedbackEntity updateGrades(Integer id, String technicalGrade, String consultantGrade){
         Optional<FeedbackEntity> feedbackOptional = feedbackRepository.findById(id);
         FeedbackEntity feedbackEntity = new FeedbackEntity();
         if(feedbackOptional.isPresent()){
@@ -53,10 +53,15 @@ public class FeedbackService implements FeedbackAppService {
         return feedbackRepository.save(feedbackEntity);
     }
 
+    public FeedbackEntity update(FeedbackEntity feedbackEntity){
+        return feedbackRepository.save(feedbackEntity);
+    }
+
+
 
     @Override
     public Optional<FeedbackEntity> findById(int id) {
-        return Optional.empty();
+        return feedbackRepository.findById(id);
     }
 
     @Override

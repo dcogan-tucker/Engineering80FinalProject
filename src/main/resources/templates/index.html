@@ -10,11 +10,6 @@
     <body>
         <div th:insert="/fragments/header :: header"></div>
         <section id="main-content">
-<!--            <div class="container">-->
-<!--                <h1 class="text-center" th:text="${group.name} + ' - ' + ${stream.name}"></h1><br>-->
-<!--                <label>Name:</label>-->
-<!--                <label th:text="${user.firstName} + ' ' + ${user.lastName}"></label><br>-->
-<!--            </div>-->
             <div sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
                 <div th:insert="/fragments/home/admin_home"></div>
             </div>
