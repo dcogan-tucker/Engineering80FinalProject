@@ -22,6 +22,9 @@
             <td th:text="${trainee.traineeEntity.firstName} + ' ' + ${trainee.traineeEntity.lastName}"></td>
             <td th:text="${trainee.feedbackEntity.status.status}"></td>
             <td th:text="${trainee.feedbackEntity.overdue}"></td>
+<!--            <td>-->
+<!--                <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal" th:attr="data-bs-target=${'#addNewTrainee'}">Add Trainee</button>-->
+<!--            </td>-->
         </tr>
         </tbody>
     </table>
