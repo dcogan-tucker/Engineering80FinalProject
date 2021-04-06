@@ -39,9 +39,7 @@ public class IndexController {
             switch (securityService.getCurrentUser().getRole()) {
                 case "ROLE_TRAINER":
                     TrainerEntity trainer = securityService.getCurrentUser().getTrainer();
-                    Iterable<TraineeEntity> trainees = traineeService.findByGroupId(trainer.getGroup().getGroupId());
                     Iterable<FeedbackEntity> allFeedback = groupService.findAllFeedbackFromGroup(trainer.getGroup().getGroupId());
-                    ArrayList<TrainerTraineeEntity> feedbackSheetsInCorrectOrder = new ArrayList<>();
 
                     List<FeedbackEntity> feedbackOrdered = new ArrayList<>();
                     for (FeedbackEntity feedback : allFeedback) {
@@ -62,30 +60,7 @@ public class IndexController {
                         }
                     }
 
-                    /*
-                    for (TraineeEntity traineeEntity : trainees) {
-                        TrainerTraineeEntity trainerTraineeEntity = new TrainerTraineeEntity();
-                        trainerTraineeEntity.setTraineeEntity(traineeEntity);
-                        boolean found = false;
-                        if (allFeedback.iterator().hasNext()) {
-                            for (Object feedbackEntity : allFeedback) {
-                                if (((FeedbackEntity) feedbackEntity).getTrainee().getTraineeId() == traineeEntity.getTraineeId()) {
-                                    trainerTraineeEntity.setFeedbackEntity(((FeedbackEntity) feedbackEntity));
-                                    found = true;
-                                }
-                            }
-                        }
-                        if (!found) {
-                            FeedbackEntity feedbackEntity = new FeedbackEntity();
-                            feedbackEntity.setStatus(Status.IN_PROGRESS);
-                            trainerTraineeEntity.setFeedbackEntity(feedbackEntity);
-                        }
-                        feedbackSheetsInCorrectOrder.add(trainerTraineeEntity);
-                    }
-                    */
-
                     model.addAttribute("trainer", trainer);
-                    model.addAttribute("trainees", trainees);
                     model.addAttribute("feedbacks", feedbackByWeek);
                     break;
                 case "ROLE_ADMIN":
