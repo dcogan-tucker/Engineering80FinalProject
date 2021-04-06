@@ -26,6 +26,6 @@ public class LoginControllerTest {
 
     @Test
     public void checkPageReturn() {
-        Assertions.assertTrue(this.testRestTemplate.getForObject("http://localhost:" + port + "/", String.class).contains("Login"));
+        Assertions.assertTrue(this.testRestTemplate.getForObject("http://localhost:" + port + "/login", String.class).contains("Login"));
     }
 }
