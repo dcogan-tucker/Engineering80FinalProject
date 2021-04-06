@@ -10,7 +10,8 @@
     <body>
         <div th:insert="/fragments/header :: header"></div>
 
-        <div class="container">
+        <section id="main-content">
+            <div class="container">
                 <div class="d-flex align-items-center justify-content-center pt-2 pb-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
@@ -40,7 +41,7 @@
 
                 <div class="d-flex justify-content-center pt-2 pb-2">
                     <form th:action="@{/change-password}">
-                    <button type="submit" class="btn bg-color-red text-white">Change password</button>
+                        <button type="submit" class="btn bg-color-red text-white">Change password</button>
                     </form>
                 </div>
 
@@ -48,8 +49,8 @@
                     <h5>Average Grades</h5>
                     <table class="w-100 text-center">
                         <thead>
-                            <td><h6>Technical</h6></td>
-                            <td><h6>Consultant</h6></td>
+                        <td><h6>Technical</h6></td>
+                        <td><h6>Consultant</h6></td>
                         </thead>
                         <tbody>
                         <tr>
@@ -68,7 +69,9 @@
                     </label>
                 </div>
             </div>
-        </div>
+            </div>
+        </section>
+
         <footer>
             <div th:insert="/fragments/footer :: footer"></div>
         </footer>
