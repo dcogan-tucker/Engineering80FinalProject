@@ -1,11 +1,8 @@
 package com.sparta.eng80.onetoonetracker.controllers;
 
 import com.sparta.eng80.onetoonetracker.entities.FeedbackEntity;
-import com.sparta.eng80.onetoonetracker.entities.TraineeEntity;
 import com.sparta.eng80.onetoonetracker.entities.TrainerEntity;
-import com.sparta.eng80.onetoonetracker.entities.datatypes.Status;
 import com.sparta.eng80.onetoonetracker.services.*;
-import com.sparta.eng80.onetoonetracker.utilities.TrainerTraineeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,17 +17,13 @@ public class IndexController {
 
     private final SecurityService securityService;
     private final GroupService groupService;
-    private final StreamService streamService;
     private final TrainerService trainerService;
-    private final TraineeService traineeService;
 
     @Autowired
-    public IndexController(SecurityService securityService, GroupService groupService, StreamService streamService, TrainerService trainerService, TraineeService traineeService) {
+    public IndexController(SecurityService securityService, GroupService groupService, TrainerService trainerService) {
         this.securityService = securityService;
         this.groupService = groupService;
-        this.streamService = streamService;
         this.trainerService = trainerService;
-        this.traineeService = traineeService;
     }
 
     @GetMapping("/")
