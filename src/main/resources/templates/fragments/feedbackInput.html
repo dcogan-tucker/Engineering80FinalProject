@@ -8,78 +8,80 @@
 <div th:fragment="feedbackInput(feedback)" id="feedbackText">
     <div class="container-fluid text-center">
         <form method="POST" th:object="${feedback}" th:attr="id=${feedback}" th:action="@{/feedback}">
-            <div class="btn-group" role="group" aria-label="User Selection">
+            <div class="btn-group d-flex m-2" role="group" aria-label="User Selection">
                 <input type="radio" class="btn-check" name="btnradioUser"
                        onclick="toggleUser('trainee','trainer')" id="traineeBtn"
                        autocomplete="off" checked>
-                <label class="btn btn-outline-primary" for="traineeBtn">Trainee</label>
+                <label class="btn btn-outline-danger" for="traineeBtn">Trainee</label>
 
                 <input type="radio" class="btn-check" name="btnradioUser"
                        onclick="toggleUser('trainer','trainee')" id="trainerBtn"
                        autocomplete="off">
-                <label class="btn btn-outline-primary" for="trainerBtn">Trainer</label>
+                <label class="btn btn-outline-danger" for="trainerBtn">Trainer</label>
             </div>
             <div id="trainee">
-                <div class="btn-group" role="group" aria-label="SSC Selection Trainee">
+                <div class="btn-group d-flex m-2" role="group" aria-label="SSC Selection Trainee">
                     <input type="radio" class="btn-check" name="btnradioTrainee"
                            onclick="toggleTextBox('stopTrainee','startTrainee','continueTrainee')" id="stopTraineeBtn"
                            autocomplete="off" checked>
-                    <label class="btn btn-outline-primary" for="stopTraineeBtn">Stop</label>
+                    <label class="btn btn-outline-danger" for="stopTraineeBtn">Stop</label>
 
                     <input type="radio" class="btn-check" name="btnradioTrainee"
                            onclick="toggleTextBox('startTrainee','stopTrainee','continueTrainee')" id="startTraineeBtn"
                            autocomplete="off">
-                    <label class="btn btn-outline-primary" for="startTraineeBtn">Start</label>
+                    <label class="btn btn-outline-danger" for="startTraineeBtn">Start</label>
 
                     <input type="radio" class="btn-check" name="btnradioTrainee"
                            onclick="toggleTextBox('continueTrainee','startTrainee','stopTrainee')"
                            id="continueTraineeBtn"
                            autocomplete="off">
-                    <label class="btn btn-outline-primary" for="continueTraineeBtn">Continue</label>
+                    <label class="btn btn-outline-danger" for="continueTraineeBtn">Cont.</label>
                 </div>
-
+                <br/>
                 <textarea id="stopTrainee" th:field="${feedback.traineeStop}"></textarea>
                 <textarea id="startTrainee" th:field="${feedback.traineeStart}" hidden></textarea>
                 <textarea id="continueTrainee" th:field="${feedback.traineeContinue}" hidden></textarea>
             </div>
             <div id="trainer" hidden>
-                <div class="btn-group" role="group" aria-label="SSC Trainer Selection">
+                <div class="btn-group d-flex m-2" role="group" aria-label="SSC Trainer Selection">
                     <input type="radio" class="btn-check" name="btnradioTrainer"
                            onclick="toggleTextBox('stopTrainer','startTrainer','continueTrainer')" id="stopTrainerBtn"
                            autocomplete="off" checked>
-                    <label class="btn btn-outline-primary" for="stopTrainerBtn">Stop</label>
+                    <label class="btn btn-outline-danger" for="stopTrainerBtn">Stop</label>
 
                     <input type="radio" class="btn-check" name="btnradioTrainer"
                            onclick="toggleTextBox('startTrainer','stopTrainer','continueTrainer')" id="startTrainerBtn"
                            autocomplete="off">
-                    <label class="btn btn-outline-primary" for="startTrainerBtn">Start</label>
+                    <label class="btn btn-outline-danger" for="startTrainerBtn">Start</label>
 
                     <input type="radio" class="btn-check" name="btnradioTrainer"
                            onclick="toggleTextBox('continueTrainer','startTrainer','stopTrainer')"
                            id="continueTrainerBtn"
                            autocomplete="off">
-                    <label class="btn btn-outline-primary" for="continueTrainerBtn">Continue</label>
+                    <label class="btn btn-outline-danger" for="continueTrainerBtn">Cont.</label>
                 </div>
-
+                <br/>
                 <textarea id="stopTrainer" th:field="${feedback.trainerStop}" readonly></textarea>
                 <textarea id="startTrainer" th:field="${feedback.trainerStart}" hidden readonly></textarea>
                 <textarea id="continueTrainer" th:field="${feedback.trainerContinue}" hidden readonly></textarea>
             </div>
-            <select id="techGrade" th:field="${feedback.technicalGrade}" class="form-control" required>
-                <option value="" disabled selected>Technical Grade</option>
-                <option th:value="A" th:text="A"></option>
-                <option th:value="B" th:text="B"></option>
-                <option th:value="C" th:text="C"></option>
-                <option th:value="D" th:text="D"></option>
-            </select>
-            <select id="consultGrade" th:field="${feedback.consultantGrade}" class="form-control" required>
-                <option value="" disabled selected>Consultant Grade</option>
-                <option th:value="A" th:text="A"></option>
-                <option th:value="B" th:text="B"></option>
-                <option th:value="C" th:text="C"></option>
-                <option th:value="D" th:text="D"></option>
-            </select>
-            <input type="submit" class="btn btn-primary" value="Submit">
+            <div>
+                <label for="techGrade" class="mt-3">Technical Grade</label>
+                <select id="techGrade" th:field="${feedback.technicalGrade}" class="form-control my-2" required>
+                    <option th:value="A" th:text="A"></option>
+                    <option th:value="B" th:text="B"></option>
+                    <option th:value="C" th:text="C"></option>
+                    <option th:value="D" th:text="D"></option>
+                </select>
+                <a th:href="@{/competencies}"><label>Consultant Grade</label></a>
+                <select id="consultGrade" th:field="${feedback.consultantGrade}" class="form-control my-2" required>
+                    <option th:value="A" th:text="A"></option>
+                    <option th:value="B" th:text="B"></option>
+                    <option th:value="C" th:text="C"></option>
+                    <option th:value="D" th:text="D"></option>
+                </select>
+            </div>
+            <input type="submit" class="btn btn-danger mt-2" value="Submit">
         </form>
     </div>
     <script>
