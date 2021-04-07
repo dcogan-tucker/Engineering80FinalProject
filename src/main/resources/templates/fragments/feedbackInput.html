@@ -4,7 +4,7 @@
     <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.0.0-beta2/css/bootstrap.min.css}"/>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body th:if="${feedback.overdue}" onload="disableEdits()">
+<body>
 <div th:fragment="feedbackInput(feedback)" id="feedbackText">
     <div class="container-fluid text-center">
         <form method="POST" th:object="${feedback}" th:attr="id=${feedback}" th:action="@{/feedback}">
@@ -99,7 +99,23 @@
             <input id="submitBtn" type="submit" name="action" class="btn btn-danger mt-2" value="Submit">
         </form>
     </div>
-    <script>
+    <script th:inline="javascript">
+        var overdue = [[${feedback.overdue}]];
+        var status = [[${feedback.status.status}]];
+        var role = [[${user.role}]];
+
+        if (overdue || status.toLowerCase() == "submitted") {
+            document.getElementById("stopTrainee").readOnly = true;
+            document.getElementById("startTrainee").readOnly = true;
+            document.getElementById("continueTrainee").readOnly = true;
+            document.getElementById("saveBtn").hidden = true
+            if(role == "ROLE_TRAINEE"){
+                document.getElementById("techGrade").disabled = true;
+                document.getElementById("consultGrade").disabled = true;
+                document.getElementById("submitBtn").hidden = true
+            }
+        }
+
         function toggleUser(enabled, disabled) {
             var divEnabled = document.getElementById(enabled);
             var divDisabled = document.getElementById(disabled);
@@ -114,16 +130,6 @@
             textboxEnabled.hidden = false;
             textboxDisabled.hidden = true;
             textboxDisabled2.hidden = true;
-        }
-
-        function disableEdits() {
-            document.getElementById("stopTrainee").readOnly = true;
-            document.getElementById("startTrainee").readOnly = true;
-            document.getElementById("continueTrainee").readOnly = true;
-            document.getElementById("techGrade").disabled = true;
-            document.getElementById("consultGrade").disabled = true;
-            document.getElementById("saveBtn").hidden = true
-            document.getElementById("submitBtn").hidden = true
         }
     </script>
 </div>

@@ -38,6 +38,7 @@ public class FeedbackController {
         }
         feedbackID = feedback.getFeedbackId();
         model.addAttribute("feedback", feedback);
+        model.addAttribute("user", user);
         return "feedback";
     }
 
