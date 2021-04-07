@@ -23,7 +23,7 @@
                 <td th:text="*{trainer.firstName}"></td>
                 <td th:text="*{trainer.lastName}"></td>
                 <td>
-                    <a class="btn btn-primary text-white" name="trainerId" type="submit" th:href="@{/trainers/{Id}(Id = ${trainer.trainerId})}">Profile</a>
+                    <a class="btn bg-color-red text-white" name="trainerId" type="submit" th:href="@{/trainers/{Id}(Id = ${trainer.trainerId})}">Profile</a>
                 </td>
             </tr>
             </tbody>
