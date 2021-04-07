@@ -21,7 +21,7 @@
         <tr class="clickable" th:each="feedback : ${feedbacks.get(i)}" th:onclick="'javascript:rowClicked(' + ${feedback.feedbackId} + ')'">
             <td th:text="${feedback.trainee.firstName} + ' ' + ${feedback.trainee.lastName}"></td>
             <td th:text="${feedback.status.status}"></td>
-            <td th:text="${feedback.overdue}"></td>
+            <td th:classappend="${feedback.overdue ? 'overdue-true' : 'overdue-false'}" th:text="${feedback.overdue ? 'True' : 'false'}"></td>
             <td>
                 <form action="#" th:action="@{/removeTrainee}" method="get">
                     <input type="hidden" id="traineeId" name="traineeId" th:value="${feedback.trainee.traineeId}">

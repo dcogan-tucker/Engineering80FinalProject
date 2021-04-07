@@ -3,6 +3,7 @@ package com.sparta.eng80.onetoonetracker.controllers;
 import com.sparta.eng80.onetoonetracker.entities.FeedbackEntity;
 import com.sparta.eng80.onetoonetracker.entities.TrainerEntity;
 import com.sparta.eng80.onetoonetracker.entities.*;
+import com.sparta.eng80.onetoonetracker.entities.datatypes.Status;
 import com.sparta.eng80.onetoonetracker.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,10 +20,10 @@ public class IndexController {
     private final SecurityService securityService;
     private final GroupService groupService;
     private final TrainerService trainerService;
-    private GroupService streamService;
+    private final StreamService streamService;
 
     @Autowired
-    public IndexController(SecurityService securityService, GroupService groupService, TrainerService trainerService, GroupService streamService) {
+    public IndexController(SecurityService securityService, GroupService groupService, TrainerService trainerService, StreamService streamService) {
         this.securityService = securityService;
         this.groupService = groupService;
         this.trainerService = trainerService;
@@ -32,6 +33,7 @@ public class IndexController {
     @GetMapping("/")
     public String method(ModelMap model) {
         if(securityService.isAuthenticated()){
+            updateFeedbackForms();
             switch (securityService.getCurrentUser().getRole()) {
                 case "ROLE_TRAINER":
                     TrainerEntity trainer = securityService.getCurrentUser().getTrainer();
@@ -100,5 +102,27 @@ public class IndexController {
             return "index";
         }
         return "login";
+    }
+
+    private void updateFeedbackForms() {
+        java.sql.Date today = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+        Iterable<FeedbackEntity> feedbackEntities = null;
+        switch (securityService.getCurrentUser().getRole()) {
+            case "ROLE_TRAINER":
+                TrainerEntity trainerEntity = securityService.getCurrentUser().getTrainer();
+                feedbackEntities = groupService.findAllFeedbackFromGroup(trainerEntity.getGroup().getGroupId());
+                break;
+            case "ROLE_TRAINEE":
+                TraineeEntity traineeEntity = securityService.getCurrentUser().getTrainee();
+                feedbackEntities = traineeEntity.getFeedbacks();
+                break;
+        }
+        for (FeedbackEntity feedbackEntity : feedbackEntities) {
+            java.sql.Date deadline = feedbackEntity.getDeadline();
+            java.sql.Date submitted = feedbackEntity.getDeadline();
+            if (submitted.after(deadline) || feedbackEntity.getStatus() != Status.SUBMITTED && deadline.before(today)) {
+                feedbackEntity.setOverdue(true);
+            }
+        }
     }
 }
