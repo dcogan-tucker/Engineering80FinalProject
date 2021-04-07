@@ -6,33 +6,41 @@
     <h1 class="pt-5 pb-3" th:text="${trainer.group.groupName} + ' - ' + ${trainer.group.stream.name}"></h1>
     <label class="pb-3" th:text="'Name: ' + ${trainer.firstName} + ' ' + ${trainer.lastName}">Trainer Name</label>
     <select class="form-select mt-3 mb-3" aria-label="Default select example" onchange="updateWeek(this)">
-        <option th:each="i, iterStat : ${feedbacks}" th:value="${iterStat.count}" th:text="'Week ' + ${iterStat.count} + ' of ' + ${trainer.group.stream.duration}"></option>
+        <option th:each="i, iterStat : ${feedbacks}" th:value="${iterStat.count}"
+                th:text="'Week ' + ${iterStat.count} + ' of ' + ${trainer.group.stream.duration}" th:selected="${feedbacks.size()} - 1 == ${iterStat.count}"></option>
     </select>
 
-    <table th:each="i : ${#numbers.sequence(1,feedbacks.size())}" class="table table-hover table-responsive py-3" th:id="'traineeTable' + ${i}" th:hidden="${i} != 1">
-        <thead>
-        <tr>
-            <th scope="col">Student Name</th>
-            <th scope="col">Status</th>
-            <th scope="col"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr class="clickable " th:classappend="${feedback.overdue ? 'overdue-true' : 'overdue-false'}" th:each="feedback : ${feedbacks.get(i)}" th:onclick="'javascript:rowClicked(' + ${feedback.feedbackId} + ')'">
-            <td th:text="${feedback.trainee.firstName} + ' ' + ${feedback.trainee.lastName}"></td>
-            <td th:text="${feedback.status.status}"></td>
-<!--            <td th:text="${feedback.overdue ? 'True' : 'false'}"></td>-->
-            <td>
-                <form action="#" th:action="@{/removeTrainee}" method="get">
-                    <input type="hidden" id="traineeId" name="traineeId" th:value="${feedback.trainee.traineeId}">
-                    <button class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal" th:attr="data-bs-target=${'#removeOldTrainee'}"
-                            type="submit">Remove Trainee
-                    </button>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+
+    <th:block th:each="i, iterStat : ${#numbers.sequence(1,feedbacks.size())}">
+        <table  class="table table-hover table-responsive py-3" th:id="'traineeTable' + ${i}" th:hidden="${i} != (${feedbacks.size()} - 1)">
+            <thead>
+            <tr>
+                <th scope="col">Student Name</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="clickable " th:classappend="${feedback.overdue ? 'overdue-true' : 'overdue-false'}" th:each="feedback : ${feedbacks.get(i)}" th:onclick="'javascript:rowClicked(' + ${feedback.feedbackId} + ')'">
+                <td th:text="${feedback.trainee.firstName} + ' ' + ${feedback.trainee.lastName}"></td>
+                <td th:text="${feedback.status.status}"></td>
+                <!--            <td th:text="${feedback.overdue ? 'True' : 'false'}"></td>-->
+                <td>
+                    <form action="#" th:action="@{/removeTrainee}" method="get">
+                        <input type="hidden" id="traineeId" name="traineeId" th:value="${feedback.trainee.traineeId}">
+                        <button class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal" th:attr="data-bs-target=${'#removeOldTrainee'}"
+                                type="submit">Remove Trainee
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <form method="post" th:action="@{/}">
+            <button class="btn bg-color-red" th:if="${feedbacks.get(i) == null}" name="updateBtn" th:id="'updateWeek' + ${i}" type="submit" hidden>Unlock Week</button>
+        </form>
+    </th:block>
 </div>
 
 

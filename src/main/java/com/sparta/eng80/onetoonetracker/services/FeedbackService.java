@@ -71,7 +71,7 @@ public class FeedbackService implements FeedbackAppService {
 
     @Override
     public FeedbackEntity save(FeedbackEntity feedbackEntity) {
-        return null;
+        return feedbackRepository.save(feedbackEntity);
     }
 
     @Override
