@@ -33,7 +33,7 @@ public class FeedbackController {
         UserEntity user = securityService.getCurrentUser();
         Optional<FeedbackEntity> feedbackEntity = feedbackService.findById(id);
         FeedbackEntity feedback = feedbackEntity.get();
-        if(user.getUserId() != feedback.getTrainee().getUser().getUserId()){
+        if((user.getUserId() != feedback.getTrainee().getUser().getUserId()) && (user.getUserId() != feedback.getTrainer().getUser().getUserId())) {
             return "redirect:/error";
         }
         feedbackID = feedback.getFeedbackId();

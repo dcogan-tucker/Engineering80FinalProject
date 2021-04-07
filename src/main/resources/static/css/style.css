@@ -154,6 +154,13 @@ input#logoutBtn {
     margin-top: 10px;
 }
 
+select#group-options {
+    text-align-last: center;
+    margin: 0 40px;
+    width: 73%;
+    padding: 6px 16px;
+}
+
 button#burger {
     color: white;
     height: 20px;
@@ -179,6 +186,10 @@ div.modal-content {
 /*    color: #34beef;*/
 /*}*/
 /* https://fonts.google.com/specimen/Raleway?preview.text_type=custom */
+
+.clickable {
+    cursor: pointer;
+}
 
 textarea {
     width: 320px;

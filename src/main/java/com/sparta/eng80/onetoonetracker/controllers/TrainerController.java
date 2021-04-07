@@ -44,14 +44,14 @@ public class TrainerController {
             @RequestParam Integer streamId,
             @RequestParam Integer trainerId,
             Model model) {
-
-        NewGroupForm newGroupForm = new NewGroupForm();
-        newGroupForm.setGroupName(groupName);
-        newGroupForm.setStartDate(startDate);
-        newGroupForm.setStreamId(streamId);
-        newGroupForm.setTrainerId(trainerId);
-
-        groupService.addNewGroup(newGroupForm);
+        if (groupService.findByName(groupName).isEmpty()) {
+            NewGroupForm newGroupForm = new NewGroupForm();
+            newGroupForm.setGroupName(groupName);
+            newGroupForm.setStartDate(startDate);
+            newGroupForm.setStreamId(streamId);
+            newGroupForm.setTrainerId(trainerId);
+            groupService.addNewGroup(newGroupForm);
+        }
         return "redirect:/";
     }
 
