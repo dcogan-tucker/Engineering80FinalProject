@@ -8,10 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+import java.util.Set;
+import java.util.Comparator;
+import java.util.Arrays;
 
 @Controller
 public class IndexController {
@@ -19,12 +27,14 @@ public class IndexController {
     private final SecurityService securityService;
     private final GroupService groupService;
     private final TrainerService trainerService;
+    private final FeedbackService feedbackService;
 
     @Autowired
-    public IndexController(SecurityService securityService, GroupService groupService, TrainerService trainerService) {
+    public IndexController(SecurityService securityService, GroupService groupService, TrainerService trainerService, FeedbackService feedbackService) {
         this.securityService = securityService;
         this.groupService = groupService;
         this.trainerService = trainerService;
+        this.feedbackService = feedbackService;
     }
 
     @GetMapping("/")
@@ -52,6 +62,11 @@ public class IndexController {
                         if (hasValue != null) {
                             feedbackByWeek.get(weekNo).add(feedback);
                         }
+                    }
+
+                    int weeksUnlocked = feedbackByWeek.size();
+                    if (weeksUnlocked < trainer.getGroup().getStream().getDuration()) {
+                        feedbackByWeek.putIfAbsent(weeksUnlocked + 1, null);
                     }
 
                     model.addAttribute("trainer", trainer);
@@ -95,5 +110,46 @@ public class IndexController {
             return "index";
         }
         return "login";
+    }
+
+    @PostMapping("/")
+    public String unlockWeek() {
+        if (securityService.isAuthenticated()){
+            UserEntity currentUser = securityService.getCurrentUser();
+            switch (currentUser.getRole()) {
+                case "ROLE_TRAINER":
+                    TrainerEntity trainer = currentUser.getTrainer();
+                    GroupEntity group = trainer.getGroup();
+                    FeedbackEntity newFeedback;
+                    for (TraineeEntity trainee : group.getTrainees()) {
+                        newFeedback = new FeedbackEntity();
+                        newFeedback.setTrainee(trainee);
+                        newFeedback.setTrainer(trainer);
+                        newFeedback.setGroup(group);
+                        newFeedback.setDeadline(getDeadline());
+                        feedbackService.save(newFeedback);
+                    }
+                    break;
+            }
+        }
+        return "index";
+    }
+
+    private Date getDeadline() {
+//        LocalDateTime date = LocalDateTime.now();
+        LocalDate date = LocalDate.now();
+        int dayOfWeek = date.getDayOfWeek().getValue();
+        if (dayOfWeek <= 4) {
+            date.plusDays(4 - dayOfWeek);
+                    date.plusDays(1);
+        } else {
+            date.plusDays(4 + (7 - dayOfWeek));
+            date.plusDays(1);
+        }
+//        date.plusHours(23 - date.getHour());
+//        date.plusMinutes(59 - date.getMinute());
+//        date.plusSeconds(59 - date.getSecond());
+//        Timestamp deadline = Timestamp.valueOf(date);
+        return Date.valueOf(date);
     }
 }
