@@ -7,11 +7,11 @@
     <label class="pb-3" th:text="'Name: ' + ${trainer.firstName} + ' ' + ${trainer.lastName}">Trainer Name</label>
     <select class="form-select mt-3 mb-3" aria-label="Default select example" onchange="updateWeek(this)">
         <option th:each="i, iterStat : ${feedbacks}" th:value="${iterStat.count}"
-                th:text="'Week ' + ${iterStat.count} + ' of ' + ${trainer.group.stream.duration}"></option>
+                th:text="'Week ' + ${iterStat.count} + ' of ' + ${trainer.group.stream.duration}" th:selected="${feedbacks.size()} - 1 == ${iterStat.count}"></option>
     </select>
 
-    <th:block th:each="i : ${#numbers.sequence(1,feedbacks.size())}">
-        <table class="table table-hover table-responsive py-3" th:id="'traineeTable' + ${i}" th:hidden="${i} != 1">
+    <th:block th:each="i, iterStat : ${#numbers.sequence(1,feedbacks.size())}">
+        <table  class="table table-hover table-responsive py-3" th:id="'traineeTable' + ${i}" th:hidden="${i} != (${feedbacks.size()} - 1)">
             <thead>
             <tr>
                 <th scope="col">Student Name</th>
@@ -39,7 +39,7 @@
         </table>
 
         <form method="post" th:action="@{/}">
-            <button th:if="${feedbacks.get(i) == null}" name="updateBtn" th:id="${i}" type="submit">Unlock Week</button>
+            <button class="btn bg-color-red" th:if="${feedbacks.get(i) == null}" name="updateBtn" th:id="'updateWeek' + ${i}" type="submit" hidden>Unlock Week</button>
         </form>
     </th:block>
 </div>
@@ -59,15 +59,20 @@
     function updateWeek(selected) {
         var tableDetails = document.getElementById("table-details");
         var tables = tableDetails.getElementsByTagName("TABLE");
-        var button = document.getElementById(selected.value);
-        var i;
+        var i = 0;
 
         for (i = 0; i < tables.length; i++) {
             tables[i].hidden = true;
         }
 
-        document.getElementById('traineeTable' + selected.value).hidden = ('' + selected.value) == button.id;
-        button.hidden = ('' + selected.value) != button.id;
+        document.getElementById('traineeTable' + selected.value).hidden = false;
+        var button = document.getElementById('updateWeek' + i);
+
+        if (i == selected.value) {
+            button.hidden = false;
+        } else {
+            button.hidden = true;
+        }
     }
 
     function rowClicked(value) {
