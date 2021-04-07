@@ -1,5 +1,6 @@
 package com.sparta.eng80.onetoonetracker.controllers;
 
+import com.sparta.eng80.onetoonetracker.services.SecurityService;
 import com.sparta.eng80.onetoonetracker.utilities.NewGroupForm;
 import com.sparta.eng80.onetoonetracker.services.GroupService;
 import com.sparta.eng80.onetoonetracker.services.TraineeService;
@@ -7,7 +8,6 @@ import com.sparta.eng80.onetoonetracker.services.TrainerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 

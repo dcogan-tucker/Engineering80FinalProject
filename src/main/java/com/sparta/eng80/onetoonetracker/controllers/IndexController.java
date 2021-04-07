@@ -47,6 +47,9 @@ public class IndexController {
     @GetMapping("/")
     public String method(ModelMap model) {
         if (securityService.isAuthenticated()) {
+            if (securityService.requiresPasswordChange()) {
+                return "redirect:/change-password";
+            }
             updateFeedbackForms();
             switch (securityService.getCurrentUser().getRole()) {
                 case "ROLE_TRAINER":
