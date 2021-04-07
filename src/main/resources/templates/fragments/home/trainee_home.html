@@ -19,7 +19,7 @@
                     <h3 class="lead ps-2">Current Week</h3>
                     <a th:value="${currentWeek}"
                        th:inline="text"
-                       th:href="@{'/feedback?id='+${currentWeek}}"
+                       th:href="@{'/feedback?id='+${feedbackWeeks.get(currentWeek).feedbackId}}"
                        th:text="'Week ' + ${currentWeek}"
                        class="list-group-item list-group-item-action fw-bold"></a>
 <!--                    <span class="badge bg-color-red status status-box" th:classappend="${feedbackWeeks.get(current).value.status.status == 'Submitted'} ? 'bg-color-green' : 'bg-color-amber'">    </span>-->
