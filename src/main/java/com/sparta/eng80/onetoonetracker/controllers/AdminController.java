@@ -3,9 +3,11 @@ package com.sparta.eng80.onetoonetracker.controllers;
 import com.sparta.eng80.onetoonetracker.entities.GroupEntity;
 import com.sparta.eng80.onetoonetracker.entities.TrainerEntity;
 import com.sparta.eng80.onetoonetracker.entities.UserEntity;
+import com.sparta.eng80.onetoonetracker.security.PasswordEncryptor;
 import com.sparta.eng80.onetoonetracker.services.AdminService;
 import com.sparta.eng80.onetoonetracker.services.GroupService;
 import com.sparta.eng80.onetoonetracker.services.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -53,7 +55,9 @@ public class AdminController {
         }
         UserEntity user = new UserEntity();
         user.setRole("ROLE_TRAINER");
-        user.setPassword("password");
+        PasswordEncryptor passwordEncryptor = new PasswordEncryptor();
+        PasswordEncoder passwordEncoder = passwordEncryptor.getBCryptPasswordEncoder();
+        user.setPassword(passwordEncoder.encode("password"));
         user.setEnabled(true);
         String email = firstName.toLowerCase().toCharArray()[0] +
                 lastName.trim().toLowerCase();
