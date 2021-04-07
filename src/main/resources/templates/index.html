@@ -11,7 +11,7 @@
         <div th:insert="/fragments/header :: header"></div>
         <section id="main-content">
             <div sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
-                <div th:insert="/fragments/home/admin_home"></div>
+                <div th:insert="/fragments/home/admin_home :: main_content"></div>
             </div>
             <div sec:authorize="hasAnyAuthority('ROLE_TRAINER')">
                 <div th:insert="/fragments/home/trainer_home"></div>

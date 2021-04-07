@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <!-- Delete when database is set up -->
     <head>
-        <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.0.0-beta2/css/bootstrap.min.css}"/>
+        <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.0.0-beta2/css/bootstrap.min.css}"/>
         <link rel="stylesheet" href="css/style.css">
     </head>
     <!-- Delete End -->
@@ -10,7 +10,7 @@
         <nav th:fragment="header" class="navbar bg-color-main" id="header">
             <div class="container-fluid" id="headerInner">
                 <a class="navbar-brand" href="#">
-                    <img th:src="@{images/sparta-global-logo-white.svg}" alt="Sparta Global Logo">
+                    <img th:src="@{/images/sparta-global-logo-white.svg}" alt="Sparta Global Logo">
                 </a>
                 <span id="menuBtn-container" class="bg-color-red">
                     <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

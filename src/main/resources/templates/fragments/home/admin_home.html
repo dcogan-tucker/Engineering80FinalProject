@@ -8,58 +8,61 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container mt-5">
+    <div class="container mt-5" th:fragment="main_content">
         <h1 class="text-center">Trainers</h1>
-        <table class="table table-hover" id="trainersTable">
+        <table class="table table-hover mt-3" id="trainersTable">
             <thead class="text-black-50 font-weight-bold">
                 <tr>
-                    <th>Trainer ID</th>
                     <th>First Name</th>
                     <th>Last Name</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
             <tr th:each="trainer : ${trainers}" class="text-black-50">
+                <td th:text="*{trainer.firstName}"></td>
+                <td th:text="*{trainer.lastName}"></td>
                 <td>
-                    <form th:action="@{'/trainers/' + *{trainer.trainerId}}" method="get">
-                        <input class="btn" name="trainerId" id="primaryBtn" type="submit" th:value="*{trainer.trainerId}"/>
-                    </form>
+                    <a class="btn btn-primary text-white" name="trainerId" type="submit" th:href="@{/trainers/{Id}(Id = ${trainer.trainerId})}">Profile</a>
                 </td>
-                <td th:text="*{trainer.firstName}"/>
-                <td th:text="*{trainer.lastName}"/>
-
             </tr>
             </tbody>
         </table>
-    </div>
-    <div>
-        <form action="#" th:action="@{/add-trainer}" th:object="${newTrainer}" method="post">
-            <div class="modal-body">
-                <label>
-                    <input class="mt-2" type="text" name="firstName" placeholder="First Name"/>
-                </label>
-                <label>
-                    <input class="mt-2" type="text" name="lastName" placeholder="Last Name"/>
-                </label>
-                <td>
-                    Group to assign trainee to:
-                </td>
-                <div>
-                    <div class="col-md-3">
-                        <select style="text-align-last: center" class="form-control" type="Number" name="groupId"
-                                required>
-                            <option value=""> --</option>
-                            <option th:each="group : ${allGroups}"
-                                    th:value="${group.groupId}"
-                                    th:text="${group.groupName}"></option>
-                        </select>
+
+        <div class="container text-center mt-5">
+            <button type="button" class="btn bg-color-red text-white" data-bs-toggle="modal" data-bs-target="#trainerModal">Add Trainer</button>
+            <div class="modal" tabindex="-1" id="trainerModal">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Add a new Trainer</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="#" th:action="@{/add-trainer}" th:object="${newTrainer}" method="post">
+                            <div class="modal-body">
+                                <div class="container">
+                                    <label>
+                                        <input class="mt-3 form-control" type="text" name="firstName" placeholder="First Name"/>
+                                        <input class="mt-3 form-control" type="text" name="lastName" placeholder="Last Name"/>
+                                    </label>
+
+                                    <select id="group-options" class="form-control mt-3" type="Number" name="groupId" required>
+                                        <option disabled selected>-- Select Group --</option>
+                                        <option th:each="group : ${allGroups}"
+                                                th:value="${group.groupId}"
+                                                th:text="${group.groupName}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn bg-color-red text-white">Create</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <input class="btn" id="primaryBtn" type="submit" value="Add">
-            </div>
-        </form>
+        </div>
     </div>
 <!--    <div>-->
 <!--        <form action="#" th:action="@{/remove-trainer}" method="post" >-->
