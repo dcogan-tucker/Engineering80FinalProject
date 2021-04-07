@@ -38,7 +38,7 @@
         </table>
 
         <form method="post" th:action="@{/}">
-            <button class="btn bg-color-red" th:if="${feedbacks.get(i) == null}" name="updateBtn" th:id="'updateWeek' + ${i}" type="submit" hidden>Unlock Week</button>
+            <button class="btn bg-color-red" th:if="${feedbacks.get(i) == null}" name="updateBtn" th:id="'updateWeek' + ${i}" type="submit" hidden th:disabled="${disableUnlock}">Unlock Week</button>
         </form>
     </th:block>
 </div>

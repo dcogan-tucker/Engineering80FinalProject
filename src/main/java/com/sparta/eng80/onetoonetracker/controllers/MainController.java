@@ -6,6 +6,7 @@ import com.sparta.eng80.onetoonetracker.services.SecurityService;
 import com.sparta.eng80.onetoonetracker.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.sql.Date;
@@ -24,13 +25,19 @@ public class    MainController {
         this.securityService = securityService;
     }
 
-    @RequestMapping("/competencies")
+    @GetMapping("/competencies")
     public String competencies() {
+        if (securityService.requiresPasswordChange()) {
+            return "redirect:/change-password";
+        }
         return "/fragments/competencies";
     }
 
-    @RequestMapping("/profile")
+    @GetMapping("/profile")
     public String viewProfile(ModelMap model){
+        if (securityService.requiresPasswordChange()) {
+            return "redirect:/change-password";
+        }
         UserEntity user = securityService.getCurrentUser();
         if(user.getRole().equals("ROLE_TRAINEE")){
             model.addAttribute("name", user.getTrainee().getFirstName() + " " + user.getTrainee().getLastName());

@@ -25,6 +25,9 @@ public class LoginController {
     @GetMapping("/login")
     public String login() {
         if(securityService.isAuthenticated()){
+            if (securityService.requiresPasswordChange()) {
+                return "redirect:/change-password";
+            }
             return "redirect:/";
         }
         return "login";

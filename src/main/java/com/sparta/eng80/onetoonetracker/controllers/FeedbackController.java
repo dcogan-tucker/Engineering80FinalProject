@@ -31,6 +31,9 @@ public class FeedbackController {
 
     @GetMapping("/feedback")
     public String getFeedback(Model model , @RequestParam(value = "id") Integer id){
+        if (securityService.requiresPasswordChange()) {
+            return "redirect:/change-password";
+        }
         UserEntity user = securityService.getCurrentUser();
         Optional<FeedbackEntity> feedbackEntity = feedbackService.findById(id);
         FeedbackEntity feedback = feedbackEntity.get();

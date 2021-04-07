@@ -6,6 +6,7 @@ import com.sparta.eng80.onetoonetracker.entities.UserEntity;
 import com.sparta.eng80.onetoonetracker.security.PasswordEncryptor;
 import com.sparta.eng80.onetoonetracker.services.AdminService;
 import com.sparta.eng80.onetoonetracker.services.GroupService;
+import com.sparta.eng80.onetoonetracker.services.SecurityService;
 import com.sparta.eng80.onetoonetracker.services.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -26,15 +27,20 @@ public class AdminController {
     private final AdminService adminService;
     private final UserService userService;
     private final GroupService groupService;
+    private final SecurityService securityService;
 
-    public AdminController(AdminService adminService, UserService userService, GroupService groupService) {
+    public AdminController(AdminService adminService, UserService userService, GroupService groupService, SecurityService securityService) {
         this.adminService = adminService;
         this.userService = userService;
         this.groupService = groupService;
+        this.securityService = securityService;
     }
 
     @GetMapping("/trainers")
     public String getAllTrainers(ModelMap modelMap){
+        if (securityService.requiresPasswordChange()) {
+            return "redirect:/change-password";
+        }
         Iterable<TrainerEntity> trainers = adminService.findAllTrainers();
         modelMap.addAttribute("trainers", trainers);
         Iterable<GroupEntity> groups = groupService.findAll();
@@ -87,8 +93,11 @@ public class AdminController {
         return "redirect:/trainers";
     }
 
-    @RequestMapping("/trainers/{trainerId}")
+    @GetMapping("/trainers/{trainerId}")
     public String findTrainer(Model model, @PathVariable(name = "trainerId") Integer trainerId){
+        if (securityService.requiresPasswordChange()) {
+            return "redirect:/change-password";
+        }
         Optional<TrainerEntity> trainer = adminService.findTrainerById(trainerId);
         if(trainer.isEmpty()){
             //Return trainer not found
