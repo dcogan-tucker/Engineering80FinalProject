@@ -5,37 +5,41 @@
     <title>Home</title>
 </head>
 <body>
-    <div class="container">
-        <h1 th:text="${trainee.firstName} + ' ' + ${trainee.lastName}" class="mt-5 fw-bold text-center"></h1>
-        <h5 th:text="|${group.groupName} - ${stream.name}|"  class="mt-2 mb-4 text-center"></h5>
-        <div class="container text-center">
-            <label>Trainer:</label>
-            <label th:text="${trainer.firstName} + ' ' + ${trainer.lastName}"></label><br>
-        </div>
+<div class="container">
+    <h1 th:text="${trainee.firstName} + ' ' + ${trainee.lastName}" class="mt-5 fw-bold text-center"></h1>
+    <h5 th:text="|${group.groupName} - ${stream.name}|" class="mt-2 mb-4 text-center"></h5>
+    <div class="container text-center">
+        <label>Trainer:</label>
+        <label th:text="${trainer.firstName} + ' ' + ${trainer.lastName}"></label><br>
+    </div>
 
-        <div class="container d-block mt-3">
-            <div class="list-group pt-3 pb-5">
-                <ul class="px-3">
-                    <h3 class="lead ps-2">Current Week</h3>
+    <div class="container d-block mt-3">
+        <div class="list-group pt-3 pb-5">
+            <ul class="px-3">
+                <h3 class="lead ps-2">Current Week</h3>
+                <li class="d-flex justify-content-between align-items-start mt-2">
                     <a th:value="${currentWeek}"
                        th:inline="text"
                        th:href="@{'/feedback?id='+${feedbackWeeks.get(currentWeek).feedbackId}}"
                        th:text="'Week ' + ${currentWeek}"
                        class="list-group-item list-group-item-action fw-bold"></a>
-<!--                    <span class="badge bg-color-red status status-box" th:classappend="${feedbackWeeks.get(current).value.status.status == 'Submitted'} ? 'bg-color-green' : 'bg-color-amber'">    </span>-->
-
-                    <h3 class="lead ps-2 mt-3">All Weeks</h3>
-                    <li th:each="feedbackWeek, iterStat : ${feedbackWeeks}" class="d-flex justify-content-between align-items-start mt-2">
-                        <a th:value="${feedbackWeek.value.feedbackId}"
-                           th:inline="text"
-                           th:href="@{'/feedback?id='+${feedbackWeek.value.feedbackId}}"
-                           th:text="'Week ' + ${feedbackWeek.key}"
-                           class="list-group-item list-group-item-action fw-bold"></a>
-                        <span class="badge bg-color-red status status-box" th:classappend="${feedbackWeek.value.status.status == 'Submitted'} ? 'bg-color-green' : 'bg-color-amber'">    </span>
-                    </li>
-                </ul>
-            </div>
+                    <span class="badge bg-color-red status status-box"
+                          th:classappend="${feedbackWeeks.get(currentWeek).status.status == 'Submitted'} ? 'bg-color-green' : 'bg-color-amber'">    </span>
+                </li>
+                <h3 class="lead ps-2 mt-3">All Weeks</h3>
+                <li th:each="feedbackWeek, iterStat : ${feedbackWeeks}"
+                    class="d-flex justify-content-between align-items-start mt-2">
+                    <a th:value="${feedbackWeek.value.feedbackId}"
+                       th:inline="text"
+                       th:href="@{'/feedback?id='+${feedbackWeek.value.feedbackId}}"
+                       th:text="'Week ' + ${feedbackWeek.key}"
+                       class="list-group-item list-group-item-action fw-bold"></a>
+                    <span class="badge bg-color-red status status-box"
+                          th:classappend="${feedbackWeek.value.status.status == 'Submitted'} ? 'bg-color-green' : 'bg-color-amber'">    </span>
+                </li>
+            </ul>
         </div>
     </div>
+</div>
 </body>
 </html>
