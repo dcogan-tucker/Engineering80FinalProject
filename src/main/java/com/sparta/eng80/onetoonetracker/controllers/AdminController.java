@@ -55,9 +55,11 @@ public class AdminController {
         TrainerEntity trainer = new TrainerEntity();
         trainer.setFirstName(firstName);
         trainer.setLastName(lastName);
-        Optional<GroupEntity> group = groupService.findById(groupId);
-        if(group.isPresent()){
-            trainer.setGroup(group.get());
+        if (groupId != -1) {
+            Optional<GroupEntity> group = groupService.findById(groupId);
+            if (group.isPresent()) {
+                trainer.setGroup(group.get());
+            }
         }
         UserEntity user = new UserEntity();
         user.setRole("ROLE_TRAINER");
