@@ -54,6 +54,9 @@ public class FeedbackController {
         feedbackEntity.setTraineeContinue(feedback.getTraineeContinue());
         feedbackEntity.setConsultantGrade(feedback.getConsultantGrade());
         feedbackEntity.setTechnicalGrade(feedback.getTechnicalGrade());
+        if(user.getRole().equals("ROLE_TRAINER")){
+            feedbackEntity.setTrainerComments(feedback.getTrainerComments());
+        }
         if(action.equals("Save")){
             feedbackEntity.setStatus(Status.IN_PROGRESS);
         }else if(action.equals("Submit")){
@@ -61,10 +64,7 @@ public class FeedbackController {
         }
 
         feedbackEntity.setSubmitted(Date.valueOf(LocalDate.now()));
-
-        if(user.getRole().equals("ROLE_TRAINEE")){
-            feedbackService.update(feedbackEntity);
-        }
+        feedbackService.update(feedbackEntity);
 
         return "redirect:/";
     }

@@ -74,6 +74,11 @@ public class FeedbackEntity {
     private Status status;
 
     /**
+     * The trainer comments for the the user with that specific feedback form
+     */
+    private String trainerComments;
+
+    /**
      * The status for whether the feedback form has been submitted before or after the deadline
      */
     private boolean overdue;
@@ -205,6 +210,16 @@ public class FeedbackEntity {
 
     public void setOverdue(boolean overdue) {
         this.overdue = overdue;
+    }
+
+    @Basic
+    @Column(name = "trainer_comments")
+    public String getTrainerComments(){
+        return trainerComments;
+    }
+
+    public void setTrainerComments(String trainerComments){
+        this.trainerComments = trainerComments;
     }
 
     @Basic
