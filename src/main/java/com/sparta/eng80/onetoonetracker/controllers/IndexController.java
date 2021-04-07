@@ -171,19 +171,27 @@ public class IndexController {
             case "ROLE_TRAINER":
                 TrainerEntity trainerEntity = securityService.getCurrentUser().getTrainer();
                 feedbackEntities = groupService.findAllFeedbackFromGroup(trainerEntity.getGroup().getGroupId());
+                for (FeedbackEntity feedbackEntity : feedbackEntities) {
+                    java.sql.Date deadline = feedbackEntity.getDeadline();
+                    java.sql.Date submitted = feedbackEntity.getDeadline();
+                    if (submitted.after(deadline) || feedbackEntity.getStatus() != Status.SUBMITTED && deadline.before(today)) {
+                        feedbackEntity.setOverdue(true);
+                    }
+                }
                 break;
             case "ROLE_TRAINEE":
                 TraineeEntity traineeEntity = securityService.getCurrentUser().getTrainee();
                 feedbackEntities = traineeEntity.getFeedbacks();
+                for (FeedbackEntity feedbackEntity : feedbackEntities) {
+                    java.sql.Date deadline = feedbackEntity.getDeadline();
+                    java.sql.Date submitted = feedbackEntity.getDeadline();
+                    if (submitted.after(deadline) || feedbackEntity.getStatus() != Status.SUBMITTED && deadline.before(today)) {
+                        feedbackEntity.setOverdue(true);
+                    }
+                }
                 break;
         }
-        for (FeedbackEntity feedbackEntity : feedbackEntities) {
-            java.sql.Date deadline = feedbackEntity.getDeadline();
-            java.sql.Date submitted = feedbackEntity.getDeadline();
-            if (submitted.after(deadline) || feedbackEntity.getStatus() != Status.SUBMITTED && deadline.before(today)) {
-                feedbackEntity.setOverdue(true);
-            }
-        }
+
     }
 }
 

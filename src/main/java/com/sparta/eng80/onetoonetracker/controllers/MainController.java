@@ -14,7 +14,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 @Controller
-public class MainController {
+public class    MainController {
 
     private UserService userService;
     private SecurityService securityService;
@@ -108,19 +108,23 @@ public class MainController {
     private String[] getAverageGrades(Set<FeedbackEntity> feedbacks) {
         String[] grades = new String[2];
         int tech = 0;
+        int techCount = 0;
         int consultant = 0;
+        int consCount = 0;
         for (FeedbackEntity feedback : feedbacks) {
             String techGrade = feedback.getTechnicalGrade();
             if (techGrade != null) {
                 tech +=  techGrade.toCharArray()[0];
+                techCount++;
             }
             String consGrade = feedback.getConsultantGrade();
             if (consGrade != null) {
                 consultant += consGrade.toCharArray()[0];
+                consCount++;
             }
         }
-        grades[0] = String.valueOf((char) (tech / feedbacks.size()));
-        grades[1] = String.valueOf((char) (consultant / feedbacks.size()));
+        grades[0] = String.valueOf((char) (tech / techCount));
+        grades[1] = String.valueOf((char) (consultant / consCount));
         return grades;
     }
 }
