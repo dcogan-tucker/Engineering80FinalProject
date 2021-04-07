@@ -7,6 +7,7 @@
 <body>
 <div th:fragment="feedbackInput(feedback)" id="feedbackText">
     <div class="container-fluid text-center">
+        <h1 th:text="${feedback.trainee.firstName} + ' ' + ${feedback.trainee.lastName} + ' / ' + 'Week ' + ${weekNo}" class="my-3 fw-bold"></h1>
         <form method="POST" th:object="${feedback}" th:attr="id=${feedback}" th:action="@{/feedback}">
             <div class="btn-group d-flex m-2" role="group" aria-label="User Selection">
                 <input type="radio" class="btn-check" name="btnradioUser"
@@ -115,23 +116,10 @@
                 document.getElementById("submitBtn").hidden = true
             }
         }
-
-        function toggleUser(enabled, disabled) {
-            var divEnabled = document.getElementById(enabled);
-            var divDisabled = document.getElementById(disabled);
-            divEnabled.hidden = false;
-            divDisabled.hidden = true;
-        }
-
-        function toggleTextBox(enabled, disabled, disabled2) {
-            var textboxEnabled = document.getElementById(enabled);
-            var textboxDisabled = document.getElementById(disabled);
-            var textboxDisabled2 = document.getElementById(disabled2);
-            textboxEnabled.hidden = false;
-            textboxDisabled.hidden = true;
-            textboxDisabled2.hidden = true;
-        }
     </script>
+    <script type="text/javascript" th:src="@{/js/feedback.js}"></script>
 </div>
+
+
 </body>
 </html>

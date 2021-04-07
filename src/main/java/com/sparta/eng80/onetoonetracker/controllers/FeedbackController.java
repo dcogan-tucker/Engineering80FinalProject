@@ -5,6 +5,7 @@ import com.sparta.eng80.onetoonetracker.entities.UserEntity;
 import com.sparta.eng80.onetoonetracker.entities.datatypes.Status;
 import com.sparta.eng80.onetoonetracker.services.FeedbackService;
 import com.sparta.eng80.onetoonetracker.services.SecurityService;
+import com.sparta.eng80.onetoonetracker.utilities.WeekNumber;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +38,8 @@ public class FeedbackController {
             return "redirect:/error";
         }
         feedbackID = feedback.getFeedbackId();
+        int weekNo = WeekNumber.getWeekNumber(feedback);
+        model.addAttribute("weekNo",weekNo);
         model.addAttribute("feedback", feedback);
         model.addAttribute("user", user);
         return "feedback";
