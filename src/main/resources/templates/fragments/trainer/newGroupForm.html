@@ -48,7 +48,7 @@
                                     <select style="text-align-last: center" class="form-control" name="trainerId"
                                             required>
                                         <option value=""> -- </option>
-                                        <option th:each="trainer : ${allTrainers}" th:value="${trainer.trainerId}" th:text="${trainer.firstName} + ' ' + ${trainer.lastName}"></option>
+                                        <option th:each="trainer : ${allUnassignedTrainers}" th:value="${trainer.trainerId}" th:text="${trainer.firstName} + ' ' + ${trainer.lastName}"></option>
                                     </select>
                                 </div>
                             </td>

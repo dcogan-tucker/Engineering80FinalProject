@@ -56,6 +56,8 @@ public class IndexController {
 
                     model.addAttribute("trainer", trainer);
                     model.addAttribute("feedbacks", feedbackByWeek);
+                    model.addAttribute("allGroups", groupService.findAll());
+                    model.addAttribute("allUnassignedTrainers", trainerService.findAllUnassigned());
                     break;
                 case "ROLE_ADMIN":
                     model.addAttribute("allGroups", groupService.findAll());
