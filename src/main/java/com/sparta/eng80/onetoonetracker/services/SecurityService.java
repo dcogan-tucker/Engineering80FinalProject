@@ -29,15 +29,6 @@ public class SecurityService {
         return authentication.isAuthenticated();
     }
 
-    public void autoLogin(String email, String password) {
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
-                = authToken(email, password);
-
-        if (usernamePasswordAuthenticationToken.isAuthenticated()) {
-            SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-        }
-    }
-
     public UsernamePasswordAuthenticationToken authToken(String email, String password) {
         UserDetails userDetails = loginCredentialService.loadUserByUsername(email);
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
@@ -50,5 +41,9 @@ public class SecurityService {
     public UserEntity getCurrentUser() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return loginCredentialService.getCurrentUser(userDetails.getUsername());
+    }
+
+    public boolean requiresPasswordChange() {
+        return !getCurrentUser().isPasswordChanged();
     }
 }
