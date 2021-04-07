@@ -25,5 +25,7 @@ public interface TrainerRepository extends CrudRepository<TrainerEntity, Integer
     @Query(nativeQuery = true, value = "update trainer set first_name = ?, last_name = ? where trainer_id = ?")
     void editTrainerById(String firstName, String lastName, int trainerId);
 
-
+    //Testing purposes only
+    @Query(nativeQuery = true, value = "select * from trainer where first_name = ? and last_name = ?")
+    TrainerEntity findByName(String firstName, String lastName);
 }

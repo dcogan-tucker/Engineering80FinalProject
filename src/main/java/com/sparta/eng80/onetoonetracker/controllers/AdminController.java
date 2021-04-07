@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 import java.util.Set;
 
-
+/**
+ * The Admin controller. Used for all methods available to the user with the role admin.
+ *
+ */
 @Controller
 public class AdminController {
 
