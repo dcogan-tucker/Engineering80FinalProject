@@ -34,7 +34,7 @@ public class TrainerController {
                 lastName,
                 "ROLE_TRAINEE"
         );
-        return "redirect:/";
+        return "redirect:/group";
     }
 
     @PostMapping("/addGroup")
@@ -52,7 +52,7 @@ public class TrainerController {
             newGroupForm.setTrainerId(trainerId);
             groupService.addNewGroup(newGroupForm);
         }
-        return "redirect:/";
+        return "redirect:/group";
     }
 
     @GetMapping("/removeTrainee")
@@ -64,7 +64,7 @@ public class TrainerController {
     public String removeTraineePart2(@RequestParam Integer traineeId) {
         trainerService.removeTraineeFromGroup(traineeId);
         trainerService.disableTraineeLogin(traineeId);
-        return "redirect:/";
+        return "redirect:/group";
     }
 
 }
