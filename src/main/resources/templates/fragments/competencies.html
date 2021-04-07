@@ -2,121 +2,69 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <title>Behavioural Competencies</title>
         <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.0.0-beta2/css/bootstrap.min.css}"/>
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
     <div th:insert="/fragments/header :: header"></div>
-        <div class="text-center bg-color-main" id="competency-container">
-            <a class="" data-bs-toggle="modal" href="#analytical" role="button">
-                <img th:src="@{/images/Analytical.png}" height="100" width="100" class="competency-sm mt-5" alt="">
-            </a>
-            <a class="" data-bs-toggle="modal" href="#determined" role="button">
-                <img th:src="@{/images/Determined.png}" height="100" width="100" class="competency-sm mt-5" alt="">
-            </a>
-            <a class="" data-bs-toggle="modal" href="#imaginative" role="button">
-                <img th:src="@{/images/Imaginative.png}" height="100" width="100" class="competency-sm mt-5" alt="">
-            </a>
-            <a class="" data-bs-toggle="modal" href="#independent" role="button">
-                <img th:src="@{/images/Independent.png}" height="100" width="100" class="competency-sm mt-5" alt="">
-            </a>
-            <a class="" data-bs-toggle="modal" href="#professional" role="button">
-                <img th:src="@{/images/Professional.png}" height="100" width="100" class="competency-sm mt-5" alt="">
-            </a>
-            <a class="" data-bs-toggle="modal" href="#studios" role="button">
-                <img th:src="@{/images/Studious.png}" height="100" width="100" class="competency-sm mt-5" alt="">
-            </a>
-        </div>
-
-        <!-- Analytical -->
-        <div class="modal fade" id="analytical" aria-hidden="true" aria-labelledby="..." tabindex="-1">
-            <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content bg-color-main justify-content-center">
-                    <div class="modal-header text-white">
-                        <button type="button" class="btn-close btn-close-white btn-lg" data-bs-dismiss="modal" aria-label="close"></button>
-                    </div>
-                    <img th:src="@{/images/Analytical.png}" alt="">
-                    <div class="modal-footer">
-                        <button class="btn btn-primary btn-lg" data-bs-target="#determined" data-bs-toggle="modal" data-bs-dismiss="modal">Next: Determined</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Determined -->
-        <div class="modal fade" id="determined" aria-hidden="true" aria-labelledby="..." tabindex="-1">
-            <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content bg-color-main justify-content-center">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close btn-close-white btn-lg" data-bs-dismiss="modal" aria-label="close"></button>
-                    </div>
-                    <img th:src="@{/images/Determined.png}" alt="">
-                    <div class="modal-footer">
-                        <button class="btn btn-primary btn-lg" data-bs-target="#imaginative" data-bs-toggle="modal" data-bs-dismiss="modal">Next: Imaginative</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Imaginative -->
-        <div class="modal fade" id="imaginative" aria-hidden="true" aria-labelledby="..." tabindex="-1">
-            <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content bg-color-main justify-content-center">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close btn-close-white btn-lg" data-bs-dismiss="modal" aria-label="close"></button>
-                    </div>
-                    <img th:src="@{/images/Imaginative.png}" alt="">
-                    <div class="modal-footer">
-                        <button class="btn btn-primary btn-lg" data-bs-target="#independent" data-bs-toggle="modal" data-bs-dismiss="modal">Next: Independent</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Independent -->
-        <div class="modal fade" id="independent" aria-hidden="true" aria-labelledby="..." tabindex="-1">
-            <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content bg-color-main justify-content-center">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close btn-close-white btn-lg" data-bs-dismiss="modal" aria-label="close"></button>
-                    </div>
-                    <img th:src="@{/images/Independent.png}" alt="">
-                    <div class="modal-footer">
-                        <button class="btn btn-primary btn-lg" data-bs-target="#professional" data-bs-toggle="modal" data-bs-dismiss="modal">Next: Professional</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Professional -->
-        <div class="modal fade" id="professional" aria-hidden="true" aria-labelledby="..." tabindex="-1">
-            <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content bg-color-main justify-content-center">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close btn-close-white btn-lg" data-bs-dismiss="modal" aria-label="close"></button>
-                    </div>
-                    <img th:src="@{/images/Professional.png}" alt="">
-                    <div class="modal-footer">
-                        <button class="btn btn-primary btn-lg" data-bs-target="#studious" data-bs-toggle="modal" data-bs-dismiss="modal">Next: Studios</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Studios -->
-        <div class="modal fade" id="studious" aria-hidden="true" aria-labelledby="..." tabindex="-1">
-            <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content bg-color-main justify-content-center">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close btn-close-white btn-lg" data-bs-dismiss="modal" aria-label="close"></button>
-                    </div>
-                    <img th:src="@{/images/Studious.png}" alt="">
-                    <div class="modal-footer">
-                        <a class="btn btn-primary btn-lg" href="#analytical" data-bs-toggle="modal" role="button" data-bs-dismiss="modal">Next: Analytical</a>
-                    </div>
-                </div>
-            </div>
+        <div class="text-center bg-color-main text-white" id="competency-container">
+            <h1>Analytic</h1>
+            <h3>Critical Thinker</h3>
+            <p>Being able to decide for yourself what is accurate and what is relevant is core to solving any situation.
+                Higher order thinking skills let you step back from situations to discover for yourself what
+                resonates as right or wrong, view different angles, identify key points, analyse information and then
+                have confidence to put your own viewpoint across without bias. You endeavour to judge the true value
+                of statements.</p>
+            <h3>Researcher</h3>
+            <p>Discovery excites your analytical nature and you enjoy gathering information and equipping yourself with knowledge from many sources. When required you can translate research into evidence to facilitate your fact based strategies. The questions you ask naturally evolve as you understand more about the subject matter.</p>
+            <h3>Strategic</h3>
+            <p>Being analytical isn’t just a state of mind or natural ability, it’s about practice and creating effective steps to help you diagnose the reality of the questions you are posed with. To identify a problem or question and then assume the best answer means to find the right tools, understand how you will analyse data, opinions and arguments, analyse and evaluate and eventually assume solutions.</p>
+            <h3>Optimise</h3>
+            <p>With any work, you should look for what you could have done better to develop optimised strategies for future problem solving. By analysing our failures and successes we can grow rapidly and become more efficient, eventually becoming well versed in crafting elegant solutions.</p>
+            <h3>Implementer</h3>
+            <p>Plans are of no use unless you can implement the strategies you have formed. You must be able to act on the execution plan and decisively implement the solutions. Monitoring and controlling is essential and your utilisation of emotional intelligence will help delegation.</p>
+            <hr style="background-color:white; height:5px">
+            <h1>Independent</h1>
+            <h3>Critical Thinker</h3>
+            <p>Being able to decide for yourself what is accurate and what is relevant is core to solving any situation.
+                Higher order thinking skills let you step back from situations to discover for yourself what
+                resonates as right or wrong, view different angles, identify key points, analyse information and then
+                have confidence to put your own viewpoint across without bias. You endeavour to judge the true value
+                of statements.</p>
+            <hr style="background-color:white; height:5px">
+            <h1>Determined</h1>
+            <h3>Critical Thinker</h3>
+            <p>Being able to decide for yourself what is accurate and what is relevant is core to solving any situation.
+                Higher order thinking skills let you step back from situations to discover for yourself what
+                resonates as right or wrong, view different angles, identify key points, analyse information and then
+                have confidence to put your own viewpoint across without bias. You endeavour to judge the true value
+                of statements.</p>
+            <hr style="background-color:white; height:5px">
+            <h1>Professional</h1>
+            <h3>Critical Thinker</h3>
+            <p>Being able to decide for yourself what is accurate and what is relevant is core to solving any situation.
+                Higher order thinking skills let you step back from situations to discover for yourself what
+                resonates as right or wrong, view different angles, identify key points, analyse information and then
+                have confidence to put your own viewpoint across without bias. You endeavour to judge the true value
+                of statements.</p>
+            <hr style="background-color:white; height:5px">
+            <h1>Studious</h1>
+            <h3>Critical Thinker</h3>
+            <p>Being able to decide for yourself what is accurate and what is relevant is core to solving any situation.
+                Higher order thinking skills let you step back from situations to discover for yourself what
+                resonates as right or wrong, view different angles, identify key points, analyse information and then
+                have confidence to put your own viewpoint across without bias. You endeavour to judge the true value
+                of statements.</p>
+            <hr style="background-color:white; height:5px">
+            <h1>Imaginative</h1>
+            <h3>Critical Thinker</h3>
+            <p>Being able to decide for yourself what is accurate and what is relevant is core to solving any situation.
+                Higher order thinking skills let you step back from situations to discover for yourself what
+                resonates as right or wrong, view different angles, identify key points, analyse information and then
+                have confidence to put your own viewpoint across without bias. You endeavour to judge the true value
+                of statements.</p>
         </div>
     <footer>
         <div th:insert="/fragments/footer :: footer"></div>
