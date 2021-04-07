@@ -9,10 +9,7 @@ import com.sparta.eng80.onetoonetracker.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 import java.util.Set;
@@ -39,20 +36,18 @@ public class AdminController {
         modelMap.addAttribute("groups", groups);
         TrainerEntity trainer = new TrainerEntity();
         modelMap.addAttribute("newTrainer", trainer);
-        return "/fragments/home/admin_home";
+        return "redirect:/";
     }
 
     @PostMapping("/add-trainer")
-    public String addTrainer(@RequestParam String groupId, @RequestParam String firstName, @RequestParam String lastName){
+    public String addTrainer(@RequestParam Integer groupId, @RequestParam String firstName, @RequestParam String lastName){
         TrainerEntity trainer = new TrainerEntity();
         trainer.setFirstName(firstName);
         trainer.setLastName(lastName);
-//        if (!groupId.equals("")){
-//            Optional<GroupEntity> group = groupService.findById(Integer.parseInt(groupId));
-//            if(group.isPresent()){
-//                trainer.setGroup(group.get());
-//            }
-//        }
+        Optional<GroupEntity> group = groupService.findById(groupId);
+        if(group.isPresent()){
+            trainer.setGroup(group.get());
+        }
         UserEntity user = new UserEntity();
         user.setRole("ROLE_TRAINER");
         user.setPassword("password");
@@ -85,7 +80,7 @@ public class AdminController {
         return "redirect:/trainers";
     }
 
-    @GetMapping("/trainers/{trainerId}")
+    @RequestMapping("/trainers/{trainerId}")
     public String findTrainer(Model model, @PathVariable(name = "trainerId") Integer trainerId){
         Optional<TrainerEntity> trainer = adminService.findTrainerById(trainerId);
         if(trainer.isEmpty()){

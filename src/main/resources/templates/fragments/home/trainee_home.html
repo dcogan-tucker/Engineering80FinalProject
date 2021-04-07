@@ -2,28 +2,26 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Home</title>
 </head>
 <body>
-<div class="container">
-    <h1 th:text="|${group.groupName} - ${stream.name}|"></h1>
-    <label>Name:</label>
-    <label th:text="${trainee.firstName} + ' ' + ${trainee.lastName}"></label><br>
+<div class="container text-center">
+    <h1 th:text="${trainee.firstName} + ' ' + ${trainee.lastName}" class="mt-5 fw-bold"></h1>
+    <h5 th:text="|${group.groupName} - ${stream.name}|"  class="mt-2 mb-4"></h5>
     <label>Trainer:</label>
     <label th:text="${trainer.firstName} + ' ' + ${trainer.lastName}"></label><br>
-
     <label>Current Week: </label>
     <a th:text="${currentWeek}"></a><br>
 
     <form method="get" th:action="@{/feedback}">
-        <select name="id">
-            <option th:each="feedback, iterStat : ${feedbackWeeks}"
-                    th:value="${feedback.value.feedbackId}"
-                    th:text="|Week ${feedback.key}|">
+        <select name="id" class="form-control mt-4">
+            <option th:each="feedbackWeek, iterStat : ${feedbackWeeks}"
+                    th:value="${feedbackWeek.value.feedbackId}"
+                    th:text="|Week ${feedbackWeek.key}|"
+                    style="background:red" th:styleappend="${feedbackWeek.value.status.status == 'Submitted'} ? ';background: green' : ';background: orange'">
             </option>
-            <!--        <span class="status bg-color-red" th:classappend="${isSubmitted ? 'bg-color-green' : 'bg-color-amber'}"></span>-->
         </select><br>
-        <button type="submit">View</button>
+        <button type="submit" class="w-100 btn bg-color-red" >View</button>
     </form>
 </div>
 </body>

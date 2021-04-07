@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.0.0-beta2/css/bootstrap.min.css}"/>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body th:if="${feedback.overdue}" onload="disableEdits()">
 <div th:fragment="feedbackInput(feedback)" id="feedbackText">
     <div class="container-fluid text-center">
         <form method="POST" th:object="${feedback}" th:attr="id=${feedback}" th:action="@{/feedback}">
@@ -38,9 +38,16 @@
                     <label class="btn btn-outline-danger" for="continueTraineeBtn">Cont.</label>
                 </div>
                 <br/>
-                <textarea id="stopTrainee" th:field="${feedback.traineeStop}"></textarea>
-                <textarea id="startTrainee" th:field="${feedback.traineeStart}" hidden></textarea>
-                <textarea id="continueTrainee" th:field="${feedback.traineeContinue}" hidden></textarea>
+                <div sec:authorize="hasAnyAuthority('ROLE_TRAINER')">
+                    <textarea id="stopTrainee" th:field="${feedback.traineeStop}" readonly></textarea>
+                    <textarea id="startTrainee" th:field="${feedback.traineeStart}" readonly hidden></textarea>
+                    <textarea id="continueTrainee" th:field="${feedback.traineeContinue}" readonly hidden></textarea>
+                </div>
+                <div sec:authorize="hasAnyAuthority('ROLE_TRAINEE')">
+                    <textarea id="stopTrainee" th:field="${feedback.traineeStop}"></textarea>
+                    <textarea id="startTrainee" th:field="${feedback.traineeStart}" hidden></textarea>
+                    <textarea id="continueTrainee" th:field="${feedback.traineeContinue}" hidden></textarea>
+                </div>
             </div>
             <div id="trainer" hidden>
                 <div class="btn-group d-flex m-2" role="group" aria-label="SSC Trainer Selection">
@@ -61,9 +68,16 @@
                     <label class="btn btn-outline-danger" for="continueTrainerBtn">Cont.</label>
                 </div>
                 <br/>
-                <textarea id="stopTrainer" th:field="${feedback.trainerStop}" readonly></textarea>
-                <textarea id="startTrainer" th:field="${feedback.trainerStart}" hidden readonly></textarea>
-                <textarea id="continueTrainer" th:field="${feedback.trainerContinue}" hidden readonly></textarea>
+                <div sec:authorize="hasAnyAuthority('ROLE_TRAINER')">
+                    <textarea id="stopTrainer" th:field="${feedback.trainerStop}" ></textarea>
+                    <textarea id="startTrainer" th:field="${feedback.trainerStart}" hidden></textarea>
+                    <textarea id="continueTrainer" th:field="${feedback.trainerContinue}" hidden></textarea>
+                </div>
+                <div sec:authorize="hasAnyAuthority('ROLE_TRAINEE')">
+                    <textarea id="stopTrainer" th:field="${feedback.trainerStop}" readonly></textarea>
+                    <textarea id="startTrainer" th:field="${feedback.trainerStart}" readonly hidden></textarea>
+                    <textarea id="continueTrainer" th:field="${feedback.trainerContinue}" readonly hidden></textarea>
+                </div>
             </div>
             <div>
                 <label for="techGrade" class="mt-3">Technical Grade</label>
@@ -81,7 +95,8 @@
                     <option th:value="D" th:text="D"></option>
                 </select>
             </div>
-            <input type="submit" class="btn btn-danger mt-2" value="Submit">
+            <input id="saveBtn" type="submit" name="action" class="btn btn-warning mt-2" value="Save">
+            <input id="submitBtn" type="submit" name="action" class="btn btn-danger mt-2" value="Submit">
         </form>
     </div>
     <script>
@@ -99,6 +114,16 @@
             textboxEnabled.hidden = false;
             textboxDisabled.hidden = true;
             textboxDisabled2.hidden = true;
+        }
+
+        function disableEdits() {
+            document.getElementById("stopTrainee").readOnly = true;
+            document.getElementById("startTrainee").readOnly = true;
+            document.getElementById("continueTrainee").readOnly = true;
+            document.getElementById("techGrade").disabled = true;
+            document.getElementById("consultGrade").disabled = true;
+            document.getElementById("saveBtn").hidden = true
+            document.getElementById("submitBtn").hidden = true
         }
     </script>
 </div>

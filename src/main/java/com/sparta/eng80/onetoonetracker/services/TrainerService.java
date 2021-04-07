@@ -7,6 +7,7 @@ import com.sparta.eng80.onetoonetracker.services.interfaces.UserAppService;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
@@ -167,5 +168,16 @@ public class TrainerService implements UserAppService<TrainerEntity> {
             wasDisabled = false;
         }
         return wasDisabled;
+    }
+
+    public Iterable<TrainerEntity> findAllUnassigned() {
+        Iterable<TrainerEntity> all = findAll();
+        ArrayList<TrainerEntity> unique = new ArrayList<>();
+        for (TrainerEntity trainerEntity : all) {
+            if (trainerEntity.getGroup() == null) {
+                unique.add(trainerEntity);
+            }
+        }
+        return unique;
     }
 }

@@ -33,7 +33,7 @@ public class FeedbackController {
         UserEntity user = securityService.getCurrentUser();
         Optional<FeedbackEntity> feedbackEntity = feedbackService.findById(id);
         FeedbackEntity feedback = feedbackEntity.get();
-        if(user.getUserId() != feedback.getTrainee().getUser().getUserId()){
+        if((user.getUserId() != feedback.getTrainee().getUser().getUserId()) && (user.getUserId() != feedback.getTrainer().getUser().getUserId())) {
             return "redirect:/error";
         }
         feedbackID = feedback.getFeedbackId();
@@ -42,7 +42,7 @@ public class FeedbackController {
     }
 
     @PostMapping("/feedback")
-    public String submitFeedback(@ModelAttribute("feedback") FeedbackEntity feedback){
+    public String submitFeedback(@ModelAttribute("feedback") FeedbackEntity feedback, @RequestParam(value="action", required=true) String action){
         UserEntity user = securityService.getCurrentUser();
         FeedbackEntity feedbackEntity = feedbackService.findById(feedbackID).get();
         feedbackEntity.setTraineeStop(feedback.getTraineeStop());
@@ -50,7 +50,12 @@ public class FeedbackController {
         feedbackEntity.setTraineeContinue(feedback.getTraineeContinue());
         feedbackEntity.setConsultantGrade(feedback.getConsultantGrade());
         feedbackEntity.setTechnicalGrade(feedback.getTechnicalGrade());
-        feedbackEntity.setStatus(Status.SUBMITTED);
+        if(action.equals("Save")){
+            feedbackEntity.setStatus(Status.IN_PROGRESS);
+        }else if(action.equals("Submit")){
+            feedbackEntity.setStatus(Status.SUBMITTED);
+        }
+
         feedbackEntity.setSubmitted(Date.valueOf(LocalDate.now()));
 
         if(user.getRole().equals("ROLE_TRAINEE")){
