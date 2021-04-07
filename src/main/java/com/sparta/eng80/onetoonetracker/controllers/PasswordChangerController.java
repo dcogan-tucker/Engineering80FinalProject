@@ -46,14 +46,12 @@ public class PasswordChangerController {
         System.out.println("CP: " + confirmPassword);
 
         if (!passwordEncoder.matches(currentPassword, userEntity.getPassword()) || !newPassword.equals(confirmPassword)) {
-            System.out.println("Error");
             return "redirect:/change-password";
         } else {
-            System.out.println("Changed");
             userEntity.setPassword(passwordEncoder.encode(newPassword));
             userEntity.setPasswordChanged(true);
             userService.save(userEntity);
-            return "index";
+            return "redirect:/";
 
         }
     }
