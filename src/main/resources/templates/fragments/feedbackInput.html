@@ -4,9 +4,10 @@
     <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.0.0-beta2/css/bootstrap.min.css}"/>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body th:if="${feedback.overdue}" onload="disableEdits()">
+<body>
 <div th:fragment="feedbackInput(feedback)" id="feedbackText">
     <div class="container-fluid text-center">
+        <h1 th:text="${feedback.trainee.firstName} + ' ' + ${feedback.trainee.lastName} + ' / ' + 'Week ' + ${weekNo}" class="my-3 fw-bold"></h1>
         <form method="POST" th:object="${feedback}" th:attr="id=${feedback}" th:action="@{/feedback}">
             <div class="btn-group d-flex m-2" role="group" aria-label="User Selection">
                 <input type="radio" class="btn-check" name="btnradioUser"
@@ -99,33 +100,26 @@
             <input id="submitBtn" type="submit" name="action" class="btn btn-danger mt-2" value="Submit">
         </form>
     </div>
-    <script>
-        function toggleUser(enabled, disabled) {
-            var divEnabled = document.getElementById(enabled);
-            var divDisabled = document.getElementById(disabled);
-            divEnabled.hidden = false;
-            divDisabled.hidden = true;
-        }
+    <script th:inline="javascript">
+        var overdue = [[${feedback.overdue}]];
+        var status = [[${feedback.status.status}]];
+        var role = [[${user.role}]];
 
-        function toggleTextBox(enabled, disabled, disabled2) {
-            var textboxEnabled = document.getElementById(enabled);
-            var textboxDisabled = document.getElementById(disabled);
-            var textboxDisabled2 = document.getElementById(disabled2);
-            textboxEnabled.hidden = false;
-            textboxDisabled.hidden = true;
-            textboxDisabled2.hidden = true;
-        }
-
-        function disableEdits() {
+        if (overdue || status.toLowerCase() == "submitted") {
             document.getElementById("stopTrainee").readOnly = true;
             document.getElementById("startTrainee").readOnly = true;
             document.getElementById("continueTrainee").readOnly = true;
-            document.getElementById("techGrade").disabled = true;
-            document.getElementById("consultGrade").disabled = true;
             document.getElementById("saveBtn").hidden = true
-            document.getElementById("submitBtn").hidden = true
+            if(role == "ROLE_TRAINEE"){
+                document.getElementById("techGrade").disabled = true;
+                document.getElementById("consultGrade").disabled = true;
+                document.getElementById("submitBtn").hidden = true
+            }
         }
     </script>
+    <script type="text/javascript" th:src="@{/js/feedback.js}"></script>
 </div>
+
+
 </body>
 </html>

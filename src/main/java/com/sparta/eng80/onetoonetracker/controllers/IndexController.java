@@ -5,6 +5,7 @@ import com.sparta.eng80.onetoonetracker.entities.TrainerEntity;
 import com.sparta.eng80.onetoonetracker.entities.*;
 import com.sparta.eng80.onetoonetracker.entities.datatypes.Status;
 import com.sparta.eng80.onetoonetracker.services.*;
+import com.sparta.eng80.onetoonetracker.utilities.WeekNumber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,7 +21,7 @@ public class IndexController {
     private final SecurityService securityService;
     private final GroupService groupService;
     private final TrainerService trainerService;
-    private final StreamService streamService;
+    private StreamService streamService;
 
     @Autowired
     public IndexController(SecurityService securityService, GroupService groupService, TrainerService trainerService, StreamService streamService) {
@@ -48,9 +49,7 @@ public class IndexController {
                     Map<Integer, List<FeedbackEntity>> feedbackByWeek = new HashMap<>();
 
                     for (FeedbackEntity feedback : feedbackOrdered) {
-                        LocalDate startDate = trainer.getGroup().getStartDate().toLocalDate();
-                        LocalDate feedbackDate = feedback.getDeadline().toLocalDate();
-                        int weekNo = (int) ChronoUnit.WEEKS.between(startDate, feedbackDate) + 1;
+                        int weekNo = WeekNumber.getWeekNumber(feedback);
 
                         List<FeedbackEntity> hasValue = feedbackByWeek.putIfAbsent(weekNo, new ArrayList<>(Arrays.asList(feedback)));
                         if (hasValue != null) {
