@@ -184,6 +184,10 @@ div.modal-content {
 /*}*/
 /* https://fonts.google.com/specimen/Raleway?preview.text_type=custom */
 
+.clickable {
+    cursor: pointer;
+}
+
 textarea {
     width: 320px;
     height: 200px

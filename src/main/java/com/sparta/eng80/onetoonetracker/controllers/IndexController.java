@@ -1,9 +1,9 @@
 package com.sparta.eng80.onetoonetracker.controllers;
 
+import com.sparta.eng80.onetoonetracker.entities.FeedbackEntity;
+import com.sparta.eng80.onetoonetracker.entities.TrainerEntity;
 import com.sparta.eng80.onetoonetracker.entities.*;
-import com.sparta.eng80.onetoonetracker.entities.datatypes.Status;
 import com.sparta.eng80.onetoonetracker.services.*;
-import com.sparta.eng80.onetoonetracker.utilities.TrainerTraineeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,17 +18,13 @@ public class IndexController {
 
     private final SecurityService securityService;
     private final GroupService groupService;
-    private final StreamService streamService;
     private final TrainerService trainerService;
-    private final TraineeService traineeService;
 
     @Autowired
-    public IndexController(SecurityService securityService, GroupService groupService, StreamService streamService, TrainerService trainerService, TraineeService traineeService) {
+    public IndexController(SecurityService securityService, GroupService groupService, TrainerService trainerService) {
         this.securityService = securityService;
         this.groupService = groupService;
-        this.streamService = streamService;
         this.trainerService = trainerService;
-        this.traineeService = traineeService;
     }
 
     @GetMapping("/")
@@ -37,34 +33,29 @@ public class IndexController {
             switch (securityService.getCurrentUser().getRole()) {
                 case "ROLE_TRAINER":
                     TrainerEntity trainer = securityService.getCurrentUser().getTrainer();
+                    Iterable<FeedbackEntity> allFeedback = groupService.findAllFeedbackFromGroup(trainer.getGroup().getGroupId());
+
+                    List<FeedbackEntity> feedbackOrdered = new ArrayList<>();
+                    for (FeedbackEntity feedback : allFeedback) {
+                        feedbackOrdered.add(feedback);
+                    }
+                    feedbackOrdered.sort(Comparator.comparing(FeedbackEntity::getDeadline).reversed());
+
+                    Map<Integer, List<FeedbackEntity>> feedbackByWeek = new HashMap<>();
+
+                    for (FeedbackEntity feedback : feedbackOrdered) {
+                        LocalDate startDate = trainer.getGroup().getStartDate().toLocalDate();
+                        LocalDate feedbackDate = feedback.getDeadline().toLocalDate();
+                        int weekNo = (int) ChronoUnit.WEEKS.between(startDate, feedbackDate) + 1;
+
+                        List<FeedbackEntity> hasValue = feedbackByWeek.putIfAbsent(weekNo, new ArrayList<>(Arrays.asList(feedback)));
+                        if (hasValue != null) {
+                            feedbackByWeek.get(weekNo).add(feedback);
+                        }
+                    }
 
                     model.addAttribute("trainer", trainer);
-                    model.addAttribute("allUnassignedGroups", groupService.findAllUnassigned());
-                    model.addAttribute("allStreams", streamService.findAll());
-                    model.addAttribute("allTrainers", trainerService.findAll());
-                    Iterable<TraineeEntity> trainees = traineeService.findByGroupId(trainer.getGroup().getGroupId());
-                    Iterable<FeedbackEntity> feedbackSheets = groupService.findAllFeedbackFromGroup(trainer.getGroup().getGroupId());
-                    ArrayList<TrainerTraineeEntity> feedbackSheetsInCorrectOrder = new ArrayList<>();
-                    for (TraineeEntity traineeEntity : trainees) {
-                        TrainerTraineeEntity trainerTraineeEntity = new TrainerTraineeEntity();
-                        trainerTraineeEntity.setTraineeEntity(traineeEntity);
-                        boolean found = false;
-                        if (feedbackSheets.iterator().hasNext()) {
-                            for (Object feedbackEntity : feedbackSheets) {
-                                if (((FeedbackEntity) feedbackEntity).getTrainee().getTraineeId() == traineeEntity.getTraineeId()) {
-                                    trainerTraineeEntity.setFeedbackEntity(((FeedbackEntity) feedbackEntity));
-                                    found = true;
-                                }
-                            }
-                        }
-                        if (!found) {
-                            FeedbackEntity feedbackEntity = new FeedbackEntity();
-                            feedbackEntity.setStatus(Status.IN_PROGRESS);
-                            trainerTraineeEntity.setFeedbackEntity(feedbackEntity);
-                        }
-                        feedbackSheetsInCorrectOrder.add(trainerTraineeEntity);
-                    }
-                    model.addAttribute("feedbackStatus", feedbackSheetsInCorrectOrder);
+                    model.addAttribute("feedbacks", feedbackByWeek);
                     break;
                 case "ROLE_ADMIN":
                     model.addAttribute("allGroups", groupService.findAll());
