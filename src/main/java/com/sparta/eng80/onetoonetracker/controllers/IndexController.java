@@ -3,6 +3,7 @@ package com.sparta.eng80.onetoonetracker.controllers;
 import com.sparta.eng80.onetoonetracker.entities.FeedbackEntity;
 import com.sparta.eng80.onetoonetracker.entities.TrainerEntity;
 import com.sparta.eng80.onetoonetracker.entities.*;
+import com.sparta.eng80.onetoonetracker.entities.datatypes.Status;
 import com.sparta.eng80.onetoonetracker.services.*;
 import com.sparta.eng80.onetoonetracker.utilities.WeekNumber;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ public class IndexController {
     @GetMapping("/")
     public String method(ModelMap model) {
         if(securityService.isAuthenticated()){
+            updateFeedbackForms();
             switch (securityService.getCurrentUser().getRole()) {
                 case "ROLE_TRAINER":
                     TrainerEntity trainer = securityService.getCurrentUser().getTrainer();
@@ -99,5 +101,27 @@ public class IndexController {
             return "index";
         }
         return "login";
+    }
+
+    private void updateFeedbackForms() {
+        java.sql.Date today = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+        Iterable<FeedbackEntity> feedbackEntities = null;
+        switch (securityService.getCurrentUser().getRole()) {
+            case "ROLE_TRAINER":
+                TrainerEntity trainerEntity = securityService.getCurrentUser().getTrainer();
+                feedbackEntities = groupService.findAllFeedbackFromGroup(trainerEntity.getGroup().getGroupId());
+                break;
+            case "ROLE_TRAINEE":
+                TraineeEntity traineeEntity = securityService.getCurrentUser().getTrainee();
+                feedbackEntities = traineeEntity.getFeedbacks();
+                break;
+        }
+        for (FeedbackEntity feedbackEntity : feedbackEntities) {
+            java.sql.Date deadline = feedbackEntity.getDeadline();
+            java.sql.Date submitted = feedbackEntity.getDeadline();
+            if (submitted.after(deadline) || feedbackEntity.getStatus() != Status.SUBMITTED && deadline.before(today)) {
+                feedbackEntity.setOverdue(true);
+            }
+        }
     }
 }
