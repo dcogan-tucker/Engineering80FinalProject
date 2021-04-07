@@ -37,21 +37,21 @@
             </tbody>
         </table>
 
-        <form method="post" th:action="@{/}">
-            <button class="btn bg-color-red" th:if="${feedbacks.get(i) == null}" name="updateBtn" th:id="'updateWeek' + ${i}" type="submit" hidden th:disabled="${disableUnlock}">Unlock Week</button>
-        </form>
+        <div th:if="${iterStat.last}" class="container text-center">
+            <form method="post" th:action="@{/}">
+                <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal"
+                        th:attr="data-bs-target=${'#addNewTrainee'}">Add Trainee
+                </button>
+                <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal"
+                        th:attr="data-bs-target=${'#addNewGroup'}">Add Group
+                </button>
+                <button class="btn bg-color-red" th:if="${feedbacks.get(i) == null}" name="updateBtn" th:id="'updateWeek' + ${i}" type="submit" hidden th:disabled="${disableUnlock}">Unlock Week</button>
+            </form>
+        </div>
     </th:block>
 </div>
 
 
-<div class="container text-center">
-    <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal"
-            th:attr="data-bs-target=${'#addNewTrainee'}">Add Trainee
-    </button>
-    <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal"
-            th:attr="data-bs-target=${'#addNewGroup'}">Add Group
-    </button>
-</div>
 <div th:insert="/fragments/trainer/newUserForm"></div>
 <div th:insert="/fragments/trainer/newGroupForm"></div>
 
