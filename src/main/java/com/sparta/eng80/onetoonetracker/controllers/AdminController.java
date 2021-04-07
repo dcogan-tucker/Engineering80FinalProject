@@ -43,7 +43,7 @@ public class AdminController {
         }
         Iterable<TrainerEntity> trainers = adminService.findAllTrainers();
         modelMap.addAttribute("trainers", trainers);
-        Iterable<GroupEntity> groups = groupService.findAll();
+        Iterable<GroupEntity> groups = groupService.findAllUnassigned();
         modelMap.addAttribute("groups", groups);
         TrainerEntity trainer = new TrainerEntity();
         modelMap.addAttribute("newTrainer", trainer);
@@ -55,9 +55,11 @@ public class AdminController {
         TrainerEntity trainer = new TrainerEntity();
         trainer.setFirstName(firstName);
         trainer.setLastName(lastName);
-        Optional<GroupEntity> group = groupService.findById(groupId);
-        if(group.isPresent()){
-            trainer.setGroup(group.get());
+        if (groupId != -1) {
+            Optional<GroupEntity> group = groupService.findById(groupId);
+            if (group.isPresent()) {
+                trainer.setGroup(group.get());
+            }
         }
         UserEntity user = new UserEntity();
         user.setRole("ROLE_TRAINER");

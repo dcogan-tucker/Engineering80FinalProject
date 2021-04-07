@@ -25,7 +25,10 @@
                 th:attr="data-bs-target=${'#adminEditTrainerModal' + trainer.trainerId}" data-bs-toggle="modal">
                 <td th:text="*{trainer.firstName}"></td>
                 <td th:text="*{trainer.lastName}"></td>
-                <td th:text="*{trainer.group.groupName}"></td>
+                <td th:switch="${trainer.group} != null">
+                    <p th:case="true" th:text="*{trainer.group.groupName}"></p>
+                    <p th:case="false" th:text="'Not Assigned'"></p>
+                </td>
 <!--                <td>-->
 <!--                    <a class="btn bg-color-red text-white" name="trainerId" type="submit" th:href="@{/trainers/{Id}(Id = ${trainer.trainerId})}">Profile</a>-->
 <!--                </td>-->
@@ -56,9 +59,10 @@
 
                                     <select id="group-options" class="form-control mt-3" type="Number" name="groupId" required>
                                         <option disabled selected>-- Select Group --</option>
-                                        <option th:each="group : ${allGroups}"
+                                        <option th:each="group : ${groups}"
                                                 th:value="${group.groupId}"
                                                 th:text="${group.groupName}"></option>
+                                        <option th:value="-1" th:text="'No Group'"></option>
                                     </select>
                                 </div>
                             </div>
