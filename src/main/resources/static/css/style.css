@@ -49,9 +49,16 @@ li.list-item {
     height: 20px;
 }
 
-span.status {
-    width: 5px;
-    height: inherit;
+div#trainee-labels {
+    margin-left: 40px;
+}
+
+span.status-box {
+    width: 25px;
+    height: 42px;
+    border-radius: 2px !important;
+    /*margin-right: 28px;*/
+    /*height: !important;*/
 }
 
 span#menuBtn-container {
@@ -84,11 +91,11 @@ div#footerBtns a {
 }
 
 .bg-color-green {
-
+    background-color: #198754;
 }
 
 .bg-color-amber {
-
+    background-color: #ffc107;
 }
 
 .text-color-main {
