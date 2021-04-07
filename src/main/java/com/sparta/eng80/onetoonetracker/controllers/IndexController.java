@@ -16,14 +16,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Arrays;
-import java.util.Set;
-import java.util.Calendar;
+import java.util.*;
 
 @Controller
 public class IndexController {
@@ -78,11 +71,23 @@ public class IndexController {
                         feedbackByWeek.putIfAbsent(weeksUnlocked + 1, null);
                     }
 
+                    boolean disableUnlock = false;
+                    int latestWeek = feedbackByWeek.size() - 1;
+                    Iterator<FeedbackEntity> feedbackIter = feedbackByWeek.get(latestWeek).iterator();
+                    if (feedbackIter.hasNext()) {
+                        FeedbackEntity latestFeedback = feedbackIter.next();
+                        Date date = latestFeedback.getDeadline();
+                        if (date.equals(getDeadline())) {
+                            disableUnlock = true;
+                        }
+                    }
+
                     model.addAttribute("trainer", trainer);
                     model.addAttribute("feedbacks", feedbackByWeek);
                     model.addAttribute("allGroups", groupService.findAll());
                     model.addAttribute("allUnassignedTrainers", trainerService.findAllUnassigned());
                     model.addAttribute("allStreams", streamService.findAll());
+                    model.addAttribute("disableUnlock", disableUnlock);
                     break;
                 case "ROLE_ADMIN":
                     model.addAttribute("allGroups", groupService.findAll());
