@@ -43,7 +43,7 @@ public class AdminController {
         }
         Iterable<TrainerEntity> trainers = adminService.findAllTrainers();
         modelMap.addAttribute("trainers", trainers);
-        Iterable<GroupEntity> groups = groupService.findAll();
+        Iterable<GroupEntity> groups = groupService.findAllUnassigned();
         modelMap.addAttribute("groups", groups);
         TrainerEntity trainer = new TrainerEntity();
         modelMap.addAttribute("newTrainer", trainer);
