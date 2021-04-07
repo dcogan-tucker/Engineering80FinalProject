@@ -10,26 +10,25 @@
                 th:text="'Week ' + ${iterStat.count} + ' of ' + ${trainer.group.stream.duration}" th:selected="${feedbacks.size()} - 1 == ${iterStat.count}"></option>
     </select>
 
+
     <th:block th:each="i, iterStat : ${#numbers.sequence(1,feedbacks.size())}">
         <table  class="table table-hover table-responsive py-3" th:id="'traineeTable' + ${i}" th:hidden="${i} != (${feedbacks.size()} - 1)">
             <thead>
             <tr>
                 <th scope="col">Student Name</th>
                 <th scope="col">Status</th>
-                <th scope="col">Overdue</th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
-            <tr class="clickable" th:each="feedback : ${feedbacks.get(i)}"
-                th:onclick="'javascript:rowClicked(' + ${feedback.feedbackId} + ')'">
+            <tr class="clickable " th:classappend="${feedback.overdue ? 'overdue-true' : 'overdue-false'}" th:each="feedback : ${feedbacks.get(i)}" th:onclick="'javascript:rowClicked(' + ${feedback.feedbackId} + ')'">
                 <td th:text="${feedback.trainee.firstName} + ' ' + ${feedback.trainee.lastName}"></td>
                 <td th:text="${feedback.status.status}"></td>
-                <td th:text="${feedback.overdue}"></td>
+                <!--            <td th:text="${feedback.overdue ? 'True' : 'false'}"></td>-->
                 <td>
                     <form action="#" th:action="@{/removeTrainee}" method="get">
                         <input type="hidden" id="traineeId" name="traineeId" th:value="${feedback.trainee.traineeId}">
-                        <button class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal"
-                                th:attr="data-bs-target=${'#removeOldTrainee'}"
+                        <button class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal" th:attr="data-bs-target=${'#removeOldTrainee'}"
                                 type="submit">Remove Trainee
                         </button>
                     </form>
@@ -55,29 +54,7 @@
 </div>
 <div th:insert="/fragments/trainer/newUserForm"></div>
 <div th:insert="/fragments/trainer/newGroupForm"></div>
-<script th:inline="javascript">
-    function updateWeek(selected) {
-        var tableDetails = document.getElementById("table-details");
-        var tables = tableDetails.getElementsByTagName("TABLE");
-        var i = 0;
 
-        for (i = 0; i < tables.length; i++) {
-            tables[i].hidden = true;
-        }
-
-        document.getElementById('traineeTable' + selected.value).hidden = false;
-        var button = document.getElementById('updateWeek' + i);
-
-        if (i == selected.value) {
-            button.hidden = false;
-        } else {
-            button.hidden = true;
-        }
-    }
-
-    function rowClicked(value) {
-        location.href = "/feedback?id=" + value;
-    }
-</script>
+<script type="text/javascript" th:src="@{/js/trainer_home.js}"></script>
 </body>
 </html>

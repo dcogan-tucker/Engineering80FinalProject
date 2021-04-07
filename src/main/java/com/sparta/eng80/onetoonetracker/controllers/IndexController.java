@@ -3,23 +3,27 @@ package com.sparta.eng80.onetoonetracker.controllers;
 import com.sparta.eng80.onetoonetracker.entities.FeedbackEntity;
 import com.sparta.eng80.onetoonetracker.entities.TrainerEntity;
 import com.sparta.eng80.onetoonetracker.entities.*;
+import com.sparta.eng80.onetoonetracker.entities.datatypes.Status;
 import com.sparta.eng80.onetoonetracker.services.*;
+import com.sparta.eng80.onetoonetracker.utilities.WeekNumber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-import java.util.Set;
 import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Arrays;
+import java.util.Set;
+import java.util.Calendar;
 
 @Controller
 public class IndexController {
@@ -28,18 +32,22 @@ public class IndexController {
     private final GroupService groupService;
     private final TrainerService trainerService;
     private final FeedbackService feedbackService;
+    private final StreamService streamService;
 
     @Autowired
-    public IndexController(SecurityService securityService, GroupService groupService, TrainerService trainerService, FeedbackService feedbackService) {
+    public IndexController(SecurityService securityService, GroupService groupService, TrainerService trainerService, FeedbackService feedbackService, StreamService streamService) {
         this.securityService = securityService;
         this.groupService = groupService;
         this.trainerService = trainerService;
         this.feedbackService = feedbackService;
+        this.streamService = streamService;
+
     }
 
     @GetMapping("/")
     public String method(ModelMap model) {
-        if(securityService.isAuthenticated()){
+        if (securityService.isAuthenticated()) {
+            updateFeedbackForms();
             switch (securityService.getCurrentUser().getRole()) {
                 case "ROLE_TRAINER":
                     TrainerEntity trainer = securityService.getCurrentUser().getTrainer();
@@ -54,9 +62,7 @@ public class IndexController {
                     Map<Integer, List<FeedbackEntity>> feedbackByWeek = new HashMap<>();
 
                     for (FeedbackEntity feedback : feedbackOrdered) {
-                        LocalDate startDate = trainer.getGroup().getStartDate().toLocalDate();
-                        LocalDate feedbackDate = feedback.getDeadline().toLocalDate();
-                        int weekNo = (int) ChronoUnit.WEEKS.between(startDate, feedbackDate) + 1;
+                        int weekNo = WeekNumber.getWeekNumber(feedback);
 
                         List<FeedbackEntity> hasValue = feedbackByWeek.putIfAbsent(weekNo, new ArrayList<>(Arrays.asList(feedback)));
                         if (hasValue != null) {
@@ -71,6 +77,9 @@ public class IndexController {
 
                     model.addAttribute("trainer", trainer);
                     model.addAttribute("feedbacks", feedbackByWeek);
+                    model.addAttribute("allGroups", groupService.findAll());
+                    model.addAttribute("allUnassignedTrainers", trainerService.findAllUnassigned());
+                    model.addAttribute("allStreams", streamService.findAll());
                     break;
                 case "ROLE_ADMIN":
                     model.addAttribute("allGroups", groupService.findAll());
@@ -92,7 +101,7 @@ public class IndexController {
                     }
 
                     Map<Long, FeedbackEntity> feedbackMappedToWeek = new HashMap<>();
-                    for (FeedbackEntity feedback:traineesFeedbackSheets) {
+                    for (FeedbackEntity feedback : traineesFeedbackSheets) {
                         long feedbackWeek = ChronoUnit.WEEKS.between(startDate, feedback.getDeadline().toLocalDate()) + 1;
                         if (feedbackWeek <= currentWeek) {
                             feedbackMappedToWeek.put(feedbackWeek, feedback);
@@ -112,9 +121,10 @@ public class IndexController {
         return "login";
     }
 
+
     @PostMapping("/")
     public String unlockWeek() {
-        if (securityService.isAuthenticated()){
+        if (securityService.isAuthenticated()) {
             UserEntity currentUser = securityService.getCurrentUser();
             switch (currentUser.getRole()) {
                 case "ROLE_TRAINER":
@@ -127,12 +137,13 @@ public class IndexController {
                         newFeedback.setTrainer(trainer);
                         newFeedback.setGroup(group);
                         newFeedback.setDeadline(getDeadline());
+                        newFeedback.setStatus(Status.NOT_STARTED);
                         feedbackService.save(newFeedback);
                     }
                     break;
             }
         }
-        return "index";
+        return "redirect:/";
     }
 
     private Date getDeadline() {
@@ -141,7 +152,7 @@ public class IndexController {
         int dayOfWeek = date.getDayOfWeek().getValue();
         if (dayOfWeek <= 4) {
             date.plusDays(4 - dayOfWeek);
-                    date.plusDays(1);
+            date.plusDays(1);
         } else {
             date.plusDays(4 + (7 - dayOfWeek));
             date.plusDays(1);
@@ -152,4 +163,27 @@ public class IndexController {
 //        Timestamp deadline = Timestamp.valueOf(date);
         return Date.valueOf(date);
     }
+
+    private void updateFeedbackForms() {
+        java.sql.Date today = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+        Iterable<FeedbackEntity> feedbackEntities = null;
+        switch (securityService.getCurrentUser().getRole()) {
+            case "ROLE_TRAINER":
+                TrainerEntity trainerEntity = securityService.getCurrentUser().getTrainer();
+                feedbackEntities = groupService.findAllFeedbackFromGroup(trainerEntity.getGroup().getGroupId());
+                break;
+            case "ROLE_TRAINEE":
+                TraineeEntity traineeEntity = securityService.getCurrentUser().getTrainee();
+                feedbackEntities = traineeEntity.getFeedbacks();
+                break;
+        }
+        for (FeedbackEntity feedbackEntity : feedbackEntities) {
+            java.sql.Date deadline = feedbackEntity.getDeadline();
+            java.sql.Date submitted = feedbackEntity.getDeadline();
+            if (submitted.after(deadline) || feedbackEntity.getStatus() != Status.SUBMITTED && deadline.before(today)) {
+                feedbackEntity.setOverdue(true);
+            }
+        }
+    }
 }
+
