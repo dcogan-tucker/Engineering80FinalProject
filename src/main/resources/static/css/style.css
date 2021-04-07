@@ -198,6 +198,17 @@ div.modal-content {
     cursor: pointer;
 }
 
+tr.overdue-true {
+    color: #ff0000;
+    font-weight: bold;
+    background: #ffcbcb;
+}
+
+tr.overdue-false {
+    color: #13b502;
+    font-weight: bold;
+}
+
 textarea {
     width: 320px;
     height: 200px
