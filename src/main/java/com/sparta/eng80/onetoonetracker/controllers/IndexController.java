@@ -19,10 +19,10 @@ public class IndexController {
     private final SecurityService securityService;
     private final GroupService groupService;
     private final TrainerService trainerService;
-    private GroupService streamService;
+    private StreamService streamService;
 
     @Autowired
-    public IndexController(SecurityService securityService, GroupService groupService, TrainerService trainerService, GroupService streamService) {
+    public IndexController(SecurityService securityService, GroupService groupService, TrainerService trainerService, StreamService streamService) {
         this.securityService = securityService;
         this.groupService = groupService;
         this.trainerService = trainerService;
