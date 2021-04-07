@@ -17,7 +17,6 @@
             <tr>
                 <th scope="col">Student Name</th>
                 <th scope="col">Status</th>
-                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -25,28 +24,13 @@
                 <td th:text="${feedback.trainee.firstName} + ' ' + ${feedback.trainee.lastName}"></td>
                 <td th:text="${feedback.status.status}"></td>
                 <!--            <td th:text="${feedback.overdue ? 'True' : 'false'}"></td>-->
-                <td>
-                    <form action="#" th:action="@{/removeTrainee}" method="get">
-                        <input type="hidden" id="traineeId" name="traineeId" th:value="${feedback.trainee.traineeId}">
-                        <button class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal" th:attr="data-bs-target=${'#removeOldTrainee'}"
-                                type="submit">Remove Trainee
-                        </button>
-                    </form>
-                </td>
             </tr>
             </tbody>
         </table>
 
         <div th:if="${iterStat.last}" class="container text-center">
-            <form method="post" th:action="@{/}">
-                <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal"
-                        th:attr="data-bs-target=${'#addNewTrainee'}">Add Trainee
-                </button>
-                <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal"
-                        th:attr="data-bs-target=${'#addNewGroup'}">Add Group
-                </button>
-                <button class="btn bg-color-red" th:if="${feedbacks.get(i) == null}" name="updateBtn" th:id="'updateWeek' + ${i}" type="submit" hidden th:disabled="${disableUnlock}">Unlock Week</button>
-            </form>
+            <a class="btn bg-color-red my-3 mx-1" href="/group">Manage Group</a>
+            <button class="btn bg-color-red my-3 mx-1" th:if="${feedbacks.get(i) == null}" name="updateBtn" th:id="'updateWeek' + ${i}" type="submit" hidden th:disabled="${disableUnlock}">Unlock Week</button>
         </div>
     </th:block>
 </div>
