@@ -19,12 +19,14 @@ public class IndexController {
     private final SecurityService securityService;
     private final GroupService groupService;
     private final TrainerService trainerService;
+    private GroupService streamService;
 
     @Autowired
-    public IndexController(SecurityService securityService, GroupService groupService, TrainerService trainerService) {
+    public IndexController(SecurityService securityService, GroupService groupService, TrainerService trainerService, GroupService streamService) {
         this.securityService = securityService;
         this.groupService = groupService;
         this.trainerService = trainerService;
+        this.streamService = streamService;
     }
 
     @GetMapping("/")
@@ -58,6 +60,7 @@ public class IndexController {
                     model.addAttribute("feedbacks", feedbackByWeek);
                     model.addAttribute("allGroups", groupService.findAll());
                     model.addAttribute("allUnassignedTrainers", trainerService.findAllUnassigned());
+                    model.addAttribute("allStreams", streamService.findAll());
                     break;
                 case "ROLE_ADMIN":
                     model.addAttribute("allGroups", groupService.findAll());
