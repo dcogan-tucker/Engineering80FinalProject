@@ -228,3 +228,7 @@ textarea {
     width: 320px;
     height: 125px
 }
+
+hr.hz-line {
+    height: 5px;
+}
