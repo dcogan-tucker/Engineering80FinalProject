@@ -209,6 +209,17 @@ tr.overdue-false {
     font-weight: bold;
 }
 
+.overdue-true {
+    color: #ff0000;
+    font-weight: bold;
+    background: #ffcbcb;
+}
+
+.overdue-false {
+    color: #13b502;
+    font-weight: bold;
+}
+
 textarea {
     width: 320px;
     height: 125px
