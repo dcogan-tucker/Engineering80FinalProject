@@ -40,25 +40,36 @@
             </tbody>
         </table>
 
-        <div class="container text-center mt-5">
-            <button type="button" class="btn bg-color-red text-white" data-bs-toggle="modal" data-bs-target="#trainerModal">Add Trainer</button>
-            <div class="modal" tabindex="-1" id="trainerModal">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Add a new Trainer</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <form action="#" th:action="@{/add-trainer}" th:object="${newTrainer}" method="post">
-                            <div class="modal-body">
-                                <div class="container">
-                                    <label>
-                                        <input class="mt-3 form-control" type="text" name="firstName" placeholder="First Name"/>
-                                        <input class="mt-3 form-control" type="text" name="lastName" placeholder="Last Name"/>
-                                    </label>
+        <div class="container mt-5 text-center">
+            <button type="button" class="btn bg-color-red" data-bs-toggle="modal" data-bs-target="#trainerModal">Add Trainer</button>
+        </div>
 
-                                    <select id="group-options" class="form-control mt-3" type="Number" name="groupId" required>
-                                        <option disabled selected>-- Select Group --</option>
+        <div class="modal fade rounded" tabindex="-1" id="trainerModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Trainer</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="#" th:action="@{/add-trainer}" th:object="${newTrainer}" method="post">
+                        <div class="modal-body">
+                            <div class="mb-2 row">
+                                <label for="addtrainerFirstName" class="col-sm-4 col-form-label">First Name</label>
+                                <div class="col-sm-6">
+                                    <input id="addtrainerFirstName" class="form-control" type="text" name="firstName" placeholder="First Name"/>
+                                </div>
+                            </div>
+                            <div class="mb-2 row">
+                                <label for="addtrainerLastName" class="col-sm-4 col-form-label">Last Name</label>
+                                <div class="col-sm-6">
+                                    <input id="addtrainerLastName" class="form-control" type="text" name="lastName" placeholder="Last Name"/>
+                                </div>
+                            </div>
+                            <div class="mb-2 row">
+                                <label for="addTrainerGroup" class="col-sm-4 col-form-label">Group</label>
+                                <div class="col-sm-6">
+                                    <select id="addTrainerGroup" class="form-control" name="groupId" required>
+                                        <option disabled selected>Select Group</option>
                                         <option th:each="group : ${groups}"
                                                 th:value="${group.groupId}"
                                                 th:text="${group.groupName}"></option>
@@ -66,69 +77,68 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn bg-color-red text-white">Create</button>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn bg-color-red">Add New Trainer</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
 
         <div th:each="trainer : ${trainers}" th:attr="id=${'adminEditTrainerModal' + trainer.trainerId}"
-             aria-hidden="true" class="modal" tabindex="-1" >
-            <div class="modal-dialog modal-dialog-centered">
+             aria-hidden="true" class="modal fade rounded" tabindex="-1" >
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Edit Trainer</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="#" th:action="@{/edit-trainer}" method="post">
-                        <div class="modal-body">
+                    <div class="modal-body">
+                        <form action="#" th:action="@{/edit-trainer}" method="post" th:id="'editTrainer' + ${trainer.trainerId}">
                             <input type="hidden" name="trainerId" th:value="*{trainer.trainerId}">
-                            <label>First Name</label>
-                            <label>
-                                <input class="mt-2" type="text" name="firstName" th:value="*{trainer.firstName}">
-                            </label></br>
-
-                            <label>Last Name</label>
-                            <label>
-                                <input class="mt-2" type="text" name="lastName" th:value="*{trainer.lastName}">
-                            </label></br>
-
-                            <label>Group</label>
-                            <select id="group-options" class="form-control mt-3" type="Number" name="groupId" required>
-                                <option th:value="*{trainer.group.groupId}" th:text="*{trainer.group.groupName}" selected>-- Select Group --</option>
-                                <option th:each="group : ${allGroups}"
-                                        th:unless="${trainer.group.groupName == group.groupName}"
-                                        th:value="${group.groupId}"
-                                        th:text="${group.groupName}"></option>
-                            </select>
-                            </br>
-
-<!--                                <input class="btn btn-primary" type="submit" value="Confirm">-->
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn bg-color-red text-white">Confirm</button>
-                        </div>
-                    </form>
-                    <div class="modal-footer">
-                        <form action="#" th:action="@{/remove-trainer}" method="post" >
-                            <div class="modal-footer">
-                                <input class="mt-2" type="hidden" name="trainerId" th:value="*{trainer.trainerId}"/>
-                                <label for="confirmation">I understand upon deletion the information can not be restored.
-                                    <input type="checkbox" id="confirmation" name="confirmation" value="true">
-                                </label>
-                                </br>
-                                <input class="btn" type="submit" value="Remove Trainer">
+                            <div class="mb-2 row">
+                                <label for="editTrainerFirstName" class="col-sm-4 col-form-label">First Name</label>
+                                <div class="col-sm-6">
+                                    <input id="editTrainerFirstName" class="form-control" type="text" name="firstName" th:value="*{trainer.firstName}">
+                                </div>
+                            </div>
+                            <div class="mb-2 row">
+                                <label for="editTrainerLastName" class="col-sm-4 col-form-label">Last Name</label>
+                                <div class="col-sm-6">
+                                    <input id="editTrainerLastName" class="form-control" type="text" name="lastName" th:value="*{trainer.lastName}">
+                                </div>
+                            </div>
+                            <div class="mb-2 row">
+                                <label for="editTrainerGroup" class="col-sm-4 col-form-label">Group</label>
+                                <div class="col-sm-6">
+                                    <select id="editTrainerGroup" class="form-control" name="groupId" required>
+                                        <option th:if="${trainer.group} != null" th:value="*{trainer.group.groupId}" th:text="*{trainer.group.groupName}" selected>Select Group</option>
+                                        <option th:each="group : ${groups}"
+                                                th:value="${group.groupId}"
+                                                th:text="${group.groupName}"></option>
+                                        <option th:selected="${trainer.group} == null" th:value="-1" th:text="'No Group'">Select Group</option>
+                                    </select>
+                                </div>
                             </div>
                         </form>
+                        <form action="#" th:action="@{/remove-trainer}" method="post" th:id="'removeTrainer' + ${trainer.trainerId}">
+                            <div class="form-check mt-2">
+                                <input type="hidden" name="trainerId" th:value="*{trainer.trainerId}"/>
+                                <input class="form-check-input" type="checkbox" id="confirmation" name="confirmation" value="true">
+                                <label class="form-check-label" for="confirmation">I understand upon deletion the information can not be restored.
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn bg-color-red" value="Save" th:form="'editTrainer' + ${trainer.trainerId}" />
+                        <input type="submit" class="btn bg-color-red" value="Remove Trainer" th:form="'removeTrainer' + ${trainer.trainerId}">
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 <!--    <div>-->
 <!--        <form action="#" th:action="@{/remove-trainer}" method="post" >-->
