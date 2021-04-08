@@ -1,4 +1,4 @@
-package com.sparta.eng80.onetoonetracker;
+package com.sparta.eng80.onetoonetracker.services;
 
 
 import com.sparta.eng80.onetoonetracker.entities.TrainerEntity;
