@@ -10,52 +10,45 @@
          aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header bg-dark text-white d-flex">
-                    <h4 class="fw-bold">Create new group</h4>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header d-flex">
+                    <h4 class="modal-title">Add new group</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body bg-dark text-white">
-                    <table class="w-100">
-                        <tr>
-                            <td><h5 class="fw-bold">Group Name</h5></td>
-                        </tr>
-                        <tr>
-                            <td>Stream Name</td>
-                            <td>
-                                <div class="col-md-3">
-                                    <select style="text-align-last: center" class="form-control" name="streamId" required>
-                                        <option value=""> -- </option>
-                                        <option th:each="stream : ${allStreams}" th:value="${stream.streamId}" th:text="${stream.name}"></option>
-                                    </select>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Group Name</td>
-                            <td>
-                                <input type="text" name="groupName" class="form-control" autofocus="autofocus" required>
-                            </td>
-                        </tr>
-                        <td>Group Start Date</td>
-                        <td>
-<!--                            <input id="datetimepicker" type="text" placeholder="" name="startDate">-->
-                            <input type="date" th:value="${#dates.createNow()}" name="startDate"/>
-                        </td>
-                        <tr>
-                            <td>Trainer to assign to this group:</td>
-                            <td>
-                                <div class="col-md-3">
-                                    <select style="text-align-last: center" class="form-control" name="trainerId"
-                                            required>
-                                        <option value=""> -- </option>
-                                        <option th:each="trainer : ${allUnassignedTrainers}" th:value="${trainer.trainerId}" th:text="${trainer.firstName} + ' ' + ${trainer.lastName}"></option>
-                                    </select>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
+                <div class="modal-body">
+                    <div class="mb-2 row">
+                        <label for="streamName" class="col-sm-4 col-form-label">Stream Name</label>
+                        <div class="col-sm-6">
+                            <select style="text-align-last: center" class="form-control" name="streamId" id="streamName" required>
+                                <option value=""> Select Stream </option>
+                                <option th:each="stream : ${allStreams}" th:value="${stream.streamId}" th:text="${stream.name}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
+                        <label for="groupName" class="col-sm-4 col-form-label">Group Name</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="groupName" id="groupName" class="form-control" autofocus="autofocus" required>
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
+                        <label for="groupStartDate" class="col-sm-4 col-form-label">Group Start Date</label>
+                        <div class="col-sm-6">
+                            <!--                            <input id="datetimepicker" type="text" placeholder="" name="startDate">-->
+                            <input type="date" id="groupStartDate" th:value="${#dates.createNow()}" name="startDate" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
+                        <label for="assignTrainer" class="col-sm-4 col-form-label">Trainer</label>
+                        <div class="col-sm-6">
+                            <select style="text-align-last: center" class="form-control" name="trainerId" id="assignTrainer"
+                                    required>
+                                <option value=""> Assign Trainer </option>
+                                <option th:each="trainer : ${allUnassignedTrainers}" th:value="${trainer.trainerId}" th:text="${trainer.firstName} + ' ' + ${trainer.lastName}"></option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer bg-dark text-white">
+                <div class="modal-footer">
                     <button class="btn bg-color-red" data-bs-toggle="modal" type="submit">Create New Group</button>
                 </div>
             </div>
