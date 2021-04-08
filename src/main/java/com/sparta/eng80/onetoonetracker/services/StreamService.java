@@ -40,4 +40,12 @@ public class StreamService implements StreamAppService {
     public void deleteById(int id) {
         streamRepository.deleteById(id);
     }
+
+    public void addNewStream(String name, String description, int duration) {
+        StreamEntity streamEntity = new StreamEntity();
+        streamEntity.setName(name);
+        streamEntity.setDescription(description);
+        streamEntity.setDuration(duration);
+        save(streamEntity);
+    }
 }
