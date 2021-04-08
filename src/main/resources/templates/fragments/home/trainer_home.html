@@ -30,7 +30,10 @@
 
         <div th:if="${iterStat.last}" class="container text-center">
             <a class="btn bg-color-red my-3 mx-1" href="/group">Manage Group</a>
-            <button class="btn bg-color-red my-3 mx-1" th:if="${feedbacks.get(i) == null}" name="updateBtn" th:id="'updateWeek' + ${i}" type="submit" hidden th:disabled="${disableUnlock}">Unlock Week</button>
+            <form th:id="'updateWeek' + ${i}" th:if="${feedbacks.get(i) == null}" method="post" th:action="@{/}" hidden>
+                <button class="btn bg-color-red my-3 mx-1"  name="updateBtn" type="submit" th:disabled="${disableUnlock}">Unlock Week</button>
+                <p th:text="${disabledMessage}"></p>
+            </form>
         </div>
     </th:block>
 </div>
