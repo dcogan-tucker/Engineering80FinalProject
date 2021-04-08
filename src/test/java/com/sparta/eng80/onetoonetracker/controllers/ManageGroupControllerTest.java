@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class MainController {
+public class ManageGroupControllerTest {
 
     @Autowired
-    private MainController mainController;
+    private ManageGroupController manageGroupController;
 
     @Test
     public void loadsContext() {
-        Assertions.assertNotNull(mainController);
+        Assertions.assertNotNull(manageGroupController);
     }
 }
