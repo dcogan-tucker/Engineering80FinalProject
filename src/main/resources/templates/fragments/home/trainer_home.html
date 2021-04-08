@@ -17,7 +17,6 @@
             <tr>
                 <th scope="col">Student Name</th>
                 <th scope="col">Status</th>
-                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -25,34 +24,21 @@
                 <td th:text="${feedback.trainee.firstName} + ' ' + ${feedback.trainee.lastName}"></td>
                 <td th:text="${feedback.status.status}"></td>
                 <!--            <td th:text="${feedback.overdue ? 'True' : 'false'}"></td>-->
-                <td>
-                    <form action="#" th:action="@{/removeTrainee}" method="get">
-                        <input type="hidden" id="traineeId" name="traineeId" th:value="${feedback.trainee.traineeId}">
-                        <button class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal" th:attr="data-bs-target=${'#removeOldTrainee'}"
-                                type="submit">Remove Trainee
-                        </button>
-                    </form>
-                </td>
             </tr>
             </tbody>
         </table>
 
-        <form th:id="'updateWeek' + ${i}" th:if="${feedbacks.get(i) == null}" method="post" th:action="@{/}" hidden>
-            <button class="btn bg-color-red"  name="updateBtn" type="submit" th:disabled="${disableUnlock}">Unlock Week</button>
-            <p th:text="${disabledMessage}"></p>
-        </form>
+        <div th:if="${iterStat.last}" class="container text-center">
+            <a class="btn bg-color-red my-3 mx-1" href="/group">Manage Group</a>
+            <form th:id="'updateWeek' + ${i}" th:if="${feedbacks.get(i) == null}" method="post" th:action="@{/}" hidden>
+                <button class="btn bg-color-red my-3 mx-1"  name="updateBtn" type="submit" th:disabled="${disableUnlock}">Unlock Week</button>
+                <p th:text="${disabledMessage}"></p>
+            </form>
+        </div>
     </th:block>
 </div>
 
 
-<div class="container text-center">
-    <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal"
-            th:attr="data-bs-target=${'#addNewTrainee'}">Add Trainee
-    </button>
-    <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal"
-            th:attr="data-bs-target=${'#addNewGroup'}">Add Group
-    </button>
-</div>
 <div th:insert="/fragments/trainer/newUserForm"></div>
 <div th:insert="/fragments/trainer/newGroupForm"></div>
 
