@@ -55,6 +55,9 @@ public class FeedbackController {
         feedbackEntity.setTraineeStop(feedback.getTraineeStop());
         feedbackEntity.setTraineeStart(feedback.getTraineeStart());
         feedbackEntity.setTraineeContinue(feedback.getTraineeContinue());
+        feedbackEntity.setTrainerStop(feedback.getTrainerStop());
+        feedbackEntity.setTrainerStart(feedback.getTrainerStart());
+        feedbackEntity.setTrainerContinue(feedback.getTrainerContinue());
         feedbackEntity.setConsultantGrade(feedback.getConsultantGrade());
         feedbackEntity.setTechnicalGrade(feedback.getTechnicalGrade());
         if(user.getRole().equals("ROLE_TRAINER")){
