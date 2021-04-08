@@ -8,47 +8,77 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <div th:insert="/fragments/header :: header"></div>
+<div th:insert="/fragments/header :: header"></div>
 
-    <section id="main-content">
-        <div class="container" id="trainer-details">
-            <h1 class="pt-5 pb-3" th:text="${user.trainer.group.groupName} + ' - ' + ${user.trainer.group.stream.name}"></h1>
-            <label class="pb-3" th:text="'Name: ' + ${user.trainer.firstName} + ' ' + ${user.trainer.lastName}">Trainer Name</label>
+<section id="main-content">
+    <div class="container" id="trainer-details">
+        <h1 class="pt-5 pb-3"
+            th:text="${user.trainer.group.groupName} + ' - ' + ${user.trainer.group.stream.name}"></h1>
+        <label class="pb-3" th:text="'Name: ' + ${user.trainer.firstName} + ' ' + ${user.trainer.lastName}">Trainer
+            Name</label>
 
-            <div class="list-group">
-                <th:block th:each="trainee : ${trainees}">
-                    <form action="#" th:action="@{/removeTrainee}" method="get">
-                        <input type="hidden" id="traineeId" name="traineeId" th:value="${trainee.traineeId}">
-                        <button type="submit"
-                                class="list-group-item list-group-item-action"
-                                data-bs-toggle="modal"
-                                th:text="${trainee.firstName} + ' ' + ${trainee.lastName}"
-                                th:attr="data-bs-target=${'#removeOldTrainee'}"></button>
+        <div class="list-group">
+            <th:block th:each="trainee : ${trainees}">
+                <a class="list-group-item list-group-item-action"
+                   th:text="${trainee.firstName} + ' ' + ${trainee.lastName}"></a>
+                <!--                <form action="#" th:action="@{/removeTrainee}" method="get">-->
+                <!--                    <input type="hidden" id="traineeId" name="traineeId" th:value="${trainee.traineeId}">-->
+                <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal"
+                        th:attr="data-bs-target=${'#removeTrainee' + trainee.traineeId}">
+                    Remove
+                </button>
+                <!--                </form>-->
+            </th:block>
+        </div>
+
+        <div class="text-center">
+            <form method="post" th:action="@{/}">
+                <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal"
+                        th:attr="data-bs-target=${'#addNewTrainee'}">Add Trainee
+                </button>
+                <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal"
+                        th:attr="data-bs-target=${'#addNewGroup'}">Add Group
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div th:each="trainee : ${trainees}" th:attr="id=${'removeTrainee' + trainee.traineeId}"
+         aria-hidden="true" class="modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Trainer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <form method="post" action="#" th:action="@{/deleteTrainee}">
+                        <div class="modal-header bg-dark text-white d-flex">
+                            <h4 class="fw-bold">Are you sure?</h4>
+                        </div>
+                        <div class="modal-body bg-dark text-white">
+                            <h5 class="fw-bold">This will remove the trainee from your group,
+                                aswell as deactivate the trainee from logging-in to the system.</h5>
+                        </div>
+                        <div class="modal-footer bg-dark text-white">
+                            <input type="hidden" id="traineeId" name="traineeId" th:value="*{trainee.traineeId}">
+                            <button class="btn bg-color-red" data-bs-toggle="modal" type="submit">DELETE</button>
+                        </div>
                     </form>
-                </th:block>
-            </div>
-
-            <div class="text-center">
-                <form method="post" th:action="@{/}">
-                    <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal"
-                            th:attr="data-bs-target=${'#addNewTrainee'}">Add Trainee
-                    </button>
-                    <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal"
-                            th:attr="data-bs-target=${'#addNewGroup'}">Add Group
-                    </button>
-                </form>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <div th:insert="/fragments/trainer/newUserForm"></div>
-    <div th:insert="/fragments/trainer/newGroupForm"></div>
+<div th:insert="/fragments/trainer/newUserForm"></div>
+<div th:insert="/fragments/trainer/newGroupForm"></div>
 
-    <footer>
-        <div th:insert="/fragments/footer :: footer"></div>
-    </footer>
-    <!-- Scripts -->
-    <script th:src="@{webjars/popper.js/2.5.4/umd/popper.min.js}"></script>
-    <script th:src="@{webjars/bootstrap/5.0.0-beta2/js/bootstrap.min.js}"></script>
+<footer>
+    <div th:insert="/fragments/footer :: footer"></div>
+</footer>
+<!-- Scripts -->
+<script th:src="@{webjars/popper.js/2.5.4/umd/popper.min.js}"></script>
+<script th:src="@{webjars/bootstrap/5.0.0-beta2/js/bootstrap.min.js}"></script>
 </body>
 </html>
