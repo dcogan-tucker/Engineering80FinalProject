@@ -117,12 +117,18 @@
             document.getElementById("startTrainee").readOnly = true;
             document.getElementById("continueTrainee").readOnly = true;
             document.getElementById("saveBtn").hidden = true
-            if(role == "ROLE_TRAINEE"){
+            if(role == "ROLE_TRAINEE" || status.toLowerCase() == "closed"){
+                document.getElementById("trainerComments").readOnly = true;
+                document.getElementById("stopTrainer").readOnly = true;
+                document.getElementById("startTrainer").readOnly = true;
+                document.getElementById("continueTrainer").readOnly = true;
                 document.getElementById("techGrade").disabled = true;
                 document.getElementById("consultGrade").disabled = true;
                 document.getElementById("submitBtn").hidden = true
             }
         }
+
+
     </script>
     <script type="text/javascript" th:src="@{/js/feedback.js}"></script>
 </div>
