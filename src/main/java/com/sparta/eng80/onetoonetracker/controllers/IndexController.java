@@ -74,11 +74,16 @@ public class IndexController {
                     boolean disableUnlock = false;
                     int latestWeek = feedbackByWeek.size() - 1;
                     Iterator<FeedbackEntity> feedbackIter = feedbackByWeek.get(latestWeek).iterator();
+                    String disabledMessage = "";
                     if (feedbackIter.hasNext()) {
                         FeedbackEntity latestFeedback = feedbackIter.next();
                         Date date = latestFeedback.getDeadline();
-                        if (date.equals(getDeadline())) {
+                        LocalDate nextUnlock = date.toLocalDate();
+                        nextUnlock = nextUnlock.plusDays(3);
+                        if (LocalDate.now().isBefore(nextUnlock)) {
                             disableUnlock = true;
+                            long days = ChronoUnit.DAYS.between(LocalDate.now(), nextUnlock);
+                            disabledMessage = "Week can be unlocked in " + days + " days";
                         }
                     }
 
@@ -88,6 +93,7 @@ public class IndexController {
                     model.addAttribute("allUnassignedTrainers", trainerService.findAllUnassigned());
                     model.addAttribute("allStreams", streamService.findAll());
                     model.addAttribute("disableUnlock", disableUnlock);
+                    model.addAttribute("disabledMessage", disabledMessage);
                     break;
                 case "ROLE_ADMIN":
                     model.addAttribute("allGroups", groupService.findAll());
@@ -159,11 +165,11 @@ public class IndexController {
         LocalDate date = LocalDate.now();
         int dayOfWeek = date.getDayOfWeek().getValue();
         if (dayOfWeek <= 4) {
-            date.plusDays(4 - dayOfWeek);
-            date.plusDays(1);
+            date = date.plusDays(4 - dayOfWeek);
+            date = date.plusDays(1);
         } else {
-            date.plusDays(4 + (7 - dayOfWeek));
-            date.plusDays(1);
+            date = date.plusDays(4 + (7 - dayOfWeek));
+            date = date.plusDays(1);
         }
 //        date.plusHours(23 - date.getHour());
 //        date.plusMinutes(59 - date.getMinute());
