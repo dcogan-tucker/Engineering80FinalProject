@@ -76,4 +76,9 @@ public class GroupService implements GroupAppService {
         }
         return unique;
     }
+
+    //strictly for testing purposes only
+    public void deleteById(int groupId) {
+        groupRepository.deleteById(groupId);
+    }
 }
