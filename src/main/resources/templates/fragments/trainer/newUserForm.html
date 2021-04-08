@@ -10,47 +10,38 @@
          aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header bg-dark text-white d-flex">
-                    <h4 class="fw-bold">Add new trainee</h4>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                <div class="modal-header d-flex">
+                    <h4 class="modal-title">Add new trainee</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                 </div>
-                <div class="modal-body bg-dark text-white">
-                    <table class="w-100">
-                        <tr>
-                            <td><h5 class="fw-bold">Trainee Name</h5></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Group to assign trainee to:
-                            </td>
-                            <td>
-                            <div class="col-md-3">
-                                <select style="text-align-last: center" class="form-control" type="Number" name="groupId"
-                                        required>
-                                    <option value=""> --</option>
-                                    <option th:each="group : ${allGroups}"
-                                            th:value="${group.groupId}"
-                                            th:text="${group.groupName}"></option>
-                                </select>
-                            </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>First Name</td>
-                            <td>
-                                <input type="text" name="firstName" class="form-control" autofocus="autofocus" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Last Name</td>
-                            <td>
-                                <input type="text" name="lastName" class="form-control" required>
-                            </td>
-                        </tr>
-                    </table>
+                <div class="modal-body">
+                    <div class="mb-2 row">
+                        <label for="traineeGroup" class="col-sm-4 col-form-label">Group</label>
+                        <div class="col-sm-6">
+                            <select style="text-align-last: center" class="form-control" type="Number" name="groupId" id="traineeGroup"
+                                    required>
+                                <option value="">Assign Group</option>
+                                <option th:each="group : ${allGroups}"
+                                        th:value="${group.groupId}"
+                                        th:text="${group.groupName}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
+                        <label for="traineeFirstName" class="col-sm-4 col-form-label">First Name</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="firstName" class="form-control" autofocus="autofocus" id="traineeFirstName" required>
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
+                        <label for="traineeLastName" class="col-sm-4 col-form-label">Last Name</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="lastName" class="form-control" id="traineeLastName" required>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer bg-dark text-white">
+                <div class="modal-footer">
                     <button class="btn bg-color-red" data-bs-toggle="modal" type="submit">Create New Trainee</button>
                 </div>
             </div>

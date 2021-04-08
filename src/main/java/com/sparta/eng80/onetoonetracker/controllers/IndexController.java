@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.sql.*;
 import java.util.*;
 
 @Controller
@@ -26,15 +25,16 @@ public class IndexController {
     private final TrainerService trainerService;
     private final FeedbackService feedbackService;
     private final StreamService streamService;
+    private final AdminService adminService;
 
     @Autowired
-    public IndexController(SecurityService securityService, GroupService groupService, TrainerService trainerService, FeedbackService feedbackService, StreamService streamService) {
+    public IndexController(SecurityService securityService, GroupService groupService, TrainerService trainerService, FeedbackService feedbackService, StreamService streamService, AdminService adminService) {
         this.securityService = securityService;
         this.groupService = groupService;
         this.trainerService = trainerService;
         this.feedbackService = feedbackService;
         this.streamService = streamService;
-
+        this.adminService = adminService;
     }
 
     @GetMapping("/")
@@ -93,8 +93,16 @@ public class IndexController {
                     model.addAttribute("disabledMessage", disabledMessage);
                     break;
                 case "ROLE_ADMIN":
+                    Iterable<TrainerEntity> trainers = adminService.findAllTrainers();
+                    TrainerEntity newTrainer = new TrainerEntity();
+                    Iterable<GroupEntity> unassignedGroups = groupService.findAllUnassigned();
+
                     model.addAttribute("allGroups", groupService.findAll());
                     model.addAttribute("trainers", trainerService.findAll());
+                    model.addAttribute("trainers", trainers);
+                    model.addAttribute("groups", unassignedGroups);
+                    model.addAttribute("newTrainer", newTrainer);
+
                     break;
                 case "ROLE_TRAINEE":
                     TraineeEntity trainee = securityService.getCurrentUser().getTrainee();

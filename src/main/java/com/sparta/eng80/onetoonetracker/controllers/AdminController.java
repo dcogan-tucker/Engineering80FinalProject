@@ -4,10 +4,7 @@ import com.sparta.eng80.onetoonetracker.entities.GroupEntity;
 import com.sparta.eng80.onetoonetracker.entities.TrainerEntity;
 import com.sparta.eng80.onetoonetracker.entities.UserEntity;
 import com.sparta.eng80.onetoonetracker.security.PasswordEncryptor;
-import com.sparta.eng80.onetoonetracker.services.AdminService;
-import com.sparta.eng80.onetoonetracker.services.GroupService;
-import com.sparta.eng80.onetoonetracker.services.SecurityService;
-import com.sparta.eng80.onetoonetracker.services.UserService;
+import com.sparta.eng80.onetoonetracker.services.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,26 +25,14 @@ public class AdminController {
     private final UserService userService;
     private final GroupService groupService;
     private final SecurityService securityService;
+    private final TrainerService trainerService;
 
-    public AdminController(AdminService adminService, UserService userService, GroupService groupService, SecurityService securityService) {
+    public AdminController(AdminService adminService, UserService userService, GroupService groupService, SecurityService securityService, TrainerService trainerService) {
         this.adminService = adminService;
         this.userService = userService;
         this.groupService = groupService;
         this.securityService = securityService;
-    }
-
-    @GetMapping("/trainers")
-    public String getAllTrainers(ModelMap modelMap){
-        if (securityService.requiresPasswordChange()) {
-            return "redirect:/change-password";
-        }
-        Iterable<TrainerEntity> trainers = adminService.findAllTrainers();
-        modelMap.addAttribute("trainers", trainers);
-        Iterable<GroupEntity> groups = groupService.findAllUnassigned();
-        modelMap.addAttribute("groups", groups);
-        TrainerEntity trainer = new TrainerEntity();
-        modelMap.addAttribute("newTrainer", trainer);
-        return "redirect:/";
+        this.trainerService = trainerService;
     }
 
     @PostMapping("/add-trainer")
@@ -84,7 +69,7 @@ public class AdminController {
         }
         trainer.setUser(user);
         adminService.saveTrainer(trainer);
-        return "redirect:/trainers";
+        return "redirect:/";
     }
 
     @PostMapping("/remove-trainer")
@@ -92,7 +77,7 @@ public class AdminController {
         if(confirmation){
             adminService.deleteTrainerById(trainerId);
         }
-        return "redirect:/trainers";
+        return "redirect:/";
     }
 
     @GetMapping("/trainers/{trainerId}")
@@ -111,8 +96,12 @@ public class AdminController {
     }
 
     @PostMapping("/edit-trainer")
-    public String editTrainer(@RequestParam int trainerId, @RequestParam String firstName, @RequestParam String lastName){
-        adminService.editTrainer(trainerId, firstName, lastName);
-        return "redirect:/trainers";
+    public String editTrainer(@RequestParam int trainerId, @RequestParam String firstName, @RequestParam String lastName, @RequestParam int groupId){
+        TrainerEntity trainer = trainerService.findById(trainerId).get();
+        trainer.setFirstName(firstName);
+        trainer.setLastName(lastName);
+        trainer.setGroup(groupService.findById(groupId).orElse(null));
+        trainerService.save(trainer);
+        return "redirect:/";
     }
 }
