@@ -12,7 +12,7 @@
     <div class="container mt-5" th:fragment="main_content">
         <h1 class="text-center">Trainers</h1>
         <table class="table table-hover mt-3" id="trainersTable">
-            <thead class="text-black-50 font-weight-bold">
+            <thead class="font-weight-bold">
                 <tr>
                     <th>First Name</th>
                     <th>Last Name</th>
@@ -20,7 +20,7 @@
                 </tr>
             </thead>
             <tbody>
-            <tr th:each="trainer : ${trainers}" class="text-black-50"
+            <tr th:each="trainer : ${trainers}"
                 th:attr="data-bs-target=${'#adminEditTrainerModal' + trainer.trainerId}" data-bs-toggle="modal">
                 <td th:text="*{trainer.firstName}"></td>
                 <td th:text="*{trainer.lastName}"></td>
@@ -132,6 +132,5 @@
         </div>
 
     </div>
-
 </body>
 </html>
