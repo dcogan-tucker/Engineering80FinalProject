@@ -38,6 +38,8 @@ public class TrainerService implements UserAppService<TrainerEntity> {
     @Override
     public TrainerEntity save(TrainerEntity trainerEntity) { return trainerRepository.save(trainerEntity); }
 
+    public void removeById(int id){ trainerRepository.removeById(id);}
+
     @Override
     public Optional<TrainerEntity> findByUserId(int id) {
         return Optional.empty();
@@ -65,7 +67,7 @@ public class TrainerService implements UserAppService<TrainerEntity> {
 
     @Override
     public Iterable<TrainerEntity> findByName(String first, String last) {
-        return null;
+        return trainerRepository.findByName(first, last);
     }
 
     public TraineeEntity addNewTrainee(GroupEntity groupEntity, String firstName, String lastName, String role) {
