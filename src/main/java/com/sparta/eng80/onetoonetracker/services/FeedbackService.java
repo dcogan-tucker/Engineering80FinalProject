@@ -17,47 +17,9 @@ public class FeedbackService implements FeedbackAppService {
         this.feedbackRepository = feedbackRepository;
     }
 
-    // TODO: feedback is present could be extracted into separate method to prevent code being repeated
-    public FeedbackEntity updateTraineeSSC(Integer id, String traineeStop, String traineeStart, String traineeContinue){
-        Optional<FeedbackEntity> feedbackOptional = feedbackRepository.findById(id);
-        FeedbackEntity feedbackEntity = new FeedbackEntity();
-        if(feedbackOptional.isPresent()){
-             feedbackEntity = feedbackOptional.get();
-             feedbackEntity.setTraineeStop(traineeStop);
-             feedbackEntity.setTraineeStart(traineeStart);
-             feedbackEntity.setTraineeContinue(traineeContinue);
-        }
-        return feedbackRepository.save(feedbackEntity);
-    }
+    public Optional<FeedbackEntity> findByTraineeStop(String traineeStop){return feedbackRepository.findByTraineeStop(traineeStop);}
 
-    public FeedbackEntity updateTrainerSSC(Integer id, String trainerStop, String trainerStart, String trainerContinue){
-        Optional<FeedbackEntity> feedbackOptional = feedbackRepository.findById(id);
-        FeedbackEntity feedbackEntity = new FeedbackEntity();
-        if(feedbackOptional.isPresent()){
-            feedbackEntity = feedbackOptional.get();
-            feedbackEntity.setTrainerStop(trainerStop);
-            feedbackEntity.setTrainerStart(trainerStart);
-            feedbackEntity.setTrainerContinue(trainerContinue);
-        }
-        return feedbackRepository.save(feedbackEntity);
-    }
-
-    public FeedbackEntity updateGrades(Integer id, String technicalGrade, String consultantGrade){
-        Optional<FeedbackEntity> feedbackOptional = feedbackRepository.findById(id);
-        FeedbackEntity feedbackEntity = new FeedbackEntity();
-        if(feedbackOptional.isPresent()){
-            feedbackEntity = feedbackOptional.get();
-            feedbackEntity.setTechnicalGrade(technicalGrade);
-            feedbackEntity.setConsultantGrade(consultantGrade);
-        }
-        return feedbackRepository.save(feedbackEntity);
-    }
-
-    public FeedbackEntity update(FeedbackEntity feedbackEntity){
-        return feedbackRepository.save(feedbackEntity);
-    }
-
-
+    public void removeById(int feedbackId){feedbackRepository.removeById(feedbackId);}
 
     @Override
     public Optional<FeedbackEntity> findById(int id) {

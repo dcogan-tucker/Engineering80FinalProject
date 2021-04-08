@@ -67,7 +67,7 @@ public class FeedbackController {
         }
 
         feedbackEntity.setSubmitted(Date.valueOf(LocalDate.now()));
-        feedbackService.update(feedbackEntity);
+        feedbackService.save(feedbackEntity);
 
         return "redirect:/";
     }

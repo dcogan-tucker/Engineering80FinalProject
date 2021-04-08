@@ -63,4 +63,8 @@ public class UserService implements UserAppService<UserEntity> {
     }
 
     public Set<String> getAllEmails(){ return userRepository.getAllEmails();}
+
+    public void removeById(int userId){
+        userRepository.removeById(userId);
+    }
 }
