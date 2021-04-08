@@ -33,6 +33,11 @@ public class StreamService implements StreamAppService {
 
     @Override
     public Optional<StreamEntity> findByName(String name) {
-        return null;
+        return streamRepository.findByName(name);
+    }
+
+    //strictly for testing purposes only
+    public void deleteById(int id) {
+        streamRepository.deleteById(id);
     }
 }
