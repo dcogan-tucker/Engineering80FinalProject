@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   width="57mm"
+   height="57mm"
+   viewBox="0 0 161.57477 161.57477"
+   preserveAspectRatio="xMidYMid meet"
+   id="svg6297"
+   sodipodi:docname="Open_Minded.svg"
+   inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)">
+  <defs
+     id="defs6301" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1858"
+     inkscape:window-height="1057"
+     id="namedview6299"
+     showgrid="false"
+     units="mm"
+     height="104mm"
+     inkscape:zoom="1.940365"
+     inkscape:cx="38.404231"
+     inkscape:cy="106.56679"
+     inkscape:window-x="54"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g6295" />
+  <metadata
+     id="metadata6233">
+Created by potrace 1.16, written by Peter Selinger 2001-2019
+<rdf:RDF>
+  <cc:Work
+     rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type
+       rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title></dc:title>
+  </cc:Work>
+</rdf:RDF>
+</metadata>
+  <g
+     transform="matrix(0.1,0,0,-0.1,0,973)"
+     fill="#000000"
+     stroke="none"
+     id="g6295">
+    <path
+       d="m 483.94328,9478.7644 c 0,-3 7,-14 15,-23 14,-15 12,-23 -24,-77 -49,-72 -64,-126 -64,-218 0,-88 15,-143 57,-208 64,-99 146,-158 255,-182 63,-15 70,-19 73,-42 4,-38 28,-42 28,-5 0,29 2,31 72,47 48,11 91.99998,29 132.00002,56 56,37 60,39 78,23 29,-27 35,-6 5,23 l -26,27 -23,-21 c -13,-12 -50,-36 -83.00004,-55 -57.99998,-32 -63.99998,-33 -169.99998,-33 -106,0 -112,1 -170,33 -81,46 -125,90 -166,169 -32,63 -34,70 -34,172 0,101 2,109 34,166 18,33 42,70 54,83 l 20,22 -23,25 c -23,24 -40,32 -40,18 z"
+       id="path6269"
+       style="fill:#4f6d84;fill-opacity:1" />
+    <path
+       d="m 718.94328,9458.7644 c -110,-33 -188,-121 -215,-244 -33,-149 68,-309 222,-353 71,-20 96,-20 166,0 111.00002,33 178.00002,97 215.00002,208 37,108 7,227 -78,311 -42.00004,43 -72.00002,60 -137.00002,79 -67,19 -106,19 -173,-1 z m 220,-40 c 98.00002,-51 155.00002,-146 155.00002,-258 0,-83 -23,-141 -78,-198 -63.00002,-66 -104.00002,-82 -208.00002,-82 -88,0 -92,1 -148,38 -37,24 -70,58 -94,95 -36,55 -37,60 -37,147 0,87 1,92 37,146 36,56 105,113 156,130 47,15 173,4 217,-18 z"
+       id="path6271"
+       style="fill:#4f6d84;fill-opacity:1" />
+    <path
+       d="m 635.94328,8642.7644 c -14,-15 -22,-36 -22,-60 v -37 h 195 195.00002 v 38 c 0,27 -7.00004,45 -23.00004,60 -21.99998,21 -32.99998,22 -172.99998,22 -144,0 -151,-1 -172,-23 z m 336,-39 2.99998,-28 h -164.99998 -166 v 23 c 0,13 3,27 7,31 4,3 77,5 162,4 l 156,-3 z"
+       id="path6273"
+       style="fill:#4f6d84;fill-opacity:1" />
+    <path
+       style="fill:none;stroke:#4f6d84;stroke-width:16.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 14.191556,9715.423 V 8118.4386 H 1610.6638 v 1596.1572 z"
+       id="path6864" />
+  </g>
+</svg>
