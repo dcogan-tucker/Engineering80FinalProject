@@ -37,16 +37,6 @@
                             <input type="date" id="groupStartDate" th:value="${#dates.createNow()}" name="startDate" class="form-control"/>
                         </div>
                     </div>
-                    <div class="mb-2 row">
-                        <label for="assignTrainer" class="col-sm-4 col-form-label">Trainer</label>
-                        <div class="col-sm-6">
-                            <select style="text-align-last: center" class="form-control" name="trainerId" id="assignTrainer"
-                                    required>
-                                <option value=""> Assign Trainer </option>
-                                <option th:each="trainer : ${allUnassignedTrainers}" th:value="${trainer.trainerId}" th:text="${trainer.firstName} + ' ' + ${trainer.lastName}"></option>
-                            </select>
-                        </div>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn bg-color-red" data-bs-toggle="modal" type="submit">Create New Group</button>
