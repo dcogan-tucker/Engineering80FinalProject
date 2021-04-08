@@ -17,7 +17,6 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Group</th>
-<!--                    <th></th>-->
                 </tr>
             </thead>
             <tbody>
@@ -29,13 +28,6 @@
                     <p th:case="true" th:text="*{trainer.group.groupName}"></p>
                     <p th:case="false" th:text="'Not Assigned'"></p>
                 </td>
-<!--                <td>-->
-<!--                    <a class="btn bg-color-red text-white" name="trainerId" type="submit" th:href="@{/trainers/{Id}(Id = ${trainer.trainerId})}">Profile</a>-->
-<!--                </td>-->
-<!--                <td>-->
-<!--                    <button type="button" class="btn bg-color-red text-white" data-bs-toggle="modal" th:object="${trainer}" data-bs-target="#adminEditTrainerModal">Edit Trainer</button>-->
-<!--                </td>-->
-
             </tr>
             </tbody>
         </table>
@@ -140,16 +132,6 @@
         </div>
 
     </div>
-<!--    <div>-->
-<!--        <form action="#" th:action="@{/remove-trainer}" method="post" >-->
-<!--            <input class="mt-2" type="number" name="trainerId" placeholder="Trainer Id"/></br>-->
-<!--            <label for="confirmation">I understand upon deletion the information can not be restored.</label>-->
-<!--            <input type="checkbox" id="confirmation" name="confirmation" value="true">-->
-<!--            <div class="modal-footer">-->
-<!--                <input class="btn" id="primaryBtn" type="submit" value="Remove Trainer">-->
-<!--            </div>-->
-<!--        </form>-->
-<!--    </div>-->
 
 </body>
 </html>
