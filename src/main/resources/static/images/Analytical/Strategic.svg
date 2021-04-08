@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   width="60mm"
+   height="62mm"
+   viewBox="0 0 170.0787 175.74799"
+   preserveAspectRatio="xMidYMid meet"
+   id="svg899"
+   sodipodi:docname="Strategic.svg"
+   inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)">
+  <defs
+     id="defs903" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1858"
+     inkscape:window-height="1057"
+     id="namedview901"
+     showgrid="false"
+     units="mm"
+     width="104mm"
+     inkscape:zoom="0.54378981"
+     inkscape:cx="270.40592"
+     inkscape:cy="577.96745"
+     inkscape:window-x="54"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g897" />
+  <metadata
+     id="metadata833">
+Created by potrace 1.16, written by Peter Selinger 2001-2019
+<rdf:RDF>
+  <cc:Work
+     rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type
+       rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title></dc:title>
+  </cc:Work>
+</rdf:RDF>
+</metadata>
+  <g
+     transform="matrix(0.1,0,0,-0.1,0,954)"
+     fill="#000000"
+     stroke="none"
+     id="g897">
+    <path
+       d="m 737.99985,9211.0733 c -87,-30 -170,-144 -170,-233 0,-47 28,-141 62,-208 34,-65 149,-216 180,-235 21,-13 48,11 123,109 91.00005,119 145.00005,244 145.00005,332 0,95 -82.00005,205 -177.00005,236 -61,20 -102,20 -163,-1 z m 208,-45 c 23,-15 54,-46 69.00005,-69 26,-38 28,-50 28,-132 -1,-82 -4,-97 -34,-156 -49.00005,-98 -159.00005,-240 -186.00005,-240 -27,0 -139,145 -187,242 -37,75 -49,192 -26,248 22,51 62,95 111,119 62,32 168,26 225,-12 z"
+       id="path867"
+       style="fill:#4f6d84;fill-opacity:1" />
+    <path
+       d="m 771.99985,9095.0733 c -51,-28 -84,-77 -84,-123 0,-60 73,-133 135,-133 45,0 93,34 123,87 52,94 -79,222 -174,169 z m 125,-47 c 44,-43 44,-105 0,-148 -25,-25 -39,-31 -74,-31 -35,0 -49,6 -74,31 -68,68 -22,179 74,179 35,0 49,-6 74,-31 z"
+       id="path869"
+       style="fill:#4f6d84;fill-opacity:1" />
+    <path
+       d="m 364.99986,8981.0733 c -4,-7 -12,-34 -57,-192 -25,-86 -31,-108 -60,-204 -11,-38 -20,-75 -20,-83 0,-7 -5,-22 -12,-33 -7,-10 -10,-21 -8,-23 9,-8 224.99999,-140 246.99999,-151 13,-6 23,-14 23,-18 0,-10 34,-10 44,-1 4,5 29,13 54,20 26,6 74,19 107,28 150,41 129,41 280,0 33,-9 81.00005,-22 107.00005,-28 25,-7 50,-15 54,-20 10,-9 44,-9 44,1 0,4 10,12 23,18 22,11 238,143 247,151 2,2 -1,13 -8,23 -7,11 -12,26 -12,33 0,8 -9,45 -20,83 -29,96 -35,118 -60,204 -11,41 -28,100 -37,130 -8,30 -19,58 -22,62 -4,4 -44,-14 -90,-41 -50,-29 -79,-51 -72,-56 7,-4 39,10 73,30 60,35 88,39 88,11 0,-7 7,-36 15,-62 8,-27 24,-83 35,-124 25,-85 31,-106 60,-205 19,-66 19,-70 3,-86 -32,-29 -222,-138 -227,-130 -3,5 -12,66 -21,137 -33,270 -40,319 -50,316 -5,-2 -10,-11 -9,-20 2,-27 24,-211 34,-282 23,-166 23,-160 0,-160 -12,0 -42,6 -68,14 -65.00005,20 -152.00005,43 -184.00005,50 -24,5 -27,11 -30,54 -2,26 -7,47 -13,47 -5,0 -11,-21 -13,-47 -3,-43 -6,-49 -30,-54 -32,-7 -119,-30 -184,-50 -26,-8 -56,-14 -68,-14 -23,0 -23,-6 0,160 10,66 32,252 34,280 1,8 -3,16 -9,18 -10,3 -19,-54 -50,-312 -9,-71 -18,-132 -21,-137 -5,-8 -194.99999,101 -226.99999,130 -16,16 -16,20 3,86 29,99 35,120 60,205 11,41 27,97 35,124 8,26 15,55 15,62 0,28 28,24 87.99999,-11 34,-20 66,-34 72,-30 7,4 -11,21 -45,41 -82.99999,50 -112.99999,65 -117.99999,56 z"
+       id="path871"
+       style="fill:#4f6d84;fill-opacity:1" />
+    <path
+       style="fill:none;stroke:#4f6d84;stroke-width:33.0236;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 67.999864,9478.5783 V 7859.0733 H 1647.9999 v 1620 z"
+       id="path905"
+       sodipodi:nodetypes="ccccc" />
+  </g>
+</svg>
