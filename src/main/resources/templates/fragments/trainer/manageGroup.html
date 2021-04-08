@@ -21,13 +21,10 @@
             <th:block th:each="trainee : ${trainees}">
                 <a class="list-group-item list-group-item-action"
                    th:text="${trainee.firstName} + ' ' + ${trainee.lastName}"></a>
-                <!--                <form action="#" th:action="@{/removeTrainee}" method="get">-->
-                <!--                    <input type="hidden" id="traineeId" name="traineeId" th:value="${trainee.traineeId}">-->
                 <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal"
                         th:attr="data-bs-target=${'#removeTrainee' + trainee.traineeId}">
                     Remove
                 </button>
-                <!--                </form>-->
             </th:block>
         </div>
 
@@ -42,37 +39,11 @@
             </form>
         </div>
     </div>
-
-    <div th:each="trainee : ${trainees}" th:attr="id=${'removeTrainee' + trainee.traineeId}"
-         aria-hidden="true" class="modal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Edit Trainer</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-footer">
-                    <form method="post" action="#" th:action="@{/deleteTrainee}">
-                        <div class="modal-header bg-dark text-white d-flex">
-                            <h4 class="fw-bold">Are you sure?</h4>
-                        </div>
-                        <div class="modal-body bg-dark text-white">
-                            <h5 class="fw-bold">This will remove the trainee from your group,
-                                aswell as deactivate the trainee from logging-in to the system.</h5>
-                        </div>
-                        <div class="modal-footer bg-dark text-white">
-                            <input type="hidden" id="traineeId" name="traineeId" th:value="*{trainee.traineeId}">
-                            <button class="btn bg-color-red" data-bs-toggle="modal" type="submit">DELETE</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 </section>
 
 <div th:insert="/fragments/trainer/newUserForm"></div>
 <div th:insert="/fragments/trainer/newGroupForm"></div>
+<div th:insert="/fragments/trainer/removeTraineeForm"></div>
 
 <footer>
     <div th:insert="/fragments/footer :: footer"></div>
