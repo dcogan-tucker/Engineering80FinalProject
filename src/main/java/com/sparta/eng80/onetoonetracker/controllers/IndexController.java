@@ -84,9 +84,6 @@ public class IndexController {
 
                     model.addAttribute("trainer", trainer);
                     model.addAttribute("feedbacks", feedbackByWeek);
-                    model.addAttribute("allGroups", groupService.findAll());
-                    model.addAttribute("allUnassignedTrainers", trainerService.findAllUnassigned());
-                    model.addAttribute("allStreams", streamService.findAll());
                     model.addAttribute("disableUnlock", disableUnlock);
                     break;
                 case "ROLE_ADMIN":
