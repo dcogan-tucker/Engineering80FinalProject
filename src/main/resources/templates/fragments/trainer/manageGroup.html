@@ -36,6 +36,9 @@
                 <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal"
                         th:attr="data-bs-target=${'#addNewGroup'}">Add Group
                 </button>
+                <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal"
+                        th:attr="data-bs-target=${'#addNewStream'}">Add Stream
+                </button>
             </form>
         </div>
     </div>
@@ -43,7 +46,9 @@
 
 <div th:insert="/fragments/trainer/newUserForm"></div>
 <div th:insert="/fragments/trainer/newGroupForm"></div>
+<div th:insert="/fragments/trainer/newStreamForm"></div>
 <div th:insert="/fragments/trainer/removeTraineeForm"></div>
+
 
 <footer>
     <div th:insert="/fragments/footer :: footer"></div>
