@@ -42,14 +42,12 @@ public class TrainerController {
             @RequestParam String groupName,
             @RequestParam Date startDate,
             @RequestParam Integer streamId,
-            @RequestParam Integer trainerId,
             Model model) {
         if (groupService.findByName(groupName).isEmpty()) {
             NewGroupForm newGroupForm = new NewGroupForm();
             newGroupForm.setGroupName(groupName);
             newGroupForm.setStartDate(startDate);
             newGroupForm.setStreamId(streamId);
-            newGroupForm.setTrainerId(trainerId);
             groupService.addNewGroup(newGroupForm);
         }
         return "redirect:/group";

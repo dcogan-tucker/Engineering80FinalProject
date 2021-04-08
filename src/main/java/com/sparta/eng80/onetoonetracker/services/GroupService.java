@@ -60,7 +60,6 @@ public class GroupService implements GroupAppService {
         groupEntity.setGroupName(newGroupForm.getGroupName());
         groupEntity.setStartDate(newGroupForm.getStartDate());
         groupEntity.setStream(streamRepository.findById(newGroupForm.getStreamId()).get());
-        groupEntity.setTrainer(trainerRepository.findById(newGroupForm.getTrainerId()).get());
         groupEntity.setTrainees(new HashSet<>());
         groupEntity.setFeedbacks(new HashSet<>());
         save(groupEntity);
