@@ -27,5 +27,10 @@ public interface TrainerRepository extends CrudRepository<TrainerEntity, Integer
 
     //Testing purposes only
     @Query(nativeQuery = true, value = "select * from trainer where first_name = ? and last_name = ?")
-    TrainerEntity findByName(String firstName, String lastName);
+    Iterable<TrainerEntity> findByName(String firstName, String lastName);
+
+    @Modifying
+    @Transactional
+    @Query(nativeQuery = true, value = "delete from trainer where trainer_id = ?")
+    void removeById(int id);
 }

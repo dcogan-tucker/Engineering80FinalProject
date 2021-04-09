@@ -45,7 +45,7 @@ public class AdminServiceTest {
         trainer.setFirstName("ServiceTest");
         trainer.setLastName("ServiceTest");
         adminService.saveTrainer(trainer);
-        this.trainer = trainerRepository.findByName("ServiceTest", "ServiceTest");
+        this.trainer = trainerRepository.findByName("ServiceTest", "ServiceTest").iterator().next();
         Assertions.assertNotNull(adminService.findTrainerById(trainer.getTrainerId()));
     }
 
@@ -68,7 +68,7 @@ public class AdminServiceTest {
     @Test
     @Order(5)
     public void editTrainerTest(){
-        this.trainer = trainerRepository.findByName("ServiceTest", "ServiceTest");
+        this.trainer = trainerRepository.findByName("ServiceTest", "ServiceTest").iterator().next();
         int id = trainer.getTrainerId();
         adminService.editTrainer(trainer.getTrainerId(), "ServiceTesting", "Lastnamee");
         Assertions.assertEquals("ServiceTesting", adminService.findTrainerById(id).get().getFirstName());
@@ -78,7 +78,7 @@ public class AdminServiceTest {
     @Test
     @Order(6)
     public void deleteTrainerByIdTest(){
-        this.trainer = trainerRepository.findByName("ServiceTesting", "Lastnamee");
+        this.trainer = trainerRepository.findByName("ServiceTesting", "Lastnamee").iterator().next();
         int id = trainer.getTrainerId();
         adminService.deleteTrainerById(id);
         Assertions.assertTrue(adminService.findTrainerById(id).isEmpty());

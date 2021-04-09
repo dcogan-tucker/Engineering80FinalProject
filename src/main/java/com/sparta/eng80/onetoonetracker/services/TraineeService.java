@@ -41,12 +41,12 @@ public class TraineeService implements UserAppService<TraineeEntity> {
     }
 
     @Override
-    public Optional<TraineeEntity> findByEmail(String name) {
+    public Optional<TraineeEntity> findByEmail(String email) {
         return Optional.empty();
     }
 
-    public Optional<UserEntity> findUserByEmail(String name) {
-        return userRepository.findUserEntityByEmailEquals(name);
+    public Optional<UserEntity> findUserByEmail(String email) {
+        return userRepository.findUserEntityByEmailEquals(email);
     }
 
     @Override
@@ -64,6 +64,10 @@ public class TraineeService implements UserAppService<TraineeEntity> {
 
     @Override
     public Iterable<TraineeEntity> findByName(String first, String last) {
-        return null;
+        return traineeRepository.findByName(first, last);
+    }
+
+    public void removeTraineeById(int id){
+        traineeRepository.removeById(id);
     }
 }
