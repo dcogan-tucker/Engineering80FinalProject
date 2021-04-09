@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="POST"  action="#" th:action="@{/addGroup}">
+    <div th:attr="id=${'addNewGroup'}" class="modal fade rounded" tabindex="-1"
+         aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header d-flex">
+                    <h4 class="modal-title">Add new group</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-2 row">
+                        <label for="streamName" class="col-sm-4 col-form-label">Stream Name</label>
+                        <div class="col-sm-6">
+                            <select style="text-align-last: center" class="form-control" name="streamId" id="streamName" required>
+                                <option value=""> Select Stream </option>
+                                <option th:each="stream : ${allStreams}" th:value="${stream.streamId}" th:text="${stream.name}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
+                        <label for="groupName" class="col-sm-4 col-form-label">Group Name</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="groupName" id="groupName" class="form-control" autofocus="autofocus" required>
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
+                        <label for="groupStartDate" class="col-sm-4 col-form-label">Group Start Date</label>
+                        <div class="col-sm-6">
+                            <!--                            <input id="datetimepicker" type="text" placeholder="" name="startDate">-->
+                            <input type="date" id="groupStartDate" th:value="${#dates.createNow()}" name="startDate" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn bg-color-red" data-bs-toggle="modal" type="submit">Create New Group</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/moment/moment.min.js}"></script>
+<script th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
+
+<script>
+    $('#datetimepicker').datetimepicker({
+        format: 'm/d/Y h:i A'
+    });
+</script>
+
+</body>
+</html>

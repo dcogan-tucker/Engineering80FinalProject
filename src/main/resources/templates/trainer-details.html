@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainer Details</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.0.0-beta2/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div th:insert="/fragments/header :: header"></div>
+    <div class="container mt-5" th:each="trainer : ${trainer}">
+        <div class="d-flex align-items-center justify-content-center pt-4 pb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+            </svg>
+        </div>
+
+        <div class="d-flex justify-content-center">
+                <table class="h4">
+                    <tr>
+                        <td class="p-2">First Name</td>
+                        <td class="p-2 ms-3 text-end" th:text="${trainer.firstName}"></td>
+                    </tr>
+                    <tr>
+                        <td class="p-2">Last Name</td>
+                        <td class="p-2 ms-3 text-end" th:text="${trainer.lastName}"></td>
+                    </tr>
+                    <tr>
+                        <td class="p-2">Password</td>
+                        <td class="p-2 ms-3 text-end" th:text="'********'"></td>
+                    </tr>
+                </table>
+        </div>
+        <table class="table table-hover" id="trainersTable">
+            <thead class="text-black-50 font-weight-bold">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-black-50">
+                    <td th:text="*{trainer.firstName}"></td>
+                    <td th:text="*{trainer.lastName}"></td>
+                    <td>
+                        <button type="button" class="btn bg-color-red text-white" data-bs-toggle="modal" data-bs-target="#trainerModal">Edit Trainer</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="modal" tabindex="-1" id="trainerModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Trainer</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="#" th:action="@{/edit-trainer}" method="post">
+                        <div class="modal-body">
+                            <td>
+                                <label>First Name</label>
+                                <label>
+                                    <input class="mt-2" type="text" name="firstName" th:value="*{trainer.firstName}">
+                                </label>
+                            </td>
+                            <td>
+                                <label>Last Name</label>
+                                <label>
+                                    <input class="mt-2" type="text" name="lastName" th:value="*{trainer.lastName}">
+                                </label>
+                            </td>
+                            <td>
+                                <input class="btn btn-primary" type="submit" value="Confirm">
+                            </td>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn bg-color-red text-white">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+<!--        <form action="#" th:action="@{/remove-trainer}" method="post" >-->
+<!--            <input class="mt-2" type="hidden" name="trainerId" th:value="*{trainer.trainerId}"/>-->
+<!--            <label for="confirmation">I understand upon deletion the information can not be restored.</label>-->
+<!--            <input type="checkbox" id="confirmation" name="confirmation" value="true">-->
+<!--            <div class="modal-footer">-->
+<!--                <input class="btn" type="submit" value="Remove Trainer">-->
+<!--            </div>-->
+<!--        </form>-->
+    </div>
+    <div th:insert="/fragments/footer :: footer"></div>
+    <!-- Scripts -->
+    <script th:src="@{/webjars/popper.js/2.5.4/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/5.0.0-beta2/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

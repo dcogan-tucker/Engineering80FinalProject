@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <title>Profile</title>
+        <link th:href="@{webjars/bootstrap/5.0.0-beta2/css/bootstrap.min.css}" th:rel="stylesheet"/>
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div th:insert="/fragments/header :: header"></div>
+
+        <section id="main-content" class="pb-5">
+            <div class="container">
+                <div class="d-flex align-items-center justify-content-center pt-4 pb-4 mt-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                    </svg>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <span class="border border-color-main border-2 shadow p-2 mb-3 bg-body rounded">
+                        <table class="h5">
+                            <tr>
+                                <td class="p-2">Name</td>
+                                <td class="p-2 text-end" th:text="${name}"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-2">Email</td>
+                                <td class="p-2 text-end" th:text="${user.email}"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-2">Password</td>
+                                <td class="p-2 text-end" th:text="'********'"></td>
+                            </tr>
+                    </table>
+                    </span>
+                </div>
+
+
+                <div class="d-flex justify-content-center pt-1 pb-4">
+                    <form th:action="@{/change-password}">
+                        <button type="submit" class="btn bg-color-red text-white">Change password</button>
+                    </form>
+                </div>
+
+                <div class="pt-2" sec:authorize="hasAnyAuthority('ROLE_TRAINEE')">
+                    <h3 class="fw-bold text-center">Average Grades</h3>
+                    <table class="w-100 text-center">
+                        <thead>
+                        <td><h4>Technical</h4></td>
+                        <td><h4>Consultant</h4></td>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="fw-bolder h1 p-1 text-color-red" th:text="${grades[0]}"></td>
+                            <td class="fw-bolder h1 p-1 text-color-red" th:text="${grades[1]}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="fw-bold pt-4 text-center">Submissions</h3>
+
+                    <div class="container ps-4">
+                        <p class="fw-bolder">Most recent: </p>
+                        <p th:text="${latestSubmissionTime}" class="ps-3"></p></br>
+
+                        <p class="fw-bolder">Average: </p>
+                        <p th:text="${averageSubmissionTime}" class="ps-3"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div th:insert="/fragments/footer :: footer"></div>
+        </footer>
+        <!-- Scripts -->
+        <script th:src="@{webjars/popper.js/2.5.4/umd/popper.min.js}"></script>
+        <script th:src="@{webjars/bootstrap/5.0.0-beta2/js/bootstrap.min.js}"></script>
+    </body>
+</html>

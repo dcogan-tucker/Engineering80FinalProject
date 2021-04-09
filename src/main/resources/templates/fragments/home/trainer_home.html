@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<body>
+
+<div class="position-absolute container h-100" id="table-details">
+    <h1 class="pt-5 pb-3" th:text="${trainer.group.groupName} + ' - ' + ${trainer.group.stream.name}"></h1>
+    <label class="pb-3" th:text="'Name: ' + ${trainer.firstName} + ' ' + ${trainer.lastName}">Trainer Name</label>
+    <select class="form-select mt-3 mb-3" aria-label="Default select example" onchange="updateWeek(this)">
+        <option th:each="i, iterStat : ${feedbacks}" th:value="${iterStat.count}"
+                th:text="'Week ' + ${iterStat.count} + ' of ' + ${trainer.group.stream.duration}" th:selected="${feedbacks.size()} - 1 == ${iterStat.count}"></option>
+    </select>
+
+    <th:block th:each="i, iterStat : ${#numbers.sequence(1,feedbacks.size())}">
+        <table  class="table table-hover table-responsive py-3" th:id="'traineeTable' + ${i}" th:hidden="${i} != (${feedbacks.size()} - 1)">
+            <thead>
+            <tr>
+                <th scope="col">Student Name</th>
+                <th scope="col">Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="clickable " th:classappend="${feedback.overdue ? 'overdue-true' : 'overdue-false'}" th:each="feedback : ${feedbacks.get(i)}" th:onclick="'javascript:rowClicked(' + ${feedback.feedbackId} + ')'">
+                <td th:text="${feedback.trainee.firstName} + ' ' + ${feedback.trainee.lastName}"></td>
+                <td th:text="${feedback.status.status}"></td>
+                <!--            <td th:text="${feedback.overdue ? 'True' : 'false'}"></td>-->
+            </tr>
+            </tbody>
+        </table>
+
+        <div th:if="${iterStat.last}" class="container text-center">
+            <a class="btn bg-color-red my-3 mx-1" href="/group">Manage Group</a>
+            <form th:id="'updateWeek' + ${i}" th:if="${feedbacks.get(i) == null}" method="post" th:action="@{/}" hidden>
+                <button class="btn bg-color-red my-3 mx-1"  name="updateBtn" type="submit" th:disabled="${disableUnlock}">Unlock Week</button>
+                <p th:text="${disabledMessage}"></p>
+            </form>
+        </div>
+    </th:block>
+
+    <div class="form-control end-0 me-3 bottom-0 mb-5 w-auto position-absolute">
+        <h4 class="fw-bolder">Key</h4>
+        <hr>
+        <div class="overdue-false">
+            <p>Ontime</p>
+        </div>
+        <div class="overdue-true">
+            <p>Late</p>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript" th:src="@{/js/trainer_home.js}"></script>
+</body>
+</html>

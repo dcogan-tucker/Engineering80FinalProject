@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="POST"  action="#" th:action="@{/addStream}">
+    <div th:attr="id=${'addNewStream'}" class="modal fade rounded" tabindex="-1"
+         aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white d-flex">
+                    <h4 class="fw-bold">Create new group</h4>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body bg-dark text-white">
+                    <table class="w-100">
+                        <tr>
+                            <td><h5 class="fw-bold">Stream Name</h5></td>
+                        </tr>
+                        <tr>
+                            <td>Stream Name</td>
+                            <td>
+                                <div class="col-md-3">
+                                    <input type="text" name="streamName" class="form-control" autofocus="autofocus" required>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Stream Description</td>
+                            <td>
+                                <input type="text" name="streamDescription" class="form-control" autofocus="autofocus" required>
+                            </td>
+                        </tr>
+                        <td>Stream Duration</td>
+                        <td>
+                            <select style="text-align-last: center" class="form-control" name="streamDuration"
+                                    required>
+                                <option value="10">10 weeks</option>
+                                <option value="12">12 weeks</option>
+                            </select>
+                        </td>
+                    </table>
+                </div>
+                <div class="modal-footer bg-dark text-white">
+                    <button class="btn bg-color-red" data-bs-toggle="modal" type="submit">Create New Stream</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/moment/moment.min.js}"></script>
+<script th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
+
+<script>
+    $('#datetimepicker').datetimepicker({
+        format: 'm/d/Y h:i A'
+    });
+</script>
+
+</body>
+</html>

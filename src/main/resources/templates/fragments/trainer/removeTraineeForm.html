@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:each="trainee : ${trainees}" th:attr="id=${'removeTrainee' + trainee.traineeId}"
+     aria-hidden="true" class="modal fade rounded" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header d-flex">
+                <h4 class="modal-title">Are you sure?</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5 class="fw-bold" th:text="'This will remove ' + ${trainee.firstName} + ' ' + ${trainee.lastName} + ' from your group, as well as deactivate the trainee from logging into the system.'"></h5>
+            </div>
+            <div class="modal-footer">
+                <form method="post" action="#" th:action="@{/deleteTrainee}">
+                    <input type="hidden" id="traineeId" name="traineeId" th:value="*{trainee.traineeId}">
+                    <button class="btn bg-color-red" data-bs-toggle="modal" type="submit">Delete Trainer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

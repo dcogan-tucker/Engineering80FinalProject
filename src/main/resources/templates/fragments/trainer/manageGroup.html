@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Manage Group</title>
+    <link th:href="@{webjars/bootstrap/5.0.0-beta2/css/bootstrap.min.css}" th:rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div th:insert="/fragments/header :: header"></div>
+
+<section id="main-content">
+    <div class="container" id="trainer-details">
+        <h1 class="pt-5 pb-3"
+            th:text="${user.trainer.group.groupName} + ' - ' + ${user.trainer.group.stream.name}"></h1>
+        <label class="pb-3" th:text="'Name: ' + ${user.trainer.firstName} + ' ' + ${user.trainer.lastName}">Trainer
+            Name</label>
+
+        <div class="list-group">
+            <th:block th:each="trainee : ${trainees}">
+                <a class="list-group-item list-group-item-action"
+                   th:text="${trainee.firstName} + ' ' + ${trainee.lastName}"></a>
+                <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal"
+                        th:attr="data-bs-target=${'#removeTrainee' + trainee.traineeId}">
+                    Remove
+                </button>
+            </th:block>
+        </div>
+
+        <div class="text-center">
+            <form method="post" th:action="@{/}">
+                <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal"
+                        th:attr="data-bs-target=${'#addNewTrainee'}">Add Trainee
+                </button>
+                <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal"
+                        th:attr="data-bs-target=${'#addNewGroup'}">Add Group
+                </button>
+                <button type="button" class="btn bg-color-red my-3 mx-1" data-bs-toggle="modal"
+                        th:attr="data-bs-target=${'#addNewStream'}">Add Stream
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<div th:insert="/fragments/trainer/newUserForm"></div>
+<div th:insert="/fragments/trainer/newGroupForm"></div>
+<div th:insert="/fragments/trainer/newStreamForm"></div>
+<div th:insert="/fragments/trainer/removeTraineeForm"></div>
+
+
+<footer>
+    <div th:insert="/fragments/footer :: footer"></div>
+</footer>
+<!-- Scripts -->
+<script th:src="@{webjars/popper.js/2.5.4/umd/popper.min.js}"></script>
+<script th:src="@{webjars/bootstrap/5.0.0-beta2/js/bootstrap.min.js}"></script>
+</body>
+</html>

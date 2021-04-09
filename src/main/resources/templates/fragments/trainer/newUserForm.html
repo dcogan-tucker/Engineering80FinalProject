@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="POST" action="#" th:action="@{/addTrainee}">
+    <div th:attr="id=${'addNewTrainee'}" class="modal fade rounded" tabindex="-1"
+         aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header d-flex">
+                    <h4 class="modal-title">Add new trainee</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-2 row">
+                        <label for="traineeGroup" class="col-sm-4 col-form-label">Group</label>
+                        <div class="col-sm-6">
+                            <select style="text-align-last: center" class="form-control" type="Number" name="groupId" id="traineeGroup"
+                                    required>
+                                <option value="">Assign Group</option>
+                                <option th:each="group : ${allGroups}"
+                                        th:value="${group.groupId}"
+                                        th:text="${group.groupName}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
+                        <label for="traineeFirstName" class="col-sm-4 col-form-label">First Name</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="firstName" class="form-control" autofocus="autofocus" id="traineeFirstName" required>
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
+                        <label for="traineeLastName" class="col-sm-4 col-form-label">Last Name</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="lastName" class="form-control" id="traineeLastName" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn bg-color-red" data-bs-toggle="modal" type="submit">Create New Trainee</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>
