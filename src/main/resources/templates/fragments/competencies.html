@@ -1,178 +1,532 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Behavioural Competencies</title>
-    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.0.0-beta2/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <title>Behavioural Competencies</title>
+        <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.0.0-beta2/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div th:insert="/fragments/header :: header"></div>
 
-<div th:insert="/fragments/header :: header"></div>
-<div class="text-center bg-color-main text-white p-3 mb-3" id="competency-container">
-    <h1 class="fw-bolder pt-4">Behavioural Competencies</h1>
-    <hr style="background-color:white; height:5px">
-    <div id="Analytic">
-        <h1 class="fw-bold">Analytic</h1>
-        <h5 class="fst-italic">Critical Thinker</h5>
-        <p>Being able to decide for yourself what is accurate and what is relevant is core to solving any situation.
-            Higher order thinking skills let you step back from situations to discover for yourself what resonates as
-            right or wrong, view different angles, identify key points, analyse information and then have confidence to
-            put your own viewpoint across without bias. You endeavour to judge the true value of statements.</p>
-        <h5 class="fst-italic">Researcher</h5>
-        <p>Discovery excites your analytical nature and you enjoy gathering information and equipping yourself with
-            knowledge from many sources. When required you can translate research into evidence to facilitate your fact
-            based strategies. The questions you ask naturally evolve as you understand more about the subject
-            matter.</p>
-        <h5 class="fst-italic">Strategic</h5>
-        <p>Being analytical isn’t just a state of mind or natural ability, it’s about practice and creating effective
-            steps to help you diagnose the reality of the questions you are posed with. To identify a problem or
-            question and then assume the best answer means to find the right tools, understand how you will analyse
-            data, opinions and arguments, analyse and evaluate and eventually assume solutions.</p>
-        <h5 class="fst-italic">Optimise</h5>
-        <p>With any work, you should look for what you could have done better to develop optimised strategies for future
-            problem solving. By analysing our failures and successes we can grow rapidly and become more efficient,
-            eventually becoming well versed in crafting elegant solutions.</p>
-        <h5 class="fst-italic">Implementer</h5>
-        <p>Plans are of no use unless you can implement the strategies you have formed. You must be able to act on the
-            execution plan and decisively implement the solutions. Monitoring and controlling is essential and your
-            utilisation of emotional intelligence will help delegation.</p>
-    </div>
-    <hr style="background-color:white; height:5px">
-    <div id="Independent">
-        <h1 class="fw-bold">Independent</h1>
-        <h5 class="fst-italic">Accountability</h5>
-        <p>You work honestly and with integrity. The people you work with trust you to be an open communicator. You are
-            responsible for both your actions and the work that you have done, whatever the consequences of that work,
-            whether it is good or bad. You gain commitment from the people around you because you hold yourself
-            accountable for your promises.</p>
-        <h5 class="fst-italic">Courageous</h5>
-        <p>It takes courage to try something new but you enjoy putting yourself in situations where there is an
-            opportunity to grow. You are unafraid to take the initiative and volunteer yourself just to see what
-            happens. You have the courage to think independently and offer thoughts willingly but compassionately.</p>
-        <h5 class="fst-italic">Disciplined</h5>
-        <p>This takes a lot of work but it’s something everyone can have. Keep consistent habits, focus on consistency,
-            set small targets to keep motivated throughout the day, observe your own work behaviours and adjust
-            accordingly. Willpower and discipline are determined by your own thoughts, you control it.</p>
-        <h5 class="fst-italic">Networker</h5>
-        <p>You cherish your network and create strong bonds with your co-workers. These solid relationships are
-            essential and become your support structure to be able to act courageously within the workplace. Although
-            you naturally act independently, you do not seek out conflict and understand when to act in unison with
-            others, acquiescing when appropriate.</p>
-        <h5 class="fst-italic">Self-Starter</h5>
-        <p>You know when not to wait for the instruction of others and begin progressing workloads with minimum
-            time-draw from your colleagues. Being self organising and disciplined are much sought after disciplines as
-            you can work towards the teams goals independently and don’t need constant management.By taking ownership of
-            your own work day means you can be trusted to get the job done.</p>
-    </div>
-    <hr style="background-color:white; height:5px">
-    <div id="Determined">
-        <h1 class="fw-bold">Determined</h1>
-        <h5 class="fst-italic">Motivated</h5>
-        <p>You know what you’re doing and how to do it, you’re determined to complete every task to the best of your
-            ability and become a trusted employee. Your determination is a motivation to others as they are inspired to
-            make the same efforts you do to succeed. When they do, you applaud their efforts and look to them for
-            inspiration.</p>
-        <h5 class="fst-italic">Goal Oriented</h5>
-        <p>You regularly set yourself personal goals on many levels –daily, weekly, monthly, yearly –your goals are not
-            only your own but the organisations. You understand what barriers might exit that will stop you achieving
-            those goals and work to remove them.</p>
-        <h5 class="fst-italic">Endurance</h5>
-        <p>Your career isn’t a sprint to the finish, it’s a lifelong marathon that takes all the discipline you can
-            muster to finish successfully. With experience comes resilience and with time and practice you can make
-            decisions despite the pressure and keep moving forward despite the losses.</p>
-        <h5 class="fst-italic">Positivity</h5>
-        <p>You start the day with positive affirmations, and continually free yourself from judgment of yourself and
-            other people to become more accepting of positivity. Focus on the good things in life, no matter how small,
-            so that your levity is infectious as other people become attuned to it.</p>
-        <h5 class="fst-italic">Focused</h5>
-        <p>You are the master of your own mind. You aren’t easily distracted by unimportant details and limit
-            multi-tasking as is required. You know the extent of your concentration spans and prepare your days
-            accordingly allowing yourself to concentrate on one thing at a time.</p>
-    </div>
-    <hr style="background-color:white; height:5px">
-    <div id="Professional">
-        <h1 class="fw-bold">Professional</h1>
-        <h5 class="fst-italic">Communication</h5>
-        <p>Eloquent written and spoken communication is essential in business. The use of articulate and appropriate
-            language, correct tone, understanding the subtleties of grammar and punctuation create a powerful
-            professional persona. </p>
-        <h5 class="fst-italic">Reliability</h5>
-        <p>You must be able to manage your commitments whether it is arriving on time, responding to people promptly or
-            following through on promises in a timely manner. You must value not only your own time, but also other
-            peoples. Reliability engenders trust. </p>
-        <h5 class="fst-italic">Demeanour</h5>
-        <p>Your behaviour should be polite, interacting with kindness to everyone in the organisations you work with.
-            Being polite and kind are important professional traits allowing you to emit a level of confidence without
-            it being interpreted as egotism. </p>
-        <h5 class="fst-italic">Appearance</h5>
-        <p>Appearance creates a strong impression that changes the dynamics of relationships and influences your career.
-            Looking professional increases your self-confidence which impresses and attracts other people.</p>
-        <h5 class="fst-italic">Poise</h5>
-        <p>To keep your composure and find the positives in all challenging situations will reward you with being seen
-            as a stable influence on others. If you can’t remain calm in difficult situations and lose your cool in
-            tense situations, you can quickly lose your professional integrity and credibility. </p>
-    </div>
-    <hr style="background-color:white; height:5px">
-    <div id="Studious">
-        <h1 class="fw-bold">Studious</h1>
-        <h5 class="fst-italic">Life-Long Learner</h5>
-        <p>You will never give up in the pursuit of knowledge and self-growth. You understand that you can never know
-            everything and yet yearn to continue this impossible quest. If you feel like you’re regularly on the edge of
-            your comfort zone, you’re doing something right. You are happy that you will never be ‘the finished
-            article’.</p>
-        <h5 class="fst-italic">Curious</h5>
-        <p>You have the impulse to understand meaning behind information and experiences, you actively seek it out. You
-            productively research areas you do not understand and ready knowledge for future use. Your curiosity allows
-            you to think deeply about subject matters and generate creative solutions.</p>
-        <h5 class="fst-italic">Cognitive Agility</h5>
-        <p>You need to have the agility of mind to rapidly move from one area of development to another as the needs of
-            your environment can change rapidly. Even though you are intent on developing yourself in one area, you must
-            listen to the advice of more experienced parties and adhere to their advice.</p>
-        <h5 class="fst-italic">Reflection</h5>
-        <p>If we aspire to develop continually, we must undertake personal reflection as an important step to know what
-            our strengths and weaknesses are. Unfortunately we can’t always see our own foibles which means we must seek
-            out feedback and receive it graciously, no matter how difficult it may be. We cannot become defensive.</p>
-        <h5 class="fst-italic">Iterative Growth</h5>
-        <p>You plan your own learning objectives and understand how to build on your foundations. You understand how far
-            you have to go and how long it takes to become and expert in any given field.We should regard our own
-            development with the highest respect and take it seriously and as such you routinely work to better your
-            mind, behaviours, abilities and skillsets.</p>
-    </div>
-    <hr style="background-color:white; height:5px">
-    <div id="Imaginative">
-        <h1 class="fw-bold">Imaginative</h1>
-        <h5 class="fst-italic">Divergent Thinker</h5>
-        <p>When problem solving there is often a straight forward answer, but at times it is beneficial that you can
-            utilise more indirect, creative approaches that give fresh alternatives. You can control your levels of
-            creativity to match the situation and where lots of possible answers are needed you can shift to multiple
-            perspectives for alternative and sometimes surprising answers. You understand that there are lots of ways to
-            interpret a question.</p>
-        <h5 class="fst-italic">Creative</h5>
-        <p>You’re not scared of trying something new, you enjoy crafting, delivering and presenting solutions. You can
-            demonstrate your initiative through generating and refining your ideas Confident in the validity of your own
-            view point you can happily look at familiar things with fresh eyes.</p>
-        <h5 class="fst-italic">Open Minded</h5>
-        <p>You are highly flexible, able to produce a broad range of ideas and not become tied to your first attempt,
-            generating uncommon ideas as a consequence. You are conscious of your cognitive biases and are able to
-            successfully navigate them, including being able to accept when your ideas aren’t the right ones for every
-            circumstance.</p>
-        <h5 class="fst-italic">Sharing Ideas</h5>
-        <p>Through all mediums, sharing ideas helps us focus our view points and address other perspectives that we may
-            not have considered. Ideas and creative thinking is always nurtured through communication. To help other
-            people visualise your concepts you should become a practiced story teller.</p>
-        <h5 class="fst-italic">Value Driven</h5>
-        <p>In order to be imaginative it’s important to be motivated for the right reason. To those ends we must
-            understand our intrinsic and extrinsic values that influence our environmental and internal reward
-            mechanisms –why do we do what we do and what do we truly care about? It usually isn’t the easy options such
-            as money and status which both have limited motivational value.</p>
-    </div>
-</div>
-<footer>
-    <div th:insert="/fragments/footer :: footer"></div>
-</footer>
-<script th:src="@{webjars/popper.js/2.5.4/umd/popper.min.js}"></script>
-<script th:src="@{webjars/bootstrap/5.0.0-beta2/js/bootstrap.min.js}"></script>
-</body>
+        <div class="text-center bg-color-main text-white p-3 mb-3" id="competency-container">
+            <h1 class="fw-bolder pt-5 mt-5">Behavioural Competencies</h1>
+
+            <hr class="hz-line">
+
+            <div id="Analytic">
+                <h1 class="fw-bold">Analytic</h1>
+
+                <div class="card mb-3 shadow p-3 bg-body rounded" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Analytical/Critical_thinking.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Critical Thinker</h5>
+                                <p>Being able to decide for yourself what is accurate and what is relevant is core to solving any situation.
+                                    Higher order thinking skills let you step back from situations to discover for yourself what resonates as
+                                    right or wrong, view different angles, identify key points, analyse information and then have confidence to
+                                    put your own viewpoint across without bias. You endeavour to judge the true value of statements.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Analytical/Researcher.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Researcher</h5>
+                                <p>Discovery excites your analytical nature and you enjoy gathering information and equipping yourself with
+                                    knowledge from many sources. When required you can translate research into evidence to facilitate your fact
+                                    based strategies. The questions you ask naturally evolve as you understand more about the subject
+                                    matter.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Analytical/Strategic.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Strategic</h5>
+                                <p>Being analytical isn’t just a state of mind or natural ability, it’s about practice and creating effective
+                                    steps to help you diagnose the reality of the questions you are posed with. To identify a problem or
+                                    question and then assume the best answer means to find the right tools, understand how you will analyse
+                                    data, opinions and arguments, analyse and evaluate and eventually assume solutions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Analytical/Optimise.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Optimise</h5>
+                                <p>With any work, you should look for what you could have done better to develop optimised strategies for future
+                                    problem solving. By analysing our failures and successes we can grow rapidly and become more efficient,
+                                    eventually becoming well versed in crafting elegant solutions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-5" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Analytical/Implementer.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Implementer</h5>
+                                <p>Plans are of no use unless you can implement the strategies you have formed. You must be able to act on the
+                                    execution plan and decisively implement the solutions. Monitoring and controlling is essential and your
+                                    utilisation of emotional intelligence will help delegation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="hz-line">
+
+            <div id="Independent">
+                <h1 class="fw-bold">Independent</h1>
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Independent/Accountability.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Accountability</h5>
+                                <p>You work honestly and with integrity. The people you work with trust you to be an open communicator. You are
+                                    responsible for both your actions and the work that you have done, whatever the consequences of that work,
+                                    whether it is good or bad. You gain commitment from the people around you because you hold yourself
+                                    accountable for your promises.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Independent/Courageous.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Courageous</h5>
+                                <p>It takes courage to try something new but you enjoy putting yourself in situations where there is an
+                                    opportunity to grow. You are unafraid to take the initiative and volunteer yourself just to see what
+                                    happens. You have the courage to think independently and offer thoughts willingly but compassionately.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Independent/Disciplined.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Disciplined</h5>
+                                <p>This takes a lot of work but it’s something everyone can have. Keep consistent habits, focus on consistency,
+                                    set small targets to keep motivated throughout the day, observe your own work behaviours and adjust
+                                    accordingly. Willpower and discipline are determined by your own thoughts, you control it.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Independent/Networker.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Networker</h5>
+                                <p>You cherish your network and create strong bonds with your co-workers. These solid relationships are
+                                    essential and become your support structure to be able to act courageously within the workplace. Although
+                                    you naturally act independently, you do not seek out conflict and understand when to act in unison with
+                                    others, acquiescing when appropriate.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-5" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Independent/Self_starter.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Self-Starter</h5>
+                                <p>You know when not to wait for the instruction of others and begin progressing workloads with minimum
+                                    time-draw from your colleagues. Being self organising and disciplined are much sought after disciplines as
+                                    you can work towards the teams goals independently and don’t need constant management.By taking ownership of
+                                    your own work day means you can be trusted to get the job done.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="hz-line">
+
+            <div id="Determined">
+                <h1 class="fw-bold">Determined</h1>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Determined/Motivated.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Motivated</h5>
+                                <p>You know what you’re doing and how to do it, you’re determined to complete every task to the best of your
+                                    ability and become a trusted employee. Your determination is a motivation to others as they are inspired to
+                                    make the same efforts you do to succeed. When they do, you applaud their efforts and look to them for
+                                    inspiration.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Determined/Goal_oriented.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Goal Oriented</h5>
+                                <p>You regularly set yourself personal goals on many levels –daily, weekly, monthly, yearly –your goals are not
+                                    only your own but the organisations. You understand what barriers might exit that will stop you achieving
+                                    those goals and work to remove them.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Determined/Endurance.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Endurance</h5>
+                                <p>Your career isn’t a sprint to the finish, it’s a lifelong marathon that takes all the discipline you can
+                                    muster to finish successfully. With experience comes resilience and with time and practice you can make
+                                    decisions despite the pressure and keep moving forward despite the losses.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Determined/Positivity.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Positivity</h5>
+                                <p>You start the day with positive affirmations, and continually free yourself from judgment of yourself and
+                                    other people to become more accepting of positivity. Focus on the good things in life, no matter how small,
+                                    so that your levity is infectious as other people become attuned to it.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-5" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Determined/Focused.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Focused</h5>
+                                <p>You are the master of your own mind. You aren’t easily distracted by unimportant details and limit
+                                    multi-tasking as is required. You know the extent of your concentration spans and prepare your days
+                                    accordingly allowing yourself to concentrate on one thing at a time.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="hz-line">
+
+            <div id="Professional">
+                <h1 class="fw-bold">Professional</h1>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Professional/Communication.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Communication</h5>
+                                <p>Eloquent written and spoken communication is essential in business. The use of articulate and appropriate
+                                    language, correct tone, understanding the subtleties of grammar and punctuation create a powerful
+                                    professional persona. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Professional/Reliability.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Reliability</h5>
+                                <p>You must be able to manage your commitments whether it is arriving on time, responding to people promptly or
+                                    following through on promises in a timely manner. You must value not only your own time, but also other
+                                    peoples. Reliability engenders trust. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Professional/Appearance.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Appearance</h5>
+                                <p>Appearance creates a strong impression that changes the dynamics of relationships and influences your career.
+                                    Looking professional increases your self-confidence which impresses and attracts other people.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-5" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Professional/Poise.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Poise</h5>
+                                <p>To keep your composure and find the positives in all challenging situations will reward you with being seen
+                                    as a stable influence on others. If you can’t remain calm in difficult situations and lose your cool in
+                                    tense situations, you can quickly lose your professional integrity and credibility. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="hz-line">
+
+            <div id="Studious">
+                <h1 class="fw-bold">Studious</h1>
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Studious/Life_long_learner.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Life-Long Learner</h5>
+                                <p>You will never give up in the pursuit of knowledge and self-growth. You understand that you can never know
+                                    everything and yet yearn to continue this impossible quest. If you feel like you’re regularly on the edge of
+                                    your comfort zone, you’re doing something right. You are happy that you will never be ‘the finished
+                                    article’.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Studious/Curious.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Curious</h5>
+                                <p>You have the impulse to understand meaning behind information and experiences, you actively seek it out. You
+                                    productively research areas you do not understand and ready knowledge for future use. Your curiosity allows
+                                    you to think deeply about subject matters and generate creative solutions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Studious/Cognitive_Agility.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Cognitive Agility</h5>
+                                <p>You need to have the agility of mind to rapidly move from one area of development to another as the needs of
+                                    your environment can change rapidly. Even though you are intent on developing yourself in one area, you must
+                                    listen to the advice of more experienced parties and adhere to their advice.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Studious/Reflection.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Reflection</h5>
+                                <p>If we aspire to develop continually, we must undertake personal reflection as an important step to know what
+                                    our strengths and weaknesses are. Unfortunately we can’t always see our own foibles which means we must seek
+                                    out feedback and receive it graciously, no matter how difficult it may be. We cannot become defensive.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-5" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Studious/Iterative_Growth.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Iterative Growth</h5>
+                                <p>You plan your own learning objectives and understand how to build on your foundations. You understand how far
+                                    you have to go and how long it takes to become and expert in any given field.We should regard our own
+                                    development with the highest respect and take it seriously and as such you routinely work to better your
+                                    mind, behaviours, abilities and skillsets.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="hz-line">
+
+            <div id="Imaginative">
+                <h1 class="fw-bold">Imaginative</h1>
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Imaginative/Divergent_Thinker.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Divergent Thinker</h5>
+                                <p>When problem solving there is often a straight forward answer, but at times it is beneficial that you can
+                                    utilise more indirect, creative approaches that give fresh alternatives. You can control your levels of
+                                    creativity to match the situation and where lots of possible answers are needed you can shift to multiple
+                                    perspectives for alternative and sometimes surprising answers. You understand that there are lots of ways to
+                                    interpret a question.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img th:src="@{images/Imaginative/Creative.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8 mt-2">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Creative</h5>
+                                <p>You’re not scared of trying something new, you enjoy crafting, delivering and presenting solutions. You can
+                                    demonstrate your initiative through generating and refining your ideas Confident in the validity of your own
+                                    view point you can happily look at familiar things with fresh eyes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Imaginative/Open_Minded.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Open Minded</h5>
+                                <p>You are highly flexible, able to produce a broad range of ideas and not become tied to your first attempt,
+                                    generating uncommon ideas as a consequence. You are conscious of your cognitive biases and are able to
+                                    successfully navigate them, including being able to accept when your ideas aren’t the right ones for every
+                                    circumstance.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Imaginative/Sharing_Ideas.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Sharing Ideas</h5>
+                                <p>Through all mediums, sharing ideas helps us focus our view points and address other perspectives that we may
+                                    not have considered. Ideas and creative thinking is always nurtured through communication. To help other
+                                    people visualise your concepts you should become a practiced story teller.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-5" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-2">
+                            <img th:src="@{images/Imaginative/Value_Driven.svg}" height="200" width="200" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-color-main">
+                                <h5 class="fst-italic">Value Driven</h5>
+                                <p>In order to be imaginative it’s important to be motivated for the right reason. To those ends we must
+                                    understand our intrinsic and extrinsic values that influence our environmental and internal reward
+                                    mechanisms –why do we do what we do and what do we truly care about? It usually isn’t the easy options such
+                                    as money and status which both have limited motivational value.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div th:insert="/fragments/footer :: footer"></div>
+        </footer>
+        <script th:src="@{webjars/popper.js/2.5.4/umd/popper.min.js}"></script>
+        <script th:src="@{webjars/bootstrap/5.0.0-beta2/js/bootstrap.min.js}"></script>
+    </body>
 </html>
