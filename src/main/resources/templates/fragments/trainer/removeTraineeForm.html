@@ -6,23 +6,20 @@
 </head>
 <body>
 <div th:each="trainee : ${trainees}" th:attr="id=${'removeTrainee' + trainee.traineeId}"
-     aria-hidden="true" class="modal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
+     aria-hidden="true" class="modal fade rounded" tabindex="-1">
+    <div class="modal-dialog">
         <div class="modal-content">
+            <div class="modal-header d-flex">
+                <h4 class="modal-title">Are you sure?</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5 class="fw-bold" th:text="'This will remove ' + ${trainee.firstName} + ' ' + ${trainee.lastName} + ' from your group, as well as deactivate the trainee from logging into the system.'"></h5>
+            </div>
             <div class="modal-footer">
                 <form method="post" action="#" th:action="@{/deleteTrainee}">
-                    <div class="modal-header bg-dark text-white d-flex">
-                        <h4 class="fw-bold">Are you sure?</h4>
-                        <button type="button" class="btn-close bg-white text-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body bg-dark text-white">
-                        <h5 class="fw-bold">This will remove the trainee from your group,
-                            aswell as deactivate the trainee from logging-in to the system.</h5>
-                    </div>
-                    <div class="modal-footer bg-dark text-white">
-                        <input type="hidden" id="traineeId" name="traineeId" th:value="*{trainee.traineeId}">
-                        <button class="btn bg-color-red" data-bs-toggle="modal" type="submit">DELETE</button>
-                    </div>
+                    <input type="hidden" id="traineeId" name="traineeId" th:value="*{trainee.traineeId}">
+                    <button class="btn bg-color-red" data-bs-toggle="modal" type="submit">Delete Trainer</button>
                 </form>
             </div>
         </div>
